@@ -1,45 +1,158 @@
---- 
-import Hamburger from './Hamburger.astro';
+---
+const pages = import.meta.glob("../pages/*.astro", { eager: true });
+
+interface navLink {
+  name: string;
+  route: string;
+}
+
+const navLinks: navLink[] = Object.keys(pages).map((p) => {
+  const name = p
+    .replace("../pages/", "")
+    .replace(".astro", "")
+    .replace("index", "");
+
+  const route = name === "" ? "/" : `/${name}`;
+
+  return { name: name || "Home", route };
+});
+
+const homeLink: navLink = navLinks.find((l) => l.route === "/") || {
+  name: "Home",
+  route: "/",
+};
+const otherLinks: navLink[] = navLinks.filter(
+  (l) => l.route != homeLink?.route,
+);
+
+const sortedLinks: navLink[] = [homeLink, ...otherLinks];
+const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+const currentPath: string = Astro.url.pathname;
+const normalizedPath = currentPath.length > 1 && currentPath.endsWith("/")
+  ? currentPath.slice(0, -1)
+  : currentPath;
+
+const isLinkActive = (route: string): boolean => {
+  if (route === "/") return normalizedPath === "/";
+  return normalizedPath.startsWith(route);
+};
 ---
 
-<!-- Navbar Component From DaisyUI -->
-
-<div class="navbar bg-base-100 shadow-sm">
+<nav aria-label="Main navigation bar" class="navbar bg-base-100 shadow-sm">
   <div class="navbar-start">
-    <div class="dropdown">
-    <Hamburger largeHidden={true} />
+    <div class="dropdown relative">
+      <button
+        id="menu-button"
+        class="btn btn-ghost lg:hidden"
+        aria-expanded="false"
+        aria-controls="menu-list"
+        aria-label="open/close menu"
+        type="button"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h8m-8 6h16"
+          ></path>
+        </svg>
+      </button>
       <ul
-        tabindex="-1"
-        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-        <li><a>Item 1</a></li>
-        <li>
-          <a>Parent</a>
-          <ul class="p-2">
-            <li><a>Submenu 1</a></li>
-            <li><a>Submenu 2</a></li>
-          </ul>
-        </li>
-        <li><a>Item 3</a></li>
+        id="menu-list"
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow hidden"
+        
+      >
+        {sortedLinks.map((l) => {
+          const active = isLinkActive(l.route);
+          return (  
+          <li>
+            <a 
+            class={`text-lg ${active ? "active font-bold" : ""}`}
+            aria-current={active ? "page" : undefined}
+            aria-label={`button link to ${l.name}`} href={l.route}>
+              {capitalize(l.name)}
+            </a>
+          </li>
+        );
+        })}
       </ul>
     </div>
-    <a class="btn btn-ghost text-xl">daisyUI</a>
+    <a class=" text font-bold -xl px-4">Francesco James</a>
   </div>
+
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1">
-      <li><a>Item 1</a></li>
-      <li>
-        <details>
-          <summary>Parent</summary>
-          <ul class="p-2 bg-base-100 w-40 z-1">
-            <li><a>Submenu 1</a></li>
-            <li><a>Submenu 2</a></li>
-          </ul>
-        </details>
-      </li>
-      <li><a>Item 3</a></li>
+      {sortedLinks.map((l) => {
+        const active = isLinkActive(l.route);
+        return (
+        
+        <li>
+          <a 
+          href={l.route}
+          aria-current={active ? "page" : undefined}
+          class={`font-bold btn btn-soft btn-primary m-2 ${active ? "active btn-active" : ""}`}
+          >
+            {capitalize(l.name)}</a>
+        </li>
+      );
+      })}
     </ul>
   </div>
   <div class="navbar-end">
     <a class="btn">Button</a>
   </div>
-</div>
+</nav>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropdownButton = document.querySelector("#menu-button") as HTMLButtonElement;
+    const dropdownMenu = document.querySelector("#menu-list") as HTMLElement;
+    const dropdownContainer = document.querySelector(".dropdown") as HTMLElement;
+    
+    if (!dropdownButton || !dropdownMenu) return; 
+
+    const setMenuState = (isOpen: boolean) => {
+      dropdownButton.setAttribute("aria-expanded", String(isOpen));
+      dropdownMenu.classList.toggle("hidden", !isOpen);
+    };
+
+    const toggleMenu = (e?: Event) => {
+      e?.stopPropagation();
+      const isExpanded = dropdownButton.getAttribute("aria-expanded") === "true";
+      setMenuState(!isExpanded);
+    };
+
+    const closeMenu = () => {
+      setMenuState(false);
+    };
+
+    // click listener 
+    dropdownButton.addEventListener("click", toggleMenu);
+
+    // click listener for click outsude close 
+    document.addEventListener("click", (e) => {
+      if (!dropdownContainer.contains(e.target as Node)) {
+        closeMenu();
+      }
+    });
+
+    // close on escape key 
+    dropdownButton.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeMenu();
+        if (dropdownButton.getAttribute("aria-expanded") === "true") {
+          dropdownButton.focus();
+        }
+      } 
+
+    });
+  }); 
+</script>

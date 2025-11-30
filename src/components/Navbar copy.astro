@@ -1,0 +1,121 @@
+---
+const pages = import.meta.glob("../pages/*.astro", { eager: true });
+
+interface navLink {
+  name: string;
+  route: string;
+}
+
+const navLinks: navLink[] = Object.keys(pages).map((p) => {
+  const name = p
+    .replace("../pages/", "")
+    .replace(".astro", "")
+    .replace("index", "");
+
+  const route = name === "" ? "/" : `/${name}`;
+
+  return { name: name || "Home", route };
+});
+
+const homeLink: navLink = navLinks.find((l) => l.route === "/") || {
+  name: "Home",
+  route: "/",
+}; // fallback for time safety
+const otherLinks: navLink[] = navLinks.filter(
+  (l) => l.route != homeLink?.route,
+);
+
+const sortedLinks: navLink[] = [homeLink, ...otherLinks];
+const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+---
+
+<nav aria-label="Main navigation bar" class="navbar bg-base-100 shadow-sm">
+  <div class="navbar-start">
+    <div class="dropdown">
+      <div
+        tabindex="0"
+        role="button"
+        aria-haspopup="true"
+        aria-label="Toggle menu"
+        aria-hidden="false"
+        aria-expanded="false"
+        class="toPress btn btn-ghost lg:hidden"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h8m-8 6h16"></path>
+        </svg>
+      </div>
+      <ul
+        tabindex="-1"
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+        aria-hidden="true"
+      >
+        {
+          sortedLinks.map((l) => (
+            <li role="menuitem">
+              <a aria-label={`button link to ${l.name}`} href={l.route}>
+                {capitalize(l.name)}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <a class="btn btn-ghost text-xl">daisyUI</a>
+  </div>
+
+  <div class="navbar-center hidden lg:flex">
+    <ul class="menu menu-horizontal px-1">
+      {
+        sortedLinks.map((l) => (
+          <li>
+            <a href={l.route}>{capitalize(l.name)}</a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <div class="navbar-end">
+    <a class="btn">Button</a>
+  </div>
+</nav>
+
+<script>
+  // aria expanded scripting
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropdownButton = document.querySelector(".dropdown .toPress");
+    const dropdownMenu = document.querySelector(".dropdown ul");
+    console.log("Dropdown button:", dropdownButton);
+    const updateAriaAttributes = () => {
+      const isLargeScreen = window.matchMedia("(min-width: 1024px)").matches; // lg breakpoint
+      dropdownButton?.setAttribute("aria-hidden", String(isLargeScreen));
+      dropdownButton?.setAttribute("aria-expanded", "false"); // Reset aria-expanded
+      dropdownMenu?.setAttribute("aria-hidden", "true"); // Reset aria-hidden per il menu
+    console.log("Dropdown button:", dropdownButton);
+    };
+
+    const handleClick = () => {
+      console.log("Dropdown button clicked");
+      const isExpanded =
+        dropdownButton?.getAttribute("aria-expanded") === "true" || false;
+      dropdownButton?.setAttribute("aria-expanded", String(!isExpanded));
+      dropdownMenu?.setAttribute("aria-hidden", String(isExpanded));
+    };
+
+    dropdownButton?.addEventListener("click", handleClick);
+    window.addEventListener("resize", updateAriaAttributes);
+
+    updateAriaAttributes();
+  });
+</script>

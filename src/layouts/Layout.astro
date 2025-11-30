@@ -1,5 +1,6 @@
 ---
 import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 ---
 <!doctype html>
@@ -7,13 +8,18 @@ import "../styles/global.css";
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro Basics</title>
 	</head>
 	<body>
-		<Navbar
-		<slot />
+		<Navbar />
+		<main class="min-h-[calc(100vh-56px)] flex flex-col w-full justify-center items-center">
+			<div class="lg:p-20 md:p-8 p-6">
+				<slot />
+			</div>
+		</main>
+		<Footer />
 	</body>
 </html>
 

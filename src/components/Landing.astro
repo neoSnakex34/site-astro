@@ -1,0 +1,48 @@
+---
+import { Image } from "astro:assets";
+import chatImg from "../assets/chat-goku.png";
+---
+
+<!-- TODO aria hidden -->
+<div class="mockup-phone">
+    <div class="mockup-phone-camera z-0"></div>
+    <div
+        class="mockup-phone-display text-white grid place-content-center bg-gradient-to-b from-base-100 to-base-300"
+    >
+        <!-- phone slot -->
+        <div class="p-4">
+            <div class="chat chat-start">
+                <div class="chat-header">
+                    Customer
+                    <time class="text-xs opacity-60">12:44</time>
+                </div>
+                <div class="chat-bubble chat-bubble-base">
+                    Hey man, can you code this for me?
+                </div>
+                <div class="pt-1 chat-footer opacity-50">Delivered</div>
+            </div>
+
+            <div class="pt-4 chat chat-end">
+                <div class="chat-header">
+                    <a href="https://github.com/neosnakex34">neosnakex34</a>
+                    <time class="text-xs opacity-60">12:45</time>
+                </div>
+                <div class="chat-image avatar">
+                    <div class="w-10 mask mask-squircle">
+                        <a href="https://github.com/neosnakex34">
+                            <Image
+                                src={chatImg}
+                                alt="my chat image, with my logo"
+                            />
+                        </a>
+                    </div>
+                </div>
+                <div class="chat-bubble chat-bubble-success">
+                    Got you covered
+                </div>
+                <div class="pt-1 chat-footer opacity-50">Delivered</div>
+            </div>
+        </div>
+        <!-- END OF PHONE slott -->
+    </div>
+</div>

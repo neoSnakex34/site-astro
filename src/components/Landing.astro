@@ -17,7 +17,7 @@ import chatImg from "../assets/chat-goku.webp";
 </div>
 
 <div aria-hidden="true" class="flex justify-center items-center">
-    <div class="lg:w-1/2 mockup-phone">
+    <div class="lg:w-1/2 sm:w-1/2 mockup-phone">
         <div class="mockup-phone-camera z-0"></div>
 
         <div
@@ -60,11 +60,12 @@ import chatImg from "../assets/chat-goku.webp";
                             </a>
                         </div>
                     </div>
-                    <!-- loading message -->
-                    <span
-                        class="loading loading-dots loading-xs text-success -mx-2 mt-6"
-                    ></span>
 
+                    <!-- loading message dots -->
+                    <span
+                        class="loading loading-dots loading-xs text-info -mx-2 mt-6"
+                    ></span>
+                    <!--  end loading message dots -->
                     <div
                         class="opacity-0 animate-delivery-fade-in pt-1 chat-footer"
                         style="animation-delay: 2.9s;"
@@ -83,9 +84,9 @@ import chatImg from "../assets/chat-goku.webp";
     class="mt-10 p-4 max-w-2xl mx-auto text-center -y-4"
 >
     <p>
-        My goal is to <span class="font-bold">quickly help</span> you with your development needs,<br>
-        whether it's <span class="font-bold">fixing bugs</span>, <span class="font-bold">developing new features</span>, or <span class="font-bold">providing assistance</span> with your
-        projects.
+        My goal is to <span class="font-bold">quickly help</span> you with your development needs.<br>
+        Whether it's <span class="font-bold">fixing bugs</span>, <span class="font-bold">developing new features</span>, or <span class="font-bold">providing assistance</span> with your
+        projects. I am here to deliver <span class="font-bold">efficient</span> and <span class="font-bold">reliable</span> solutions to ensure your satisfaction.
     </p>
 </section>
 
@@ -100,10 +101,10 @@ import chatImg from "../assets/chat-goku.webp";
         
         const messageBubble = document.createElement("div");
         messageBubble.className =
-            "opacity-0 animate-msg-fade-in chat-bubble chat-bubble-success ml-2";
+            "opacity-0 animate-msg-fade-in chat-bubble chat-bubble-neutral ml-2";
         messageBubble.style.animationDelay = "0.2s";
         messageBubble.innerHTML =
-            'Got you <span class="font-bold">covered</span>';
+            'Got you <a href="/about" class="font-bold text-info link">covered</a>';
         loadingDots.replaceWith(messageBubble);
     }, 2000);
 </script>

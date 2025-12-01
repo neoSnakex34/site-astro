@@ -29,9 +29,10 @@ const sortedLinks: navLink[] = [homeLink, ...otherLinks];
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
 const currentPath: string = Astro.url.pathname;
-const normalizedPath = currentPath.length > 1 && currentPath.endsWith("/")
-  ? currentPath.slice(0, -1)
-  : currentPath;
+const normalizedPath =
+  currentPath.length > 1 && currentPath.endsWith("/")
+    ? currentPath.slice(0, -1)
+    : currentPath;
 
 const isLinkActive = (route: string): boolean => {
   if (route === "/") return normalizedPath === "/";
@@ -61,28 +62,30 @@ const isLinkActive = (route: string): boolean => {
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M4 6h16M4 12h8m-8 6h16"
-          ></path>
+            d="M4 6h16M4 12h8m-8 6h16"></path>
         </svg>
       </button>
       <ul
         id="menu-list"
-        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow-2xl hidden" 
-        
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow-2xl hidden"
       >
-        {sortedLinks.map((l) => {
-          const active = isLinkActive(l.route);
-          return (  
-          <li>
-            <a 
-            class={`text-lg ${active ? "active font-bold underline" : ""}`}
-            aria-current={active ? "page" : undefined}
-            aria-label={`button link to ${l.name}`} href={l.route}>
-              {capitalize(l.name)}
-            </a>
-          </li>
-        );
-        })}
+        {
+          sortedLinks.map((l) => {
+            const active = isLinkActive(l.route);
+            return (
+              <li>
+                <a
+                  class={`text-lg ${active ? "active font-bold underline" : ""}`}
+                  aria-current={active ? "page" : undefined}
+                  aria-label={`button link to ${l.name}`}
+                  href={l.route}
+                >
+                  {capitalize(l.name)}
+                </a>
+              </li>
+            );
+          })
+        }
       </ul>
     </div>
     <a class="btn btn-ghost normal-case text-xl" href="/">MySite</a>
@@ -90,35 +93,40 @@ const isLinkActive = (route: string): boolean => {
 
   <div class="navbar-center hidden lg:flex">
     <ul class="menu menu-horizontal px-1">
-      {sortedLinks.map((l) => {
-        const active = isLinkActive(l.route);
-        return (
-        
-        <li>
-          <a 
-          href={l.route}
-          aria-current={active ? "page" : undefined}
-          class={`font-bold btn btn-soft btn-primary m-2 ${active ? "active btn-active" : ""}`}
-          >
-            {capitalize(l.name)}</a>
-        </li>
-      );
-      })}
+      {
+        sortedLinks.map((l) => {
+          const active = isLinkActive(l.route);
+          return (
+            <li>
+              <a
+                href={l.route}
+                aria-current={active ? "page" : undefined}
+                class={`font-bold btn btn-dash  m-2 ${active ? "active btn-active" : ""}`}
+              >
+                {capitalize(l.name)}
+              </a>
+            </li>
+          );
+        })
+      }
     </ul>
   </div>
   <div class="navbar-end">
-    
     <a class="btn">Button</a>
   </div>
 </nav>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const dropdownButton = document.querySelector("#menu-button") as HTMLButtonElement;
+    const dropdownButton = document.querySelector(
+      "#menu-button",
+    ) as HTMLButtonElement;
     const dropdownMenu = document.querySelector("#menu-list") as HTMLElement;
-    const dropdownContainer = document.querySelector(".dropdown") as HTMLElement;
-    
-    if (!dropdownButton || !dropdownMenu) return; 
+    const dropdownContainer = document.querySelector(
+      ".dropdown",
+    ) as HTMLElement;
+
+    if (!dropdownButton || !dropdownMenu) return;
 
     const setMenuState = (isOpen: boolean) => {
       dropdownButton.setAttribute("aria-expanded", String(isOpen));
@@ -127,7 +135,8 @@ const isLinkActive = (route: string): boolean => {
 
     const toggleMenu = (e?: Event) => {
       e?.stopPropagation();
-      const isExpanded = dropdownButton.getAttribute("aria-expanded") === "true";
+      const isExpanded =
+        dropdownButton.getAttribute("aria-expanded") === "true";
       setMenuState(!isExpanded);
     };
 
@@ -135,25 +144,24 @@ const isLinkActive = (route: string): boolean => {
       setMenuState(false);
     };
 
-    // click listener 
+    // click listener
     dropdownButton.addEventListener("click", toggleMenu);
 
-    // click listener for click outsude close 
+    // click listener for click outsude close
     document.addEventListener("click", (e) => {
       if (!dropdownContainer.contains(e.target as Node)) {
         closeMenu();
       }
     });
 
-    // close on escape key 
+    // close on escape key
     dropdownButton.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         closeMenu();
         if (dropdownButton.getAttribute("aria-expanded") === "true") {
           dropdownButton.focus();
         }
-      } 
-
+      }
     });
-  }); 
+  });
 </script>

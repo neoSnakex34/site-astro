@@ -21,11 +21,17 @@ const homeLink: navLink = navLinks.find((l) => l.route === "/") || {
   name: "Home",
   route: "/",
 };
+
+const blogLink: navLink = navLinks.find((l) => l.route === "/blog") || {
+  name: "Blog",
+  route: "/blog",
+};
+
 const otherLinks: navLink[] = navLinks.filter(
-  (l) => l.route != homeLink?.route,
+  (l) => l.route != homeLink?.route && l.route != blogLink?.route,
 );
 
-const sortedLinks: navLink[] = [homeLink, ...otherLinks];
+const sortedLinks: navLink[] = [homeLink, ...otherLinks, blogLink];
 const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
 const currentPath: string = Astro.url.pathname;
@@ -88,7 +94,10 @@ const isLinkActive = (route: string): boolean => {
         }
       </ul>
     </div>
-    <a class="btn btn-ghost normal-case text-xl" href="/">MySite</a>
+    <a
+      aria-label="button link to Home"
+      aria-description="button link to Home, currently showing my site title neoSnakex34"
+      class="btn btn-ghost normal-case text-xl mx-3" href="/">neoSnakex34</a>
   </div>
 
   <div class="navbar-center hidden lg:flex">
@@ -96,6 +105,9 @@ const isLinkActive = (route: string): boolean => {
       {
         sortedLinks.map((l) => {
           const active = isLinkActive(l.route);
+          if (l.route === "/blog") {
+            return null;
+          };
           return (
             <li>
               <a
@@ -112,7 +124,24 @@ const isLinkActive = (route: string): boolean => {
     </ul>
   </div>
   <div class="navbar-end">
-    <a class="btn">Button</a>
+    {
+    () => {
+
+      const active = isLinkActive(blogLink.route);
+
+      return (
+        <a
+          href="/blog"
+          aria-current={active ? "page" : undefined}
+          aria-label="button link to Blog"
+          class={`btn btn-soft btn-accent mx-4 font-bold ${active ? "active btn-active" : ""}`}
+        >
+          Blog
+        </a>
+        );
+    }
+  }
+   
   </div>
 </nav>
 

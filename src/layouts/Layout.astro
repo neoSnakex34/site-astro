@@ -2,7 +2,9 @@
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
+const { justifyType, alignType } = Astro.props;
 ---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -14,7 +16,9 @@ import "../styles/global.css";
 	</head>
 	<body>
 		<Navbar />
-		<main class="min-h-[calc(100vh-56px)] flex flex-col w-full justify-center items-center bg-base-200">
+		<main
+			class=`min-h-[calc(100vh-56px)] flex flex-col w-full bg-base-200 ${justifyType ? "justify-"+justifyType : 'justify-center'} ${alignType ? "items-"+alignType : 'items-center'}`
+		>
 			<div class="lg:p-20 md:p-8 p-6">
 				<slot />
 			</div>

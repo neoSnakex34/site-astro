@@ -1,5 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
-
 
 @plugin "daisyui"{
 
@@ -8,6 +8,13 @@
 
 
 @theme {
+  --font-montserrat: 'Montserrat', sans-serif;
+}
+
+@theme {
+
+  --animate-blink: blink 2s step-start infinite;
+
   --animate-msg-fade-in: fade-in forwards;
 
   --animate-delivery-fade-in: fadeInDel ease-out forwards;
@@ -17,7 +24,16 @@
   --animate-msg-slide-in: slide-left-to-right 0.3s ease-out forwards;
   
   --animate-msg-avatar: fade-in 1s forwards;
-  
+
+  @keyframes blink {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+
   @keyframes fade-in {
   
     0% {

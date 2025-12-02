@@ -1,7 +1,27 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 ---
-<Layout>
-  <h1 class="font-bold text-xl">Some facts about me:</h1>
-  <h2 class="text-lg">or... what i do for a living.</h2>
+
+<Layout justifyType="start" alignType="center">
+  <div
+    aria-hidden="false"
+    aria-label="mockup code for introduction"
+    aria-description="a section representin a mockup ouput of 'whoami' output is my name: Francesco James Fanti"
+    class="mockup-code w-full text-left text-lg lg:text-md font-mono mb-8"
+  >
+    <div aria-hidden="true">
+      <pre class="font-bold"><span>$ </span><code>whoami</code></pre>
+      <pre
+        class="text-success font-bold"><span /><code> Francesco James Fanti</code></pre>
+      {
+        /* inline-block could be useful as a class for the blockchar in order to avoid quirks */
+      }
+      <pre
+        class="font-bold"><span>$ </span><code class="animate-blink">█</code></pre>
+    </div>
+  </div>
+
+  <h1 class="font-montserrat font-bold text-xl">Some facts about me:</h1>
+  <h2 class="font-montserrat font-semibold text-lg">or... what i do for a living.</h2>
+  
 </Layout>

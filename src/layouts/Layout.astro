@@ -3,6 +3,11 @@ import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 const { justifyType, alignType } = Astro.props;
+const lgp = 20; 
+const mdp = 8;
+const smp = 6;
+// TODO make this a little fancier with children related padding
+
 ---
 
 <!doctype html>
@@ -12,14 +17,14 @@ const { justifyType, alignType } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>neosnakex34</title>
 	</head>
 	<body>
 		<Navbar />
 		<main
 			class=`min-h-[calc(100vh-56px)] flex flex-col w-full bg-base-200 ${justifyType ? "justify-"+justifyType : 'justify-center'} ${alignType ? "items-"+alignType : 'items-center'}`
 		>
-			<div class="lg:p-20 md:p-8 p-6">
+			<div class=`lg:p-${lgp} md:p-${mdp} p-${smp}`>
 				<slot />
 			</div>
 		</main>

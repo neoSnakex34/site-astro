@@ -80,8 +80,9 @@ import chatImg from "../assets/chat-goku.webp";
 </div>
 
 <section
+    id="scroll-section"
     aria-hidden="true"
-    class="mt-10 p-4 max-w-2xl mx-auto text-center -y-4"
+    class="mt-10 p-4 max-w-2xl mx-auto text-center -y-4 opacity-0 transition-opacity duration-500"
 >
     <p class="font-montserrat">
         My goal is to <span class="font-bold">quickly help</span> you with your development needs.<br>
@@ -91,6 +92,22 @@ import chatImg from "../assets/chat-goku.webp";
 </section>
 
 <script>
+
+    // little presenting section will appear after a scroll 
+    // TODO can be improved on mobile view 
+    const section: HTMLElement | null = document.getElementById("scroll-section");
+    const handleScroll = () => {
+        if (!section) return;
+        if (window.scrollY > 50) {
+            section.classList.add("opacity-100");
+            section.classList.remove("opacity-0");
+            window.removeEventListener("scroll", handleScroll);
+        } else {
+            section.classList.remove("opacity-100");
+        }
+    };
+    window.addEventListener("scroll", handleScroll);
+
     // loading dots will be replaced with the message after 2 seconds
     setTimeout(() => {
         const loadingDots: HTMLElement | null = document.querySelector(
@@ -107,4 +124,6 @@ import chatImg from "../assets/chat-goku.webp";
             'Got you <a href="/about" class="font-bold text-info link">covered</a>';
         loadingDots.replaceWith(messageBubble);
     }, 2000);
+
+
 </script>

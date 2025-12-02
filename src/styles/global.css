@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
 @import "tailwindcss";
 
 @plugin "daisyui"{
@@ -8,6 +10,8 @@
 
 
 @theme {
+  --font-source-code-pro: 'Source Code Pro', monospace;
+  --font-jetbrains-mono: 'JetBrains Mono', monospace;
   --font-montserrat: 'Montserrat', sans-serif;
 }
 

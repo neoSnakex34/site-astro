@@ -1,20 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import cat from "../assets/giphy.gif";
 ---
 
 <Layout justifyType="start">
 
   <div class="gif-container mb-10">
     <div style="width:100%;height:0;padding-bottom:77%;position:relative;">
-      <iframe
-        src="https://giphy.com/embed/VIU0t3EaFcpPPjPV5N"
-        width="100%"
-        height="100%"
-        style="position:absolute"
-        class="giphy-embed"
-        ></iframe>
+      <Image src={cat} alt="cat typing on a laptop" style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;" />
     </div><p>
-      <a class="text-xs" href="https://media.giphy.com/media/11JTxkrmq4bGE0/giphy.gif"
+      <a class="text-xs link link-base" href="https://giphy.com/gifs/VIU0t3EaFcpPPjPV5N"
         >via GIPHY</a>
     </p>
   </div>

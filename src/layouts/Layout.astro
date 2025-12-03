@@ -3,6 +3,8 @@ import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 const { justifyType, alignType, showFab = false } = Astro.props;
+
+
 ---
 
 <!doctype html>
@@ -25,11 +27,13 @@ const { justifyType, alignType, showFab = false } = Astro.props;
 		</main>
 
 		<!-- top fab -->
-		<div class=`fab ${showFab ? "" : "opacity-0"}` id="fab-top-container">
+		{ showFab && 
+		
+		<div class='fab transition-opacity duration-200 opacity-0' id="fab-top-container">
 			<!-- a focusable div with tabindex is necessary to work on all browsers. role="button" is necessary for accessibility -->
 			<button
 				role="button"
-				class="z-0 btn btn-lg btn-circle btn-accent opacity-70"
+				class="z-0 btn btn-lg btn-circle btn-accent"
 				aria-description="scroll on top"
 			>
 				^
@@ -37,7 +41,9 @@ const { justifyType, alignType, showFab = false } = Astro.props;
 			
 			
 		</div>
-		<Footer />
+		}
+
+<Footer />
 	</body>
 </html>
 
@@ -51,7 +57,10 @@ const { justifyType, alignType, showFab = false } = Astro.props;
 </style>
 
 <script>
+	// NOTE it can be improved by removing fab element from the DOM when not needed
+	
 
+	
 	const debounce = <T extends unknown[]> (
 		callback: (...args: T) => void,
 		delay: number
@@ -76,24 +85,30 @@ const { justifyType, alignType, showFab = false } = Astro.props;
 	
 
 	fabTop?.addEventListener('click', () => {
-		console.log('clicked');
 		window.scrollTo({ top: 0, behavior: 'smooth' });
+		fabTop.classList.remove('opacity-100');
+		fabTop.classList.add('opacity-0');
 	});
 	console.log('fabTop:', fabTop);
 
 
 	
-
+	if (fabTop) {
 	window.addEventListener('scroll', debounce(() => {
 		console.log('called');
 		if (fabTop) {
 			if (window.scrollY > 300) {
-				fabTop.classList.remove('hidden');
+				fabTop.classList.remove('opacity-0');
+				fabTop.classList.add('opacity-100');
 			} else {
-				fabTop.classList.add('hidden');
+				fabTop.classList.remove('opacity-100');
+				fabTop.classList.add('opacity-0');
 			}
 		}
-	}, 500));
+	}, 380));
+
+	};
+
 	
 	
 

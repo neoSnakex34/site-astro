@@ -4,6 +4,8 @@ import chatImg from "../assets/chat-goku.webp";
 ---
 <!-- TODO consider using preact or something like that to make astro island instead of plain js
  or at least consider using js into separate components  -->
+
+<!-- TODO fix some accessibility -->
 <h1 class="sr-only">Freelance Web Developer and Hardware Technician</h1>
 <h2 class="sr-only">I will help you develop your projects and fix your bugs</h2>
 
@@ -86,7 +88,8 @@ import chatImg from "../assets/chat-goku.webp";
     aria-hidden="true"
     class="mt-10 p-4 max-w-2xl mx-auto text-center -y-4 opacity-0 transition-opacity duration-500"
 >
-    <p class="font-montserrat">
+<!-- TODO fix the br in this -->
+    <p class="font-montserrat leading-relaxed text-md">
         My goal is to <span class="font-bold">quickly 
     help</span> you with your development needs.<br>
         Whether it's <span class="font-bold">fixing bugs</span>, <span class="font-bold">developing new features</span>, or <span class="font-bold">providing assistance</span> with your
@@ -96,6 +99,7 @@ import chatImg from "../assets/chat-goku.webp";
 
 <script>
 
+    // TODO handle edgecases of no intersection/widescreens
     // little presenting section will appear after a scroll 
     const section: HTMLElement | null = document.getElementById("scroll-section");
     const phoneTop: HTMLElement | null = document.getElementById("phone-top");
@@ -118,24 +122,7 @@ import chatImg from "../assets/chat-goku.webp";
     
     io.observe(phoneTop!);
     
-    const handleScroll = () => {
-        if (!section || !phoneTop) return;
-        // console.log(phoneTop.getBoundingClientRect().top);
-        // console.log(window.scrollY);
-        // console.log(Math.abs(phoneTop.getBoundingClientRect().top) - window.scrollY);
-        const isPhoneTopOnPosition: boolean = phoneTop.getBoundingClientRect().top < 5
-        console.log(isPhoneTopOnPosition);
-        
-        if (isPhoneTopOnPosition) {
-            section.classList.add("opacity-100");
-            section.classList.remove("opacity-0");
-            // window.removeEventListener("scroll", handleScroll);
-        } else {
-            section.classList.remove("opacity-100");
-            section.classList.add("opacity-0");
-        }
-    };
-    
+  
     // loading dots will be replaced with the message after 2 seconds
     setTimeout(() => {
         const loadingDots: HTMLElement | null = document.querySelector(

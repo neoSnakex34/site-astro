@@ -20,7 +20,7 @@
   --animate-blink: blink 2s step-start infinite;
 
   --animate-msg-fade-in: fade-in forwards;
-
+  --animate-about-fade-in: fade-in 3s ease-in forwards;
   --animate-delivery-fade-in: fadeInDel ease-out forwards;
 
   --animate-msg-slide-up: slide-up 1s ease-out forwards;

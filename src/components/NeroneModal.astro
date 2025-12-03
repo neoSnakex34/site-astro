@@ -1,0 +1,19 @@
+---
+import { Image } from "astro:assets";
+import nerone from "../assets/nerone.jpg";
+---
+<dialog id="my_modal_1" class="modal">
+  <div class="modal-box">
+    <Image 
+      src={nerone}
+      alt="a picture of nerone, one of the stray cats i look after"
+    />
+    <p class="pt-5 font-montserrat font-semibold">She/He is Nerone</p>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>
+</dialog>

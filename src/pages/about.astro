@@ -1,34 +1,34 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Whoami from "../components/Whoami.astro";
+import NeroneModal from "../components/NeroneModal.astro";
 ---
 
-<Layout justifyType="start" alignType="start">
-  <div
-    aria-hidden="false"
-    aria-label="mockup code for introduction"
-    aria-description="a section representin a mockup ouput of 'whoami' output is my name: Francesco James Fanti"
-    class="mockup-code text-left text-lg lg:text-md mx-10 lg:mb-20 md:mb-8 mb-6"
-  >
-    <div aria-hidden="true">
-      <pre class="font-jetbrains-mono font-bold"><span>$ </span>whoami</pre>
-      <pre
-        class="font-jetbrains-mono font-bold text-success"><span />Francesco James Fanti</pre>
-      {
-        /* inline-block could be useful as a class for the blockchar in order to avoid quirks */
-      }
-      <pre
-        class="font-jetbrains-mono font-bold"><span>$ </span><span class="animate-blink">█</span></pre>
-<!--  add space below -->
-      <pre></pre>
-      <pre> </pre>
-      <pre> </pre>
-      <pre> </pre>
-      </div>
+<Layout justifyType="start" >
+
+  <Whoami />
+  <div id="about-section" class="font-montserrat animate-about-fade-in">
+
+  <h1 class="font-bold text-xl">Some facts <span class="italic">about me</span></h1>
+  <h2 class="font-medium text-lg pb-10">aka what i do for</h2>
+  <h3 class="font-bold text-lg">a living:</h3>
+  <h4 class="font-medium text-md leading-relaxed pb-6">
+    <p>When it comes to <span class="font-bold">technology</span> I consider myself as a <span class="italic font-bold">jack of all trades.</span></p>
+    <p>I'm a <span class="italic font-bold">freelance developer</span> focused on <span class="font-bold">fronted solutions or full stack applications.</span></p>
+    <p>I love <span class="italic font-bold">repairing hardware</span>, pc building and maintenance.</p>
+    <p class="pt-2">You can learn more about it in my <a class="link link-accent font-bold" href="/skills">skills page</a>;</p>
+    <p>take a look at my projects on <a class="link link-info font-bold" href="https://github.com/neosnakex34" target="_blank" rel="noopener noreferrer">github</a>;</p>
+    <p>download my updated <a class="link link-info font-bold" href="https://github.com/neoSnakex34/cv-typst/raw/master/main.pdf" download>CV</a><span class="text-xs"> (with contacts)</span></p>
+  </h4>
+  
+  <!-- TODO link other stuff -->
+  <h3 class="font-bold text-lg">hobby:</h3>
+  <h4 class="font-medium text-md leading-relaxed pb-6">
+    <p>In my free time, I love looking after the neighborhood <span role="button" aria-roledescription="this is a link that triggers the opening of a modal showing a cat pic" class="link link-base font-bold" onclick="my_modal_1.showModal()">stray cats</span>,</p>
+    <p>playing <a class="link font-bold" href="https://en.wikipedia.org/wiki/Balatro" target="_blank" rel="noopener noreferrer">balatro</a>, reading novels</p>
+    <p>or getting into tedious, yet not purposefully political, debates concerning free software.</p>
+    <p>You may consider giving my <a class="link link-success font-bold" href="/blog">blog</a> a read.</p>
+  </h4>
   </div>
-
-  <h1 class="font-montserrat font-bold text-xl">Some facts <span class="italic">about me</span></h1>
-  <h2 class="font-montserrat font-semibold text-lg">aka what i do for</h2>
-  <h3>a living: </h3>
-
-  <h3>hobby</h3>
+  <NeroneModal />
 </Layout>

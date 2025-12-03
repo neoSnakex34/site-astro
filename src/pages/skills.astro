@@ -1,7 +1,54 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout>
-  <h1>skills</h1>
+<Layout justifyType="start">
+
+  <div class="gif-container mb-10">
+    <div style="width:100%;height:0;padding-bottom:77%;position:relative;">
+      <iframe
+        src="https://giphy.com/embed/VIU0t3EaFcpPPjPV5N"
+        width="100%"
+        height="100%"
+        style="position:absolute"
+        class="giphy-embed"
+        ></iframe>
+    </div><p>
+      <a class="text-xs" href="https://media.giphy.com/media/11JTxkrmq4bGE0/giphy.gif"
+        >via GIPHY</a>
+    </p>
+  </div>
+
+    <div class="flex-col lg:flex-row-reverse">
+      
+      <div class="font-montserrat">
+        <h1 class="text-5xl font-bold">Tech</h1>
+        <div>
+          <h2 class="text-xl font-bold italic">I'm using in my projects:</h2>
+          <h3 class="text-xl font-bold pt-2">Backend</h3>
+          <ul class="pt-1 font-medium text-xl lg:text-lg">
+            <li>:: Node.js [express.js]</li>
+            <li>:: FastAPI</li>
+            <li>:: Database [SQL; Redis]</li>
+          </ul>
+
+          <h3 class="text-xl font-bold pt-2">Frontend</h3>
+          <ul class="pt-1 font-medium text-xl lg:text-lg">
+            <li>:: Astro</li>
+            <li>:: React</li>
+            <li>:: Vue.js [Nuxt.js]</li>
+            <li>:: CSS libraries [Tailwind; Bootstrap]</li>
+            <li>:: UI libraries [DaisyUI]</li>
+          </ul>
+
+          <h3 class="text-xl font-bold pt-2">Programming</h3>
+          <ul class="pt-1 font-medium text-xl lg:text-lg">
+            <li>:: JavaScript/TypeScript</li>
+            <li>:: Python</li>
+            <li>:: Go</li>
+            <li>:: Java</li>
+          </ul>
+        </div>
+      </div>
+    </div>
 </Layout>

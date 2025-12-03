@@ -2,10 +2,8 @@
 import { Image } from "astro:assets";
 import chatImg from "../assets/chat-goku.webp";
 ---
-<!-- TODO consider using preact or something like that to make astro island instead of plain js
- or at least consider using js into separate components  -->
 
-<!-- TODO fix some accessibility -->
+
 <h1 class="sr-only">Freelance Web Developer and Hardware Technician</h1>
 <h2 class="sr-only">I will help you develop your projects and fix your bugs</h2>
 
@@ -85,8 +83,7 @@ import chatImg from "../assets/chat-goku.webp";
 
 <section
     id="scroll-section"
-    aria-hidden="true"
-    class="mt-10 p-4 max-w-2xl mx-auto text-center -y-4 opacity-0 transition-opacity duration-500"
+    class="mt-10 p-4 max-w-2xl mx-auto text-center -y-4 opacity-0 transition-opacity duration-3000"
 >
 <!-- TODO fix the br in this -->
     <div class="font-montserrat leading-relaxed text-md">
@@ -103,25 +100,13 @@ import chatImg from "../assets/chat-goku.webp";
     // TODO handle edgecases of no intersection/tablet screens
 
 
+
     // little presenting section will appear after a scroll 
     const section: HTMLElement | null = document.getElementById("scroll-section");
-    const phoneTop: HTMLElement | null = document.getElementById("phone-top");
+    const anchor: HTMLElement | null = document.getElementById("scroll-anchor");
 
 
-   const canScrollOut = (el: HTMLElement) => {
-        const rect = el.getBoundingClientRect();
-
-        const pageHeight = document.documentElement.scrollHeight;
-        const viewportHeight = window.innerHeight;
-
-        
-        const scrollNeeded = pageHeight - viewportHeight;
-
-        return rect.top < scrollNeeded
-
-   };
-
-   if (section && phoneTop) {
+   if (section && anchor) {
 
         // TODO disable intersection observer on screen in which is useless
         const io = new IntersectionObserver(([entry]) => {
@@ -134,24 +119,11 @@ import chatImg from "../assets/chat-goku.webp";
             }
         }, { threshold: 1 });
 
-        io.observe(phoneTop);
+        io.observe(anchor);
    
 
+    
         
-        const checkScroll = () => {
-            const canScroll = canScrollOut(phoneTop);
-            console.log("canScroll:", canScroll);
-            if (!canScroll) {
-                section.classList.add("opacity-100");
-                section.classList.remove("opacity-0");
-            } else {
-                section.classList.remove("opacity-100");
-                section.classList.add("opacity-0");
-            }
-        }
-        // TODO optimise 
-        window.addEventListener("resize", checkScroll);
-        checkScroll();
     };
     
     

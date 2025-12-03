@@ -2,8 +2,7 @@
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
-const { justifyType, alignType } = Astro.props;
-
+const { justifyType, alignType, showFab = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -24,6 +23,20 @@ const { justifyType, alignType } = Astro.props;
 				<slot />
 			</div>
 		</main>
+
+		<!-- top fab -->
+		<div class=`fab ${showFab ? "" : "hidden"}` id="fab-top-container">
+			<!-- a focusable div with tabindex is necessary to work on all browsers. role="button" is necessary for accessibility -->
+			<button
+				role="button"
+				class="z-0 btn btn-lg btn-circle btn-accent opacity-70"
+				aria-description="scroll on top"
+			>
+				^
+			</button>
+			
+			
+		</div>
 		<Footer />
 	</body>
 </html>
@@ -36,3 +49,55 @@ const { justifyType, alignType } = Astro.props;
 		height: 100%;
 	}
 </style>
+
+<script>
+
+	const debounce = <T extends unknown[]> (
+		callback: (...args: T) => void,
+		delay: number
+	) => {
+
+		let timeoutTimer: ReturnType<typeof setTimeout>;
+
+		return (...args: T) => {
+			clearTimeout(timeoutTimer);
+
+			timeoutTimer = setTimeout(() => {
+				callback(...args);
+			}, delay);
+		};
+	}; 
+	
+
+	document.addEventListener('DOMContentLoaded', () => {
+
+
+	const fabTop: HTMLElement | null = document.getElementById('fab-top-container');
+	
+
+	fabTop?.addEventListener('click', () => {
+		console.log('clicked');
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+	});
+	console.log('fabTop:', fabTop);
+
+
+	
+
+	window.addEventListener('scroll', debounce(() => {
+		console.log('called');
+		if (fabTop) {
+			if (window.scrollY > 300) {
+				fabTop.classList.remove('hidden');
+			} else {
+				fabTop.classList.add('hidden');
+			}
+		}
+	}, 500));
+	
+	
+
+
+});
+	
+</script>

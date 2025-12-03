@@ -1,6 +1,50 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+
+import nerone from "../assets/nerone.jpg";
+import studioMessini from "../assets/studio.png";
+import rcipsum from "../assets/rcipsum1.png";
+import sessionBee from "../assets/sessionbee.png";
+import wasa from "../assets/wasa.png";
+import tossDice from "../assets/tossdice.png";
 ---
-<Layout>
-  <h1>works</h1>
+
+<Layout justifyType="start" itemsType="center">
+  <div class="flex flex-col items-center">
+    <Card
+      title="studiomessini.com"
+      description="fast and SEO optimized website for a speech therapist"
+      path={studioMessini}
+      redirect1="https://studiomessini.com/"
+      redirect2="https://github.com/neosnakex34"
+    />
+
+    <Card
+      title="sessionBee"
+      description="PoC of a backend as a (micro)service for IoT"
+      path={sessionBee}
+      redirect2="https://github.com/neoSnakex34/sessionbee"
+    />
+    <Card
+      title="tossdice"
+      description="webapp dice roller with fair odds (moving from fullstack to static soon) - backend is sleeping"
+      path={tossDice}
+      redirect1="https://tossdice.pages.dev/"
+    />
+
+    <Card
+      title="rcIpsum"
+      description="Raymond Carver powered lorem ipsum generator"
+      path={rcipsum}
+      redirect2="https://github.com/neoSnakex34/rcipsum"
+    />
+
+    <Card
+      title="wasaPHOTO"
+      description="Demo of a WebApp photo sharing social network"
+      path={wasa}
+      redirect2="https://github.com/neoSnakex34/wasaphoto"
+    />
+  </div>
 </Layout>

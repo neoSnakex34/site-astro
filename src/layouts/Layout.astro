@@ -25,7 +25,7 @@ const { justifyType, alignType, showFab = false } = Astro.props;
 		</main>
 
 		<!-- top fab -->
-		<div class=`fab ${showFab ? "" : "hidden"}` id="fab-top-container">
+		<div class=`fab ${showFab ? "" : "opacity-0"}` id="fab-top-container">
 			<!-- a focusable div with tabindex is necessary to work on all browsers. role="button" is necessary for accessibility -->
 			<button
 				role="button"

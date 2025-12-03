@@ -1,9 +1,73 @@
 ---
+
 ---
+
 <!-- TODO add credits to font and other resources -->
-<footer class="footer sm:footer-horizontal footer-center bg-base-300 text-base-content p-4">
+<footer
+  class="footer sm:footer-horizontal font-montserrat bg-base-300 text-base-content p-10 pb-10"
+>
+  <nav>
+    <h6 class="footer-title">Credits</h6>
+    <!-- astro daisyui  -->
+    <a
+      class="link link-hover"
+      href="https://astro.build/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Astro
+    </a>
+    <a
+      class="link link-hover"
+      href="https://daisyui.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      DaisyUI
+    </a>
+    <a
+      class="link link-hover"
+      href="https://localthunk.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      LocalThunk (Balatro)
+    </a> 
+    <a 
+      class="link link-hover"
+      href="https://giphy.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Giphy
+    </a>
+  </nav>
+  <nav>
+    <h6 class="footer-title">Special Thanks</h6>
+    <a
+      class="link link-hover"
+      href="https://smony.artstation.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+      >Smony (fellow friend and artist)
+    </a>
+  </nav>
+  <nav>
+    <h6 class="footer-title">Legal</h6>
+    <div class="grid grid-flow-col gap-4">
+      <a class="link link-hover">Privacy Policy [stub]</a>
+    </div>
+  </nav>
+</footer>
+<footer
+  class="footer sm:footer-horizontal font-montserrat footer-center bg-base-300 text-base-content p-4"
+>
   <div>
-    <p>crafted with ❤️ using Astro and DaisyUI</p>
-    <p>Copyright © {new Date().getFullYear()} - Francesco James Fanti</p>
+    <div class="text-xs leading-relaxed font-medium">
+      <p>Every trademark or logo not explicitly mentioned is the property of its respective owner.</p>
+      <p>Balatro is a game by LocalThunk</p>
+
+    </div>
+    <p class="font-bold">Copyright © {new Date().getFullYear()} - Francesco James Fanti</p>
   </div>
-</footer>   
+</footer>

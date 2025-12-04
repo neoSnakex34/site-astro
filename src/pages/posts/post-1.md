@@ -5,7 +5,7 @@ pubDate: 2025-12-04
 description: 'First post on blog section, an introduction to my new blog'
 author: 'neoSnakex34'
 image:
-    url: '../../src/assets/blog/postImages/post-1.png'
+    url: '/blog/postImages/post-1.webp'
     alt: 'A screenshot of this blog source code.'
     credit: 'Me'
     creditUrl: "/"

@@ -1,0 +1,31 @@
+---
+import Layout from "./Layout.astro";
+const { frontmatter } = Astro.props;
+import { Image } from "astro:assets";
+
+import "../styles/global.css";
+---
+
+<Layout justifyType="start" alignType="center" bgColor="base-300" showFab={true}>
+<div class="container font-montserrat flex flex-col items-left gap-4">
+
+<div class="gap-6 items-left">
+
+<div>
+  <h1 class="text-lg font-bold">{frontmatter.title}</h1>
+  <p class="text-sm font-medium">{frontmatter.pubDate.toString().slice(0,10)}</p>
+  <p class="my-3 font-medium"><em>{frontmatter.description}</em></p>
+  <p class="text-xs font-medium mb-2">Written by: {frontmatter.author}</p>
+
+</div>
+<div>
+<Image class="mb-3" src={frontmatter.image.url} width="500" inferSize={true} alt={frontmatter.image.alt} />
+
+</div>
+</div>
+
+  <slot class="mt-10 leading-relaxed"/>
+
+
+</div>
+</Layout>

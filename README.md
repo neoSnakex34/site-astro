@@ -11,5 +11,4 @@ just as the title says, that's the source code for my astro site
 - [x] add first blog post
 - [ ] add an rss feed
 - [ ] handle tags in posts 
-- [ ]
 

@@ -8,8 +8,8 @@ just as the title says, that's the source code for my astro site
 
 
 ### TODO 
-[x] add first blog post
-[] add an rss feed
-[] handle tags in posts 
-[]
+- [x] add first blog post
+- [ ] add an rss feed
+- [ ] handle tags in posts 
+- [ ]
 

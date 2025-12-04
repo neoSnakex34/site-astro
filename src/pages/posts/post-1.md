@@ -1,14 +1,19 @@
 ---
 layout: ../../layouts/BlogPostLayout.astro
-title: 'Welcome to the blog section'
+title: 'Introducing the blog'
 pubDate: 2025-12-04
-description: 'An introduction...'
+description: 'First post on blog section, an introduction to my new blog'
 author: 'neoSnakex34'
 image:
-    url: 'https://docs.astro.build/assets/rose.webp'
-    alt: 'The Astro logo on a dark background with a pink glow.'
+    url: '/src/assets/blog/postImages/post-1.png'
+    alt: 'A screenshot of this blog source code.'
+    credit: 'Me'
+    creditUrl: "/"
 tags: ["astro", "blogging", "learning in public"]
----
-# **STUB**
 
-## hello
+---
+## some context
+This blog has been built with the idea of keeping my site alive for a little bit more than the last one.
+
+### the last one?
+for those who may not know, I built two portfolio sites in the past years. The first was built with nuxt.js and the second was a pure react experiment with daisyui and tailwind

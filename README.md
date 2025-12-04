@@ -1,5 +1,15 @@
-# TODO 
+# neoSnakex34 personal portfolio and blog 
+just as the title says, that's the source code for my astro site
 
-## todo 
+## tech stack 
+- astro 
+- tailwindcss
+- daisyui 
 
-### definitely to do
+
+### TODO 
+[x] add first blog post
+[] add an rss feed
+[] handle tags in posts 
+[]
+

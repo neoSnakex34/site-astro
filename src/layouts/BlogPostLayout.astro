@@ -1,12 +1,14 @@
 ---
 import Layout from "./Layout.astro";
 const { frontmatter } = Astro.props;
-import { Image } from "astro:assets";
+
 
 import "../styles/global.css";
+
 ---
 
 <Layout justifyType="start" alignType="center" bgColor="base-300" showFab={true}>
+  
 <div class="container font-montserrat flex flex-col items-left gap-4">
 
 <div class="gap-6 items-left">
@@ -19,12 +21,14 @@ import "../styles/global.css";
 
 </div>
 <div>
-<Image class="mb-3" src={frontmatter.image.url} width="500" inferSize={true} alt={frontmatter.image.alt} />
-
+  <img src={frontmatter.image.url} width="600" alt={frontmatter.image.alt} />
+  <p class="text-xs font-medium mb-4 mt-2">Image credit: <a class="link link-info" href={frontmatter.image.creditUrl}>{frontmatter.image.credit}</a></p>
 </div>
 </div>
 
-  <slot class="mt-10 leading-relaxed"/>
+<div class="prose font-medium font-montserrat">
+  <slot />
+</div>
 
 
 </div>

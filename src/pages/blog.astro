@@ -1,10 +1,33 @@
 ---
 import Layout from "../layouts/Layout.astro";
+const allPosts = Object.values(
+  import.meta.glob("./posts/*.md", { eager: true }),
+);
 ---
 
-<Layout title="Blog">
-  <ul>
-    <li><a class="link link-hover" href="/posts/post-1">Post 1</a></li>
-  </ul>
+<Layout title="Blog" alignType="center" justifyType="start">
+  <div class="container font-montserrat">
 
+  <h1 class="font-bold text-2xl">Blog</h1>
+  <h2 class="font-semibold text-lg mb-5">welcome to the blog section</h2>
+  <h3 class="font-medium">Latest Posts:</h3>
+  <ul class="list-decimal text-md underline">
+    {
+      allPosts
+        .sort(
+          (a: any, b: any) =>
+            new Date(a.frontmatter.pubDate).getTime() -
+            new Date(b.frontmatter.pubDate).getTime(),
+        )
+        .map((p: any) => (
+          <li class="my-2">
+            <a href={p.url} class="link link-hover">
+              {p.frontmatter.title}
+            </a>
+          </li>
+        ))
+        
+    }
+  </ul>
+  </div>
 </Layout>

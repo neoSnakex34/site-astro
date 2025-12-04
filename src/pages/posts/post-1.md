@@ -19,7 +19,7 @@ This blog has been built with the idea of keeping my site alive for a little bit
 ### the last one?
 For those who may not know, I built two portfolio sites in the past years. The first was built with nuxt.js and the second was a pure react experiment with daisyui and tailwind. Both of them failed.  
 The first lacked style and usability, the second was just not catchy enough. 
-Nonetheless, some ideas from the react site were reused in that site. For instance:
+Nonetheless, some ideas from the react site were reused in this site. For instance:
 - the formatting of the skill page has been copy-pasted from the previous one and then adapted to the new ui/ux needs.
 - the code mockup with the fake ``` whoami ``` command was already present in the old site.
 

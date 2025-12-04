@@ -28,7 +28,7 @@ I mean, even though I'm a supporter of the <a target="_blank" href="https://en.w
 Being a gen-z means I grew up on mid 2000s and 10s internet. 
 - I've witnessed the birth of countless memes
 - I made friends on skype and was an old facebook fan
-- I played LoL when it was still and enjoyable game (kind of)
+- I played LoL when it was still an enjoyable game (kind of)
 - I even had a blog when I was a kid, it was a mockup of my uncle blog and it was hosted on altervista and the bloog (when altervista closed).
   
 _That_ Internet was a place **for human beings**, and I believe that keeping that old fashioned world wide web alive should be everyone's mission.

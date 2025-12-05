@@ -29,7 +29,7 @@ Being a gen-z means I grew up on mid 2000s and 10s internet.
 - I've witnessed the birth of countless memes
 - I made friends on skype and was an old facebook fan
 - I played LoL when it was still an enjoyable game (kind of)
-- I even had a blog when I was a kid, it was a mockup of my uncle blog and it was hosted on altervista and the bloog (when altervista closed).
+- I even had a blog when I was a kid, it was a mockup of my uncle blog and it was hosted on altervista and then on bloog (when altervista closed).
   
 _That_ Internet was a place **for human beings**, and I believe that keeping that old fashioned world wide web alive should be everyone's mission.
 

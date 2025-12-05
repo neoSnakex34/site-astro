@@ -3,7 +3,6 @@ import { Image } from "astro:assets";
 import chatImg from "../assets/chat-goku.webp";
 ---
 
-
 <h1 class="sr-only">Freelance Web Developer and Hardware Technician</h1>
 <h2 class="sr-only">I will help you develop your projects and fix your bugs</h2>
 
@@ -54,10 +53,7 @@ import chatImg from "../assets/chat-goku.webp";
                     <div class="chat-image avatar">
                         <div class="w-10 mask mask-squircle">
                             <a href="https://github.com/neosnakex34">
-                                <Image
-                                    src={chatImg}
-                                    alt="my logo"
-                                />
+                                <Image src={chatImg} alt="my logo" />
                             </a>
                         </div>
                     </div>
@@ -85,48 +81,54 @@ import chatImg from "../assets/chat-goku.webp";
     id="scroll-section"
     class="mt-10 p-4 max-w-2xl mx-auto text-center -y-4 opacity-0 transition-opacity duration-3000"
 >
-<!-- TODO fix the br in this -->
     <div class="font-montserrat leading-relaxed text-md">
-        <p>My goal is to <span class="font-bold">quickly help</span> you with your development needs.</p>
-        <p>Whether it's <span class="font-bold">fixing bugs</span>, <span class="font-bold">developing new features</span>, or <span class="font-bold">providing assistance</span> with your
-        projects.</p>
-        <p> I am here to deliver <span class="font-bold">efficient</span> and <span class="font-bold">reliable</span> solutions to ensure your satisfaction.</p>
-        <p class="mt-2">Whatever is your goal, <a href="/about" class="font-bold link link-info">I've got you covered</a>.</p>
+        <p>
+            <span class="italic">My goal</span> is to <span class="font-bold">quickly help</span> you with your
+            development needs.
+        </p>
+        <p>
+            Whether it's <span class="font-bold">fixing bugs</span>, <span
+                class="font-bold">developing new features</span
+            >, or <span class="font-bold">providing assistance</span> with your projects.
+        </p>
+        <p>
+            I am here to deliver <span class="font-bold">efficient</span> and <span
+                class="font-bold">reliable</span
+            > solutions to ensure your satisfaction.
+        </p>
+        <p class="mt-2">
+            Whatever is <span class="italic">your goal</span>, <a
+                href="/about"
+                class="font-bold link link-info">I've got you covered</a
+            >.
+        </p>
     </div>
 </section>
 
 <script>
-
-    // TODO handle edgecases of no intersection/tablet screens
-
-
-
-    // little presenting section will appear after a scroll 
-    const section: HTMLElement | null = document.getElementById("scroll-section");
+    // little presenting section will appear after a scroll
+    const section: HTMLElement | null =
+        document.getElementById("scroll-section");
     const anchor: HTMLElement | null = document.getElementById("scroll-anchor");
 
-
-   if (section && anchor) {
-
+    if (section && anchor) {
         // TODO disable intersection observer on screen in which is useless
-        const io = new IntersectionObserver(([entry]) => {
-            if (!entry.isIntersecting) {
-                section.classList.add("opacity-100");
-                section.classList.remove("opacity-0");
-            } else {
-                section.classList.add("opacity-0");
-                section.classList.remove("opacity-100");
-            }
-        }, { threshold: 1 });
+        // NOTE with the actual anchor it should always be useful
+        const io = new IntersectionObserver(
+            ([entry]) => {
+                if (!entry.isIntersecting) {
+                    section.classList.add("opacity-100");
+                    section.classList.remove("opacity-0");
+                } else {
+                    section.classList.add("opacity-0");
+                    section.classList.remove("opacity-100");
+                }
+            },
+            { threshold: 1 },
+        );
 
         io.observe(anchor);
-   
-
-    
-        
-    };
-    
-    
+    }
 
     // loading dots will be replaced with the message after 2 seconds
     setTimeout(() => {
@@ -135,15 +137,23 @@ import chatImg from "../assets/chat-goku.webp";
         );
 
         if (!loadingDots) return;
-        
+
         const messageBubble = document.createElement("div");
         messageBubble.className =
             "opacity-0 animate-msg-fade-in chat-bubble chat-bubble-neutral ml-2";
         messageBubble.style.animationDelay = "0.2s";
         messageBubble.innerHTML =
-            'Got you <a href="/about" class="font-bold text-info link">covered</a>!';
+            'Got you <a id="covered-text"class="font-bold text-info link">covered</a>!';
         loadingDots.replaceWith(messageBubble);
+
+        const coveredText = document.getElementById("covered-text") || null;
+        const scrollSection = document.getElementById("scroll-section") || null;
+
+        const scrollToSection = () => {
+            console.log("deifo");
+            scrollSection?.scrollIntoView({ behavior: "smooth" });
+        };
+
+        coveredText?.addEventListener("click", scrollToSection);
     }, 2000);
-
-
 </script>

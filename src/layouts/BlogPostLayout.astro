@@ -14,22 +14,44 @@ import "../styles/global.css";
 <div class="gap-6 items-left">
 
 <div>
-  <h1 class="text-lg font-bold">{frontmatter.title}</h1>
+  <h1 class="text-2xl font-bold">{frontmatter.title}</h1>
   <p class="text-sm font-medium">{frontmatter.pubDate.toString().slice(0,10)}</p>
   <p class="my-3 font-medium"><em>{frontmatter.description}</em></p>
   <p class="text-xs font-medium mb-2">Written by: {frontmatter.author}</p>
 
 </div>
-<div>
+<div class="mt-6">
   <img src={frontmatter.image.url} width="600" alt={frontmatter.image.alt} />
+  <div class="mt-4 flex flex-row justify-start gap-10">
   <p class="text-xs font-medium mb-4 mt-2">Image credit: <a class="link link-info" href={frontmatter.image.creditUrl}>{frontmatter.image.credit}</a></p>
+  <button id="btn-fullscreen-img" class="btn btn-sm btn-ghost">open fullscreen image</button>
+
+  </div>
 </div>
 </div>
 
-<div class="prose font-medium font-montserrat">
+<div class="prose font-medium font-montserrat mx-auto">
   <slot />
 </div>
 
 
 </div>
 </Layout>
+
+<script define:vars={{frontmatter}} is:inline>
+  
+  const imgUrl = frontmatter.image.url || '';
+
+  const handleImgClick = () => {
+    if (!imgUrl) {
+    //  TODO gracefully handle error in ui instead of console
+      console.error('Image URL is not available.');
+      return;
+    }
+
+    window.open(imgUrl, '_blank');
+  };
+
+  const fullscrenBtn = document.getElementById('btn-fullscreen-img');
+  fullscrenBtn?.addEventListener('click', handleImgClick); 
+</script>

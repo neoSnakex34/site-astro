@@ -46,7 +46,10 @@ const isLinkActive = (route: string): boolean => {
 };
 ---
 
-<nav aria-label="Main navigation bar" class="font-montserrat navbar bg-base-100 shadow-sm">
+<nav
+  aria-label="Main navigation bar"
+  class="font-montserrat navbar bg-base-100 shadow-sm"
+>
   <div class="navbar-start">
     <div class="dropdown relative">
       <button
@@ -97,7 +100,9 @@ const isLinkActive = (route: string): boolean => {
     <a
       aria-label="button link to Home"
       aria-description="button link to Home, currently showing my site title neoSnakex34"
-      class="btn btn-ghost normal-case text-xl mx-3" href="/">neoSnakex34</a>
+      class="btn btn-ghost normal-case text-xl mx-3"
+      href="/">neoSnakex34</a
+    >
   </div>
 
   <div class="navbar-center hidden lg:flex">
@@ -107,7 +112,7 @@ const isLinkActive = (route: string): boolean => {
           const active = isLinkActive(l.route);
           if (l.route === "/blog") {
             return null;
-          };
+          }
           return (
             <li>
               <a
@@ -125,27 +130,26 @@ const isLinkActive = (route: string): boolean => {
   </div>
   <div class="navbar-end">
     {
-    () => {
+      () => {
+        const active = isLinkActive(blogLink.route);
 
-      const active = isLinkActive(blogLink.route);
-
-      return (
-        <a
-          href="/blog"
-          aria-current={active ? "page" : undefined}
-          aria-label="button link to Blog"
-          class={`btn btn-soft btn-accent mx-4 font-bold ${active ? "active btn-active" : ""}`}
-        >
-          Blog
-        </a>
+        return (
+          <a
+            href="/blog"
+            aria-current={active ? "page" : undefined}
+            aria-label="button link to Blog"
+            class={`btn btn-soft btn-accent mx-4 font-bold ${active ? "active btn-active" : ""}`}
+          >
+            Blog
+          </a>
         );
+      }
     }
-  }
-   
   </div>
 </nav>
-<div class="anchor" id="scroll-anchor" />
+<div class="anchor" id="scroll-anchor"></div>
 <script>
+// TODO tidy up this script and aria
   document.addEventListener("DOMContentLoaded", () => {
     const dropdownButton = document.querySelector(
       "#menu-button",
@@ -176,7 +180,7 @@ const isLinkActive = (route: string): boolean => {
     // click listener
     dropdownButton.addEventListener("click", toggleMenu);
 
-    // click listener for click outsude close
+    // click listener for click outside close
     document.addEventListener("click", (e) => {
       if (!dropdownContainer.contains(e.target as Node)) {
         closeMenu();

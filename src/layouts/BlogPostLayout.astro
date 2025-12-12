@@ -23,7 +23,7 @@ import "../styles/global.css";
 <div class="mt-6">
   <img src={frontmatter.image.url} width="600" alt={frontmatter.image.alt} />
   <div class="mt-4 flex flex-row justify-start gap-10">
-  <p class="text-xs font-medium mb-4 mt-2">Image credit: <a class="link link-info" href={frontmatter.image.creditUrl}>{frontmatter.image.credit}</a></p>
+  <p class="text-xs font-medium mb-4 mt-2">Image credit: <a class="link link-info" target="_blank" rel="noopener noreferrer" href={frontmatter.image.creditUrl}>{frontmatter.image.credit}</a></p>
   <button id="btn-fullscreen-img" class="btn btn-sm btn-ghost">open fullscreen image</button>
 
   </div>

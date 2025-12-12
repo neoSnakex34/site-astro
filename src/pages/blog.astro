@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+// TODO maybe define a type for posts
 const allPosts = Object.values(
   import.meta.glob("./posts/*.md", { eager: true }),
 );
@@ -16,8 +17,8 @@ const allPosts = Object.values(
       allPosts
         .sort(
           (a: any, b: any) =>
-            new Date(a.frontmatter.pubDate).getTime() -
-            new Date(b.frontmatter.pubDate).getTime(),
+            new Date(b.frontmatter.pubDate).getTime() -
+            new Date(a.frontmatter.pubDate).getTime(),
         )
         .map((p: any) => (
           <li class="my-2">

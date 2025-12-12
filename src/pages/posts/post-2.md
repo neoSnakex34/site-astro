@@ -15,7 +15,7 @@ tags: ["art", "ai vs human", "illustrators", "blogging"]
 ---
 ## What's the deal with this pic everywere?
 
-It all began when I realized that using a piece of [fan art of Goku Black](/public/blog/inPostPic/chat-goku.webp) (a goated one) might not have been the best of ideas in terms of possible fair use and personal branding.
+It all began when I realized that using a piece of [fan art of Goku Black](/blog/inPostPic/chat-goku.webp) (a goated one) might not have been the best of ideas in terms of possible fair use and personal branding.
 
 It was then that I decided to reach out to _my dear_ friend **Smony**, the guy behind different works of art in my projects! 
 Simone created the previous pic (the one of Goku Black) that I used for over a year as my propic for github and telegram. 

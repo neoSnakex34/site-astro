@@ -43,7 +43,7 @@ In this world of ours is kinda difficult to discern between good and evil, innit
 AI can be a good tool, an assistance in certain - tedious - tasks. But it should never substitute human work in terms of creativity. As an example I do like AI assisted coding as far as I don't feel too biased toward a design pattern or something like that. 
 
 ### The elephants may actually be two
-Although it is not an easy task to distinguish good from evil, it is absolutely certain that most companies are abusing AI Slop cause it costs less than paying artists. But AI Slop is soulless, it would have been fun to create memes with if only did not waste this much energy. I can condone the use of it as a brainstorming model, a mockup tool or as a correction-related ait on Graphic Design and Illustration programs, but I believe that **art belongs to artists**.
+Although it is not an easy task to distinguish good from evil, it is absolutely certain that most companies are abusing AI Slop cause it costs less than paying artists. But AI Slop is soulless, it would have been fun to create memes with if only did not waste this much energy. I can condone the use of it as a brainstorming model, a mockup tool or as a correction-related aid on Graphic Design and Illustration programs, but I believe that **art belongs to artists**.
 
 ### I'd like to commission an illustration to Smony
 You can reach out to him on Telegram @**SpazioUomo**. 

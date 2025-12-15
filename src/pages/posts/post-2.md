@@ -19,7 +19,7 @@ It all began when I realized that using a piece of [fan art of Goku Black](/blog
 
 It was then that I decided to reach out to _my dear_ friend **Smony**, the guy behind different works of art in my projects! 
 Simone created the previous pic (the one of Goku Black) that I used for over a year as my propic for github and telegram. 
-Back in April, he realized the polyhedral dice art for my [tossdice](https://tossdice.pages.dev) webapp (that unfortunately does not work well as of dec 25 because I have to migrate it to a full frontend app). 
+Back in April, he realized the polyhedral dice art for my [tossdice](https://tossdice.pages.dev) webapp (**that is now working as intended**).  
 
 ### All fun and games but who the heck is Smony?
 Smony is a talented artist, currently attending his Bachelor of Arts in Comics and Illustration at Accademia di Belle Arti, L’Aquila. He is focused on Comic Book Art and Professional Illustration and at time of writing he is **ACCEPTING COMMISSIONS**

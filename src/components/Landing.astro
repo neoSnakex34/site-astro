@@ -6,17 +6,8 @@ import chatImg from "../assets/io.png";
 <h1 class="sr-only">Freelance Web Developer and Hardware Technician</h1>
 <h2 class="sr-only">I will help you develop your projects and fix your bugs</h2>
 
-<div class="sr-only" role="region" aria-label="Benvenuto">
-    <p>
-        This is my landing page, it shows a phone mockup with a chat
-        conversation between you (the customer) and me (the developer).
-    </p>
-    <p>I will assist you with whatever you need.</p>
-    <p>You can proceed to the next page.</p>
-    <a href="/about">Go to the About page</a>
-</div>
-
 <div aria-hidden="true" class="flex justify-center items-center">
+    
     <div class="lg:max-w-s max-w-xs mockup-phone lg:mt-0 mt-10" id="phone-top">
         <div class="mockup-phone-camera z-0"></div>
 
@@ -64,8 +55,8 @@ import chatImg from "../assets/io.png";
                     ></span>
                     <!--  end loading message dots -->
                     <div
-                        class="opacity-0 animate-delivery-fade-in pt-1 chat-footer"
-                        style="animation-delay: 2.9s;
+                        class="opacity-0 animate-delivery-fade-in pt-1 chat-footer";
+                        style="animation-delay: 1s;
     "
                     >
                         Delivered
@@ -143,7 +134,7 @@ import chatImg from "../assets/io.png";
             "opacity-0 animate-msg-fade-in chat-bubble chat-bubble-neutral ml-2";
         messageBubble.style.animationDelay = "0.2s";
         messageBubble.innerHTML =
-            'Got you <a id="covered-text"class="font-bold text-info link">covered</a>!';
+            'Got you <span id="covered-text" class="font-bold text-info link">covered</span>!';
         loadingDots.replaceWith(messageBubble);
 
         const coveredText = document.getElementById("covered-text") || null;
@@ -154,5 +145,5 @@ import chatImg from "../assets/io.png";
         };
 
         coveredText?.addEventListener("click", scrollToSection);
-    }, 2000);
+    }, 500);
 </script>

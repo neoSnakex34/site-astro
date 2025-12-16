@@ -10,7 +10,7 @@ import { SEO } from "astro-seo";
 <html lang="en">
 	<head>
 		<SEO
-			title="francesco james - developer"
+			title="francesco james - developer" 
 			description="Personal website and blog of developer neosnakex34"
 			openGraph={{
         basic: {
@@ -44,7 +44,6 @@ import { SEO } from "astro-seo";
 	<body>
 		
 		<Navbar />
-		<!-- TODO use standard js instead of ternary -->
 		<main
 			class=`min-h-[calc(100vh-56px)] flex flex-col w-full ${bgColor ? "bg-"+bgColor : 'bg-base-200'}  ${justifyType ? "justify-"+justifyType : 'justify-center'} ${alignType ? "items-"+alignType : 'items-center'}`
 		>
@@ -62,7 +61,7 @@ import { SEO } from "astro-seo";
 			<button
 				role="button"
 				class="z-0 btn btn-lg btn-circle btn-accent"
-				aria-description="scroll on top"
+				aria-label="scroll on top"
 			>
 				^
 			</button>
@@ -85,7 +84,6 @@ import { SEO } from "astro-seo";
 </style>
 
 <script>
-	// NOTE it can be improved by removing fab element from the DOM when not needed
 	
 
 	

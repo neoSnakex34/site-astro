@@ -2,14 +2,16 @@
 import { Image } from 'astro:assets';
 import { undefined } from 'astro:schema';
 
-const { title, description, path, redirect1 = undefined, redirect2 = undefined } = Astro.props;
+const { title, description, path, redirect1 = undefined, redirect2 = undefined, lazyLoading = true } = Astro.props;
 const hasRedirect1 = redirect1 !== undefined;
 const hasRedirect2 = redirect2 !== undefined;
+const loadingType = lazyLoading ? "lazy" : "eager";
 ---
 
 <div class="card bg-base-100 lg:w-1/2 shadow-sm lg:mb-20 md:mb-10 mb-6">
     <figure>
     <Image
+      loading={loadingType}
       src={path}
       alt={title} 
       inferSize = {true}

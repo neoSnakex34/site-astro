@@ -14,7 +14,9 @@ tags: ["astro", "blogging"]
 ---
 
 ## Distrohopping really kicked in 
-After years of distrohopping, in which I used or just tried:
+### but how did it started
+I started my gnu/linux journey back in 2020, when I bough a mini pc I intended to use as a daily driver.
+I hopped between countless distros, but the most relevant are:
 - **Linux Mint** (feb 2020 - april 2020)]
 - **Fedora KDE** (april 2020 - more or less september 2021)
 - **ArcoLinux BSPWM** (september 2021 - october 2021)

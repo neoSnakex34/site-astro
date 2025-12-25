@@ -16,7 +16,7 @@ tags: ["immutability", "fedora silverblue", "ublue-os"]
 ---
 ## Distrohopping really kicked in 
 ### but how did it start?
-I started my gnu/linux journey back in 2020, when I bough a mini pc I intended to use as a daily driver for university.
+I started my gnu/linux journey back in 2020, when I bought a mini pc I intended to use as a daily driver for university.
 During those years, I hopped between countless distros, but the most relevant are:\
 written as \
 [distro - desktop environment/window manager]
@@ -63,7 +63,7 @@ Exstensively using flatpak and other user-space centric approach to applications
 Creating custom devcontainers for my environment I managed to reproduce a suitable environment for my software engineering exam, having debian bookwork with all the build related tools and an installation of helix editor with it's own tailored configuration I can use when needed just spinning up a ```devcontainer exec bash```.
 
 ### is it about fedora, bluefin, or development approach?
-What changed in me was fundamentally the paradigm adopted in handling my system. Everyone can achieve this kind of workflow in almost every stable enough distro, without it being atomic. For instance, one could use ```toolbox```, ```brew```, ```devcontainer``` and ```podman``` directly on a debian stable, prioritizing flatpak first approach and reducing to the bare minimum the installation of ```apt``` packages. Again, this kind of approach is even better in NixOS, where you can decide to use ```direnv``` and declare specific dev environments via flakes. What really made me switch 
+What changed in me was fundamentally the paradigm adopted in handling my system. Everyone can achieve this kind of workflow in almost every stable enough distro, without it being atomic. For instance, one could use ```toolbox```, ```brew```, ```devcontainer``` and ```podman``` directly on a debian stable, prioritizing flatpak first approach and reducing to the bare minimum the installation of ```apt``` packages. Again, this kind of approach is even better in NixOS, where you can decide to use ```devenv``` and declare specific dev environments via flakes. What really made me switch 
 was the loving and exstensive community behind fedora atomic and, in particular, ublue-os. While cloud native approach can be considered too opinionated (as in too dogmatic) I believe that it's container-first approach is kinda useful and fun too. 
 
 #### my current setup

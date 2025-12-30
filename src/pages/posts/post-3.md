@@ -38,7 +38,7 @@ Since the really steep learning curve and the absolutely horrendous documentatio
 
 ### you were just talking about distro hopping
 #### what's the deal with all this nixing around? 
-as I said, NixOS had become my home for a while. After some thinkering about the right way to configure it with Home Manager and Flakes I ended up with a nice workflow and I expanded the config to my workstation too. <br>
+as I said, NixOS had become my home for a while. After some tinkering about the right way to configure it with Home Manager and Flakes I ended up with a nice workflow and I expanded the config to my workstation too. <br>
 Throughout 2025 I used NixOS on every machine I own with the peace of mind of one that has a vast choice of software via nix package manager and the stability of an immutable-like reproducible desktop. 
 
 ### so why did you leave that bliss

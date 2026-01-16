@@ -3,10 +3,7 @@ import { Image } from "astro:assets";
 import chatImg from "src/assets/io.png";
 ---
 
-<h1 class="sr-only">Freelance Web Developer and Hardware Technician</h1>
-<h2 class="sr-only">I will help you develop your projects and fix your bugs</h2>
-
-<div aria-hidden="true" class="flex justify-center items-center">
+<div role="region" aria-label="Customer-Developer Chat Simulation" class="flex justify-center items-center">
     
     <div class="lg:max-w-s max-w-xs mockup-phone lg:mt-0 mt-10" id="phone-top">
         <div class="mockup-phone-camera z-0"></div>
@@ -14,7 +11,6 @@ import chatImg from "src/assets/io.png";
         <div
             class="mockup-phone-display text-white grid place-content-center bg-linear-to-b from-base-100 to-base-300"
         >
-            <!-- phone slot -->
             <div class="p-4">
                 <div class="chat chat-end">
                     <div class="chat-header">
@@ -33,17 +29,17 @@ import chatImg from "src/assets/io.png";
                     <div class="pt-1 chat-footer opacity-50">Delivered</div>
                 </div>
 
-                <div class="pt-4 chat chat-start">
+                <div class="pt-4 chat chat-start" aria-live="polite">
                     <div
                         class="opacity-0 animate-delivery-fade-in chat-header ml-2"
                         style="animation-delay: 2.3s;"
                     >
-                        <a href="https://github.com/neosnakex34">neosnakex34</a>
+                        <a href="https://github.com/neosnakex34" class="focus:ring focus:ring-accent rounded-sm">neosnakex34</a>
                         <time class="text-xs opacity-60">12:45</time>
                     </div>
                     <div class="chat-image avatar">
                         <div class="w-10 mask mask-squircle">
-                            <a href="https://github.com/neosnakex34">
+                            <a href="https://github.com/neosnakex34" class="focus:ring focus:ring-accent rounded-xl block">
                                 <Image
                                 layout="constrained"
                                 width={40}
@@ -54,11 +50,9 @@ import chatImg from "src/assets/io.png";
                         </div>
                     </div>
 
-                    <!-- loading message dots -->
                     <span
                         class="loading loading-dots loading-xs text-info -mx-2 mt-6"
                     ></span>
-                    <!--  end loading message dots -->
                     <div
                         class="opacity-0 animate-delivery-fade-in pt-1 chat-footer";
                         style="animation-delay: .8s;"
@@ -67,8 +61,7 @@ import chatImg from "src/assets/io.png";
                     </div>
                 </div>
             </div>
-            <!-- END OF PHONE slot -->
-        </div>
+            </div>
     </div>
 </div>
 
@@ -77,8 +70,13 @@ import chatImg from "src/assets/io.png";
     class="mt-10 p-4 max-w-2xl mx-auto text-center -y-4 opacity-0 transition-opacity duration-3000"
 >
     <div class="font-montserrat leading-relaxed text-md">
+        
+        <h1 class="text-2xl font-bold mb-4">I'm a freelance developer</h1>
+
+        <h2 class="italic text-lg font-bold mb-1">My goal</h2>
+
         <p>
-            <span class="italic">My goal</span> is to <span class="font-bold">quickly help</span> you with your
+            is to <span class="font-bold">quickly help</span> you with your
             development needs.
         </p>
         <p>
@@ -137,8 +135,10 @@ import chatImg from "src/assets/io.png";
         messageBubble.className =
             "opacity-0 animate-msg-fade-in chat-bubble chat-bubble-neutral ml-2";
         messageBubble.style.animationDelay = "0.2s";
+        
         messageBubble.innerHTML =
-            'Got you <span id="covered-text" class="font-bold text-info link">covered</span>!';
+            'Got you <button id="covered-text" type="button" class="font-bold text-info link bg-transparent border-none p-0 align-baseline font-inherit cursor-pointer">covered</button>!';
+
         loadingDots.replaceWith(messageBubble);
 
         const coveredText = document.getElementById("covered-text") || null;

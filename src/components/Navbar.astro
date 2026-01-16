@@ -1,4 +1,5 @@
 ---
+import LocaleSelector from "./LocaleSelector.astro";
 const pages = import.meta.glob("src/pages/*.astro", { eager: true });
 
 interface navLink {
@@ -56,6 +57,7 @@ const isLinkActive = (route: string): boolean => {
   aria-label="Main navigation bar"
   class="font-montserrat navbar bg-base-100 shadow-sm"
 >
+  <LocaleSelector/>
   <div class="navbar-start">
     <div class="dropdown relative">
       <button

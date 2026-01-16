@@ -1,15 +1,22 @@
-  <div
-    aria-hidden="false"
-    aria-label="mockup code for with my name output"
-    class="mockup-code text-left text-lg lg:pb-70 md:pb-65 pb-50 lg:mb-20 md:mb-8 mb-6"
-    
-  >
-    <div aria-hidden="false">
+---
+const { pathname } = Astro.url;
+const isItalian = pathname.startsWith("/it");
+
+const ariaLabel = isItalian 
+  ? "Terminale: esecuzione del comando whoami che mostra il mio nome" 
+  : "Terminal: running whoami command displaying my name";
+---
+
+<div
+  role="figure" 
+  aria-label={ariaLabel}
+  class="mockup-code text-left text-lg lg:pb-70 md:pb-65 pb-50 lg:mb-20 md:mb-8 mb-6"
+>
+    <div>
       <pre class="font-jetbrains-mono font-bold"><span>$ </span>whoami</pre>
-      <pre
-        class="font-jetbrains-mono font-bold text-success"><span />Francesco James Fanti</pre>
-      <pre
-        class="font-jetbrains-mono font-bold"><span>$ </span><span class="animate-blink">█</span></pre>
-  
-      </div>
-  </div>
+      
+      <pre class="font-jetbrains-mono font-bold text-success">Francesco James Fanti</pre>
+      
+      <pre class="font-jetbrains-mono font-bold"><span>$ </span><span class="animate-blink" aria-hidden="true">█</span></pre>
+    </div>
+</div>

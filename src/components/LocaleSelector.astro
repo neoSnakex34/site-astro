@@ -1,0 +1,88 @@
+---
+const { pathname } = Astro.url;
+const isItalian = pathname.startsWith("/it");
+
+// paths without it localization should be put here 
+const untranslatedPaths = ["/blog", "/posts"];
+const disableItalian = untranslatedPaths.some((path) => pathname.includes(path));
+
+const currentLang = isItalian ? "it" : "en";
+---
+
+<div class="dropdown dropdown-bottom">
+  
+  <div tabindex="0" role="button" class="btn btn-ghost btn-sm text-xl m-1" aria-label="Language Selector">
+    {isItalian ? "🇮🇹" : "🇬🇧"}
+  </div>
+
+  <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+    
+    <li>
+      <button 
+        class="lang-btn flex justify-between" 
+        data-lang="en"
+        disabled={!isItalian} 
+      >
+        <span>🇬🇧 English</span>
+        {!isItalian && <span class="text-xs font-bold">✓</span>}
+      </button>
+    </li>
+
+    <li>
+      <button 
+        class="lang-btn flex justify-between" 
+        data-lang="it" 
+        disabled={isItalian || disableItalian} 
+        title={disableItalian ? "Translation not available" : ""}
+      >
+        <span class={disableItalian ? "opacity-50" : ""}>🇮🇹 Italiano</span>
+        
+        {isItalian && <span class="text-xs font-bold">✓</span>}
+        {disableItalian && <span class="badge badge-xs badge-ghost">N/A</span>}
+      </button>
+    </li>
+
+  </ul>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const currentPath = window.location.pathname;
+    const isItalianPath = currentPath.startsWith("/it");
+
+    const savedLang = localStorage.getItem("lang");
+    
+    const itBtn = document.querySelector('button[data-lang="it"]') as HTMLButtonElement | null;
+    const isItDisabled = itBtn?.disabled || false;
+
+    if (savedLang === "it" && !isItalianPath && !isItDisabled) {
+      window.location.replace("/it" + currentPath);
+    } 
+
+    else if (savedLang === "en" && isItalianPath) {
+      window.location.replace(currentPath.replace(/^\/it/, "") || "/");
+    }
+
+    const buttons = document.querySelectorAll('.lang-btn');
+    
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+
+        const target = e.currentTarget as HTMLButtonElement;
+        const selectedLang = target.dataset.lang; // "en" o "it"
+
+        if (!selectedLang) return;
+
+        localStorage.setItem("lang", selectedLang);
+
+        if (selectedLang === "it") {
+       
+           window.location.assign("/it" + currentPath);
+        } else {
+           const newPath = currentPath.replace(/^\/it/, "") || "/";
+           window.location.assign(newPath);
+        }
+      });
+    });
+  });
+</script>

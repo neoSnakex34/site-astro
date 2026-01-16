@@ -1,8 +1,9 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "src/layouts/Layout.astro";
+
 // TODO maybe define a type for posts
 const allPosts = Object.values(
-  import.meta.glob("./posts/*.md", { eager: true }),
+  import.meta.glob("src/pages/posts/*.md", { eager: true }),
 );
 ---
 

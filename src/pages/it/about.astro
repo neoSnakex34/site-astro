@@ -1,0 +1,34 @@
+---
+import Layout from "src/layouts/it/Layout.astro";
+import Whoami from "src/components/Whoami.astro";
+import NeroneModal from "src/components/it/NeroneModal.astro";
+---
+
+<Layout justifyType="start" showFab={true}>
+
+  <Whoami />
+  <div id="about-section" class="font-montserrat animate-about-fade-in">
+
+  <h1 class="font-bold text-xl">Ecco alcune <span class="italic">informazioni su di me</span></h1>
+  <h2 class="font-medium text-lg pb-10">overro cosa faccio per...</h2>
+  <h3 class="font-bold text-lg">vivere:</h3>
+  <h4 class="font-medium text-md leading-relaxed pb-6">
+    <p>Quando parliamo di <span class="font-bold">tecnologia</span> mi considero un <span class="italic font-bold">tuttofare.</span></p>
+    <p>Sono uno <span class="italic font-bold">sviluppatore freelance</span> che si occupa di <span class="font-bold">soluzioni frontend o applicazioni full stack.</span></p>
+    <p>Amo <span class="italic font-bold">riparare hardware</span>, assemblare PC e fare manutenzione.</p>
+    <p class="pt-2">Puoi apprendere di più a riguardo nella mia: <a class="link link-accent font-bold" href="/skills">pagina delle competenze</a>;</p>
+    <p>guardare i miei progetti su <a class="link link-info font-bold" href="https://github.com/neosnakex34" target="_blank" rel="noopener noreferrer">github</a>;</p>
+  <p>scaricare il mio <a class="link link-info font-bold" href="https://github.com/neoSnakex34/cv-typst/raw/master/main.pdf" download>CV</a> aggiornato<span class="text-xs"> (dove trovi i miei contatti)</span></p>
+  </h4>
+  
+  <!-- TODO link other stuff -->
+  <h3 class="font-bold text-lg">hobby:</h3>
+  <h4 class="font-medium text-md leading-relaxed pb-6">
+    <p>Nel tempo libero, mi piace prendermi cura dei <span role="button" aria-label="triggers the opening of a modal showing a cat pic" class="link link-base font-bold" onclick="my_modal_1.showModal()">gatti randagi</span> del quartiere,</p>
+    <p>giocare a <a class="link font-bold" href="https://en.wikipedia.org/wiki/Balatro" target="_blank" rel="noopener noreferrer">balatro</a>, <a class="link link-base font-bold" href="https://en.wikipedia.org/wiki/Days_at_the_Morisaki_Bookshop" target="_blank" rel="noopener noreferrer">leggere romanzi</a></p>
+    <p>o infilarmi in tediose, seppur non volontariamente politiche, discussioni riguardanti il free software.</p>
+    <p>Potresti voler dare un'occhiata al mio <a class="link link-success font-bold" href="/blog">blog</a> (per ora solo in inglese).</p>
+  </h4>
+  </div>
+  <NeroneModal />
+</Layout>

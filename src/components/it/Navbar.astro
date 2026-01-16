@@ -1,0 +1,224 @@
+---
+const pages = import.meta.glob("src/pages/it/*.astro", { eager: true });
+
+interface navLink {
+  name: string;
+  route: string;
+}
+
+const translationUnit: Record<string, string> = {
+  "about": "Chi Sono", 
+  "skills": "Competenze", 
+  "works": "Progetti"
+}
+
+const navLinks: navLink[] = Object.keys(pages).map((p) => {
+  const name = p
+    .replace("/src/pages/it/", "")
+    .replace(".astro", "")
+    .replace("index", "");
+
+    
+  const route = name === "" ? "/it" : `/it/${name}`;
+
+  return { name: name || "Home", route };
+  
+});
+// console.log(navLinks)
+
+const homeLink: navLink = navLinks.find((l) => l.route === "/") || {
+  name: "Home",
+  route: "/it",
+};
+
+const blogLink: navLink = navLinks.find((l) => l.route === "/blog") || {
+  name: "Blog",
+  route: "/blog",
+};
+
+const otherLinks: navLink[] = navLinks.filter(
+  (l) => l.route != homeLink?.route && l.route != blogLink?.route,
+);
+
+// console.log(otherLinks)
+
+const sortedLinks: navLink[] = [homeLink, ...otherLinks, blogLink];
+const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+const currentPath: string = Astro.url.pathname;
+
+const normalizedPath =
+  currentPath != homeLink.route
+    ? currentPath.slice(3)
+    : currentPath;
+
+// console.log(normalizedPath)
+
+const isLinkActive = (route: string): boolean => {
+  
+  const safePath = currentPath.length > 1 && currentPath.endsWith('/')
+    ? currentPath.slice(0, -1)
+    : currentPath;
+
+  
+  if (route === "/it") {
+    return safePath === "/it";
+  }
+
+  
+  return safePath === route || safePath.startsWith(`${route}/`);
+};
+---
+
+<nav
+  aria-label="Main navigation bar"
+  class="font-montserrat navbar bg-base-100 shadow-sm"
+>
+ 
+  <div class="navbar-start">
+    <div class="dropdown relative">
+      <button
+        id="menu-button"
+        class="btn btn-ghost lg:hidden"
+        aria-expanded="false"
+        aria-controls="menu-list"
+        aria-label="open/close menu"
+        type="button"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h8m-8 6h16"></path>
+        </svg>
+      </button>
+      <ul
+        id="menu-list"
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-5 w-52 p-2 shadow-2xl hidden"
+      >
+        {
+          sortedLinks.map((l) => {
+            const active = isLinkActive(l.route);
+            return (
+              <li>
+                <a
+                  class={`text-lg ${active ? "active font-bold underline" : ""}`}
+                  aria-current={active ? "page" : undefined}
+                  aria-label={`button link to ${l.name}`}
+                  href={l.route}
+                >
+                  {translationUnit[l.name] || capitalize(l.name)}
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+    <a
+      aria-label="button link to Home"
+      class="btn btn-ghost normal-case text-xl mx-3"
+      href="/">neoSnakex34</a
+    >
+  </div>
+
+  <div class="navbar-center hidden lg:flex">
+    <ul class="menu menu-horizontal px-1">
+      {
+        sortedLinks.map((l) => {
+          const active = isLinkActive(l.route);
+          if (l.route === "/blog") {
+            return null;
+          }
+          return (
+            <li>
+              <a
+                href={l.route}
+                aria-current={active ? "page" : undefined}
+                class={`font-bold btn btn-dash  m-2 ${active ? "active btn-active" : ""}`}
+              >
+                {(translationUnit[l.name]) || capitalize(l.name)}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+  <div class="navbar-end">
+    {
+      () => {
+        const active = isLinkActive(blogLink.route);
+
+        return (
+          <a
+            href="/blog"
+            aria-current={active ? "page" : undefined}
+            aria-label="button link to Blog"
+            class={`btn btn-soft btn-accent mx-4 font-bold ${active ? "active btn-active" : ""}`}
+          >
+            Blog
+          </a>
+        );
+      }
+    }
+  </div>
+</nav>
+<div class="anchor" id="scroll-anchor"></div>
+<script>
+// TODO tidy up this script and aria
+  document.addEventListener("DOMContentLoaded", () => {
+    const dropdownButton = document.querySelector(
+      "#menu-button",
+    ) as HTMLButtonElement;
+    const dropdownMenu = document.querySelector("#menu-list") as HTMLElement;
+    const dropdownContainer = document.querySelector(
+      ".dropdown",
+    ) as HTMLElement;
+
+    if (!dropdownButton || !dropdownMenu) return;
+
+    const setMenuState = (isOpen: boolean) => {
+      dropdownButton.setAttribute("aria-expanded", String(isOpen));
+      dropdownMenu.classList.toggle("hidden", !isOpen);
+    };
+
+    const toggleMenu = (e?: Event) => {
+      e?.stopPropagation();
+      const isExpanded =
+        dropdownButton.getAttribute("aria-expanded") === "true";
+      setMenuState(!isExpanded);
+    };
+
+    const closeMenu = () => {
+      setMenuState(false);
+    };
+
+    // click listener
+    dropdownButton.addEventListener("click", toggleMenu);
+
+    // click listener for click outside close
+    document.addEventListener("click", (e) => {
+      if (!dropdownContainer.contains(e.target as Node)) {
+        closeMenu();
+      }
+    });
+
+    // close on escape key
+    dropdownButton.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeMenu();
+        if (dropdownButton.getAttribute("aria-expanded") === "true") {
+          dropdownButton.focus();
+        }
+      }
+    });
+  });
+</script>

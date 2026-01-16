@@ -1,0 +1,146 @@
+---
+import Navbar from "src/components/it/Navbar.astro";
+import Footer from "src/components/it/Footer.astro";
+import "src/styles/global.css";
+const { justifyType, alignType, showFab = false, bgColor} = Astro.props;
+import { SEO } from "astro-seo";
+---
+
+<!doctype html>
+<html lang="it">
+	<head>
+
+	<script type="text/javascript" src="https://embeds.iubenda.com/widgets/b4d01a1b-7a9f-4fb5-a45a-79966a6834fd.js"></script>
+		<SEO
+			title="francesco james - developer" 
+			description="Personal website and blog of developer neosnakex34"
+			openGraph={{
+        basic: {
+		  title: "francesco james - developer",
+		  type: "website",
+		  image: "https://avatars.githubusercontent.com/u/97003970?v=4"
+			
+		},
+      }}
+	  twitter={{
+		creator: "@neosankex34"
+	  }}
+	extend={{
+		link: [{rel: "icon", href: "/favicon.ico"}],
+
+		meta: [
+			{name: "twitter:image", content: "https://avatars.githubusercontent.com/u/97003970?v=4"},
+			{name: "twitter:title", content: "francesco james - developer"},
+			{name: "twitter:description", content: "Personal website and blog of developer neosnakex34"},
+		],
+	}}
+
+		/>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<!-- <link rel="icon" type="image/svg+xml" href="/favicon.ico" /> -->
+		  <link rel="sitemap" href="/sitemap-index.xml" />
+		<meta name="generator" content={Astro.generator} />
+		<!-- <title>neosnakex34</title> -->
+	</head>
+	<body>
+		
+		<Navbar />
+		<main
+			class=`min-h-[calc(100vh-56px)] flex flex-col w-full ${bgColor ? "bg-"+bgColor : 'bg-base-200'}  ${justifyType ? "justify-"+justifyType : 'justify-center'} ${alignType ? "items-"+alignType : 'items-center'}`
+		>
+			<div class=`lg:p-20 md:p-8 p-6 bg-inherit`>
+				<slot class="bg-inherit"/>
+			</div>
+		</main>
+
+</main>
+		<!-- top fab -->
+		{ showFab && 
+		
+		<div class='mb-12 fab transition-opacity duration-200 opacity-0' id="fab-top-container">
+			<!-- a focusable div with tabindex is necessary to work on all browsers. role="button" is necessary for accessibility -->
+			<button
+				role="button"
+				class="z-0 btn btn-lg btn-circle btn-accent"
+				aria-label="scroll on top"
+			>
+				^
+			</button>
+			
+			
+		</div>
+		}
+
+<Footer />
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+<script>
+	
+
+	
+	const debounce = <T extends unknown[]> (
+		callback: (...args: T) => void,
+		delay: number
+	) => {
+
+		let timeoutTimer: ReturnType<typeof setTimeout>;
+
+		return (...args: T) => {
+			clearTimeout(timeoutTimer);
+
+			timeoutTimer = setTimeout(() => {
+				callback(...args);
+			}, delay);
+		};
+	}; 
+	
+
+	document.addEventListener('DOMContentLoaded', () => {
+
+
+	const fabTop: HTMLElement | null = document.getElementById('fab-top-container');
+	
+
+	fabTop?.addEventListener('click', () => {
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+		fabTop.classList.remove('opacity-100');
+		fabTop.classList.add('opacity-0');
+	});
+	console.log('fabTop:', fabTop);
+
+
+	
+	if (fabTop) {
+	window.addEventListener('scroll', debounce(() => {
+		console.log('called');
+		if (fabTop) {
+			if (window.scrollY > 300) {
+				fabTop.classList.remove('opacity-0');
+				fabTop.classList.add('opacity-100');
+			} else {
+				fabTop.classList.remove('opacity-100');
+				fabTop.classList.add('opacity-0');
+			}
+		}
+	}, 380));
+
+	};
+
+	
+	
+
+
+});
+	
+</script>

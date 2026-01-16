@@ -1,0 +1,51 @@
+---
+import Layout from "src/layouts/it/Layout.astro";
+import Card from "src/components/it/Card.astro";
+
+import nerone from "src/assets/nerone.jpg";
+import studioMessini from "src/assets/studio.png";
+import rcipsum from "src/assets/rcipsum1.png";
+import sessionBee from "src/assets/sessionbee.png";
+import wasa from "src/assets/wasa.png";
+import tossDice from "src/assets/tossdice2.png";
+---
+
+<Layout title="Works" justifyType="start" itemsType="center" showFab={true}>
+  <div class="flex flex-col items-center">
+    <Card
+      lazyLoading={false}
+      title="studiomessini.com"
+      description="sito professionale, ottimizzato e SEO friendly"
+      path={studioMessini}
+      redirect1="https://studiomessini.com/"
+    />
+
+    <Card
+      title="sessionBee"
+      description="Proof-of-concept di un gestore di sessioni per IoT come microservizio"
+      path={sessionBee}
+      redirect2="https://github.com/neoSnakex34/sessionbee"
+    />
+    <Card
+      title="tossdice"
+      description="webapp full frontend, lancia dadi con probabilità equa"
+      path={tossDice}
+      redirect1="https://tossdice.pages.dev/"
+      redirect2="https://github.com/neosnakex34/dice_preact"
+    />
+
+    <Card
+      title="rcIpsum"
+      description="Generatore di testo casuale in stile Lorem Ipsum basato su racconti di Raymond Carver"
+      path={rcipsum}
+      redirect2="https://github.com/neoSnakex34/rcipsum"
+    />
+
+    <Card
+      title="wasaPHOTO"
+      description="WebApp demo, simulazione di un social network di condivisione foto"
+      path={wasa}
+      redirect2="https://github.com/neoSnakex34/wasaphoto"
+    />
+  </div>
+</Layout>

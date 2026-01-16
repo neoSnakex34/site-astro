@@ -1,0 +1,28 @@
+---
+import { Image } from 'astro:assets';
+import { undefined } from 'astro:schema';
+
+const { title, description, path, redirect1 = undefined, redirect2 = undefined, lazyLoading = true } = Astro.props;
+const hasRedirect1 = redirect1 !== undefined;
+const hasRedirect2 = redirect2 !== undefined;
+const loadingType = lazyLoading ? "lazy" : "eager";
+---
+
+<div class="card bg-base-100 lg:w-1/2 shadow-sm lg:mb-20 md:mb-10 mb-6">
+    <figure>
+    <Image
+      loading={loadingType}
+      src={path}
+      alt={title} 
+      inferSize = {true}
+    />
+  </figure>
+
+  <div class="card-body font-montserrat">
+    <h2 class="card-title text-xl font-bold">{title}</h2>
+    <p class="text-lg font-medium">{description}</p>
+    <div class="card-actions justify-end p-3">
+    <a role="button" href={redirect1} class=`mr-3 btn btn-lg btn-success ${hasRedirect1 ? '' : 'hidden'}` target={hasRedirect1 ? "_blank" : ""} rel={hasRedirect1 ? "noopener noreferrer" : ""}>Sito</a>
+    <a role="button" href={redirect2} class=`btn btn-lg btn-accent ${hasRedirect2 ? '' : 'hidden'}` target={hasRedirect2 ? "_blank" : ""} rel={hasRedirect2 ? "noopener noreferrer" : ""}>Sorgente</a>
+</div>
+</div>

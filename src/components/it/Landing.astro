@@ -1,0 +1,152 @@
+---
+import { Image } from "astro:assets";
+import chatImg from "../../assets/io.png";
+---
+
+<h1 class="sr-only">Freelance Web Developer and Hardware Technician</h1>
+<h2 class="sr-only">I will help you develop your projects and fix your bugs</h2>
+
+<div aria-hidden="true" class="flex justify-center items-center">
+    
+    <div class="lg:max-w-s max-w-xs mockup-phone lg:mt-0 mt-10" id="phone-top">
+        <div class="mockup-phone-camera z-0"></div>
+
+        <div
+            class="mockup-phone-display text-white grid place-content-center bg-linear-to-b from-base-100 to-base-300"
+        >
+            <!-- phone slot -->
+            <div class="p-4">
+                <div class="chat chat-end">
+                    <div class="chat-header">
+                        Cliente
+                        <time class="text-xs opacity-60">12:44</time>
+                    </div>
+                    <div class="chat-bubble chat-bubble-base">
+                        <span class="text-rotate mr-5 duration-15000">
+                            <span>
+                                <p>Hey! mi serve un programma</p>
+                                <p>Devo sistemare questo bug!</p>
+                                <p>Puoi aiutarmi con questo? 🥲</p>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="pt-1 chat-footer opacity-50">Inviato</div>
+                </div>
+
+                <div class="pt-4 chat chat-start">
+                    <div
+                        class="opacity-0 animate-delivery-fade-in chat-header ml-2"
+                        style="animation-delay: 2.3s;"
+                    >
+                        <a href="https://github.com/neosnakex34">neosnakex34</a>
+                        <time class="text-xs opacity-60">12:45</time>
+                    </div>
+                    <div class="chat-image avatar">
+                        <div class="w-10 mask mask-squircle">
+                            <a href="https://github.com/neosnakex34">
+                                <Image
+                                layout="constrained"
+                                width={40}
+                                height={40}
+                                src={chatImg} 
+                                alt="an artwork representing me" />
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- loading message dots -->
+                    <span
+                        class="loading loading-dots loading-xs text-info -mx-2 mt-6"
+                    ></span>
+                    <!--  end loading message dots -->
+                    <div
+                        class="opacity-0 animate-delivery-fade-in pt-1 chat-footer";
+                        style="animation-delay: .8s;"
+                    >
+                        Inviato
+                    </div>
+                </div>
+            </div>
+            <!-- END OF PHONE slot -->
+        </div>
+    </div>
+</div>
+
+<section
+    id="scroll-section"
+    class="mt-10 p-4 max-w-2xl mx-auto text-center -y-4 opacity-0 transition-opacity duration-3000"
+>
+    <div class="font-montserrat leading-relaxed text-md">
+        <p>
+            <span class="italic">Il mio obiettivo</span> è quello di <span class="font-bold">aiutarti rapidamente</span> a sviluppare le tue idee e le tue applicazioni.
+        </p>
+        <p>
+            Che sia <span class="font-bold">sistemare bug</span>, <span
+                class="font-bold">implementare nuove feature</span
+            >, o <span class="font-bold">fornirti assistenza</span> con i tuoi progetti.
+        </p>
+        <p>
+            Ti fornirò soluzioni <span class="font-bold">efficienti</span> e <span
+                class="font-bold">affidabili</span
+            > che garantiscano la tua soddisfazione.
+        </p>
+        <p class="mt-2">
+            Qualsiasi sia <span class="italic">il tuo obiettivo</span>, <a
+                href="/about"
+                class="font-bold link link-info">Ci penso io</a
+            >.
+        </p>
+    </div>
+</section>
+
+<script>
+    // little presenting section will appear after a scroll
+    const section: HTMLElement | null =
+        document.getElementById("scroll-section");
+    const anchor: HTMLElement | null = document.getElementById("scroll-anchor");
+
+    if (section && anchor) {
+        // TODO disable intersection observer on screen in which is useless
+        // NOTE with the actual anchor it should always be useful
+        const io = new IntersectionObserver(
+            ([entry]) => {
+                if (!entry.isIntersecting) {
+                    section.classList.add("opacity-100");
+                    section.classList.remove("opacity-0");
+                } else {
+                    section.classList.add("opacity-0");
+                    section.classList.remove("opacity-100");
+                }
+            },
+            { threshold: 1 },
+        );
+
+        io.observe(anchor);
+    }
+
+    // loading dots will be replaced with the message after 2 seconds
+    setTimeout(() => {
+        const loadingDots: HTMLElement | null = document.querySelector(
+            ".mockup-phone .chat.chat-start .loading-dots",
+        );
+
+        if (!loadingDots) return;
+
+        const messageBubble = document.createElement("div");
+        messageBubble.className =
+            "opacity-0 animate-msg-fade-in chat-bubble chat-bubble-neutral ml-2";
+        messageBubble.style.animationDelay = "0.2s";
+        messageBubble.innerHTML =
+            'Ci penso <span id="covered-text" class="font-bold text-info link">io</span>!';
+        loadingDots.replaceWith(messageBubble);
+
+        const coveredText = document.getElementById("covered-text") || null;
+        const scrollSection = document.getElementById("scroll-section") || null;
+
+        const scrollToSection = () => {
+            scrollSection?.scrollIntoView({ behavior: "smooth" });
+        };
+
+        coveredText?.addEventListener("click", scrollToSection);
+    }, 350);
+</script>

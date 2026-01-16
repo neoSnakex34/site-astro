@@ -6,25 +6,31 @@ interface navLink {
   route: string;
 }
 
+console.log(pages)
 const navLinks: navLink[] = Object.keys(pages).map((p) => {
   const name = p
-    .replace("../pages/", "")
+    .replace("/src/pages/", "")
     .replace(".astro", "")
     .replace("index", "");
 
+    console.log(name)
+    
   const route = name === "" ? "/" : `/${name}`;
 
   return { name: name || "Home", route };
+  
 });
 
+console.log(navLinks)
 const homeLink: navLink = navLinks.find((l) => l.route === "/") || {
   name: "Home",
   route: "/",
 };
+console.log(homeLink)
 
 const blogLink: navLink = navLinks.find((l) => l.route === "/blog") || {
   name: "Blog",
-  route: "/blog",
+  route: "blog",
 };
 
 const otherLinks: navLink[] = navLinks.filter(

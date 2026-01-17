@@ -1,4 +1,7 @@
 ---
+const {btnType} = Astro.props
+const buttonT = btnType === 'footer' ? "btn-success" : "btn-ghost"
+const dropdownT = btnType === 'footer' ? "dropdown-bottom" : "dropdown-center"
 const { pathname } = Astro.url;
 const isItalian = pathname.startsWith("/it");
 
@@ -9,10 +12,10 @@ const disableItalian = untranslatedPaths.some((path) => pathname.includes(path))
 const currentLang = isItalian ? "it" : "en";
 ---
 
-<div class="dropdown dropdown-bottom">
+<div class=`dropdown ${dropdownT}`>
   
-  <div tabindex="0" role="button" class="btn btn-ghost btn-sm text-xl m-1" aria-label="Language Selector">
-    {isItalian ? "[IT]" : "[EN]"}
+  <div tabindex="0" role="button" class=`btn ${buttonT} btn-sm text-md`  aria-label="Language Selector">
+    {isItalian ? "[it]" : "[en]"}
   </div>
 
   <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">

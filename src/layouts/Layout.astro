@@ -2,7 +2,17 @@
 import Navbar from "src/components/Navbar.astro";
 import Footer from "src/components/Footer.astro";
 import "src/styles/global.css";
-const { justifyType, alignType, showFab = false, bgColor} = Astro.props;
+const siteurl = "https://francescojames.dev";
+const { justifyType, alignType, showFab = false, bgColor,
+
+	title = "Francesco James, Developer", 
+	description = "A skilled developer based in Italy, here for you",  
+	canonical, 
+	ogImage = `${siteurl}/io.png`, 
+	robots = "index, follow",
+	
+
+} = Astro.props;
 import { SEO } from "astro-seo";
 ---
 
@@ -11,7 +21,7 @@ import { SEO } from "astro-seo";
 	<head>
 
 	<script type="text/javascript" src="https://embeds.iubenda.com/widgets/b4d01a1b-7a9f-4fb5-a45a-79966a6834fd.js"></script>
-		<SEO
+		<!-- <SEO
 			title="francesco james - developer" 
 			description="Personal website and blog of developer neosnakex34"
 			openGraph={{
@@ -35,7 +45,22 @@ import { SEO } from "astro-seo";
 		],
 	}}
 
-		/>
+		/> -->
+			<title>{title}</title>
+		<meta name="description" content={description} />
+		{canonical ? <link rel="canonical" href={canonical}/> : null }
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		{ogImage ? <meta property="og:image" content={ogImage} /> : null }
+		<meta name="robots" content={robots}>
+
+		<meta name="twitter:card" content="io.png" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		{ ogImage && <meta name = "twitter:image" content={ogImage} />}
+		<!-- TODO SITEMAP ? -->
+
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<!-- <link rel="icon" type="image/svg+xml" href="/favicon.ico" /> -->

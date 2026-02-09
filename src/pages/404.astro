@@ -2,7 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 
 // here locale will be trated in a special manner since 404 is handled by astro
-//
 const translations = {
   en: {
     headTitle: "404 - Page Not Found",
@@ -13,7 +12,6 @@ const translations = {
     btn: "Go back home",
     homeLink: "/"
   },
-
   it: {
     headTitle: "404 - Pagina Non Trovata",
     headDesc: "La pagina che stai cercando non esiste.",
@@ -25,16 +23,15 @@ const translations = {
   }
 };
 
-const pathname = Astro.url.pathname;
-const lang = pathname.startsWith("/it") ? "it" : "en";
-const t = translations[lang];
+const defaultLang = "en";
+const t = translations[defaultLang];
 ---
 
 <Layout
   title={t.headTitle}
   description={t.headDesc}
   robots="noindex, follow"
-  lang={lang}
+  lang={defaultLang}
 >
 
   <div class="hero min-h-[60vh] bg-base-200">
@@ -63,8 +60,21 @@ const t = translations[lang];
 
 </Layout>
 
-<script define:vars={{ lang }}>
-  if (document.documentElement.lang !== lang) {
-    document.documentElement.setAttribute("lang", lang);
+<script define:vars={{ translations }}>
+  const pathname = window.location.pathname;
+
+  if (pathname.startsWith("/it")) {
+    const t = translations.it;
+
+    document.getElementById("err-title").innerText = t.title;
+    document.getElementById("err-subtitle").innerText = t.subtitle;
+    document.getElementById("err-text").innerText = t.text;
+
+    const btn = document.getElementById("err-btn");
+    btn.innerText = t.btn;
+    btn.href = t.homeLink;
+
+    document.documentElement.setAttribute("lang", "it");
+    document.title = t.headTitle;
   }
 </script>

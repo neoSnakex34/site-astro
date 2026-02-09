@@ -4,64 +4,87 @@ import { Image } from "astro:assets";
 import cat from "src/assets/giphy.gif";
 ---
 
-<Layout title="Skills"justifyType="start"
-title="My Skills - Francesco James Fanti", 
-  description="the toolchain I work with", 
-  canonical="https://francescojames.dev/skills"
+<Layout
+    title="Skills"
+    justifyType="start"
+    title="My Skills - Francesco James Fanti"
+    ,
+    description="the toolchain I work with"
+    ,
+    canonical="https://francescojames.dev/skills"
 >
-
-  <div class="gif-container mb-10">
-    <div style="width:100%;height:0;padding-bottom:77%;position:relative;">
-      <Image 
-      loading="eager"
-      src={cat} alt="cat typing on a laptop"
-      style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;" />
-    </div><p>
-      <a class="text-xs link link-base" href="https://giphy.com/gifs/VIU0t3EaFcpPPjPV5N"
-      target="_blank"
-      rel="noopener noreferrer"
-      
-        >via GIPHY</a>
-    </p>
-  </div>
+    <div class="gif-container mb-10">
+        <div style="width:100%;height:0;padding-bottom:77%;position:relative;">
+            <Image
+                loading="eager"
+                src={cat}
+                alt="cat typing on a laptop"
+                style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;"
+            />
+        </div><p>
+            <a
+                class="text-xs link link-base"
+                href="https://giphy.com/gifs/VIU0t3EaFcpPPjPV5N"
+                target="_blank"
+                rel="noopener noreferrer">via GIPHY</a
+            >
+        </p>
+    </div>
 
     <div class="flex-col lg:flex-row-reverse">
-      
-      <div class="font-montserrat">
-        <h1 class="text-4xl font-bold">Tech</h1>
-        <div>
-          <h2 class="text-xl font-semibold italic">I'm using in my projects:</h2>
-          <h3 class="text-xl font-bold mt-8">Backend</h3>
-          <ul class="pt-1 font-medium text-xl lg:text-lg">
-            <li>:: Node.js [express.js]</li>
-            <li>:: Database [SQL; Redis]</li>
-          </ul>
+        <div class="font-montserrat">
+            <h1 class="text-4xl font-bold">Things I will do for you</h1>
+            <div>
+                <ul class="pt-1 font-medium text-xl lg:text-lg list-(--semi-colons)">
+                    <li>Build your new website</li>
+                    <li>Create a webapp for you</li>
+                    <li>Digitalize your business</li>
+                    <li>Improve or Rewrite your site</li>
+                    <li>Develop your mobile app</li>
+                </ul>
+            </div>
+            <h2 class="pt-10 text-3xl font-bold">Tech</h2>
+            <div>
+                <h3 class="text-xl font-semibold italic">
+                    I'm using in my projects:
+                </h3>
+                <h4 class="text-xl font-bold mt-4">Backend</h4>
+                <ul class="pt-1 font-medium text-xl lg:text-lg list-(--semi-colons)">
+                    <li>Node.js [express.js]</li>
+                    <li>Database [SQL; Redis]</li>
+                </ul>
 
-          <h3 class="text-xl font-bold pt-2">Frontend</h3>
-          <ul class="pt-1 font-medium text-xl lg:text-lg">
-            <li>:: Astro</li>
-            <li>:: React</li>
-            <li>:: Vue.js [Nuxt.js]</li>
-            <li>:: CSS libraries [Tailwind; Bootstrap]</li>
-            <li>:: UI libraries [DaisyUI]</li>
-          </ul>
+                <h4 class="text-xl font-bold pt-2">Frontend</h4>
+                <ul class="pt-1 font-medium text-xl lg:text-lg list-(--semi-colons)">
+                    <li>Astro</li>
+                    <li>React</li>
+                    <li>Vue.js [Nuxt.js]</li>
+                    <li>CSS libraries [Tailwind; Bootstrap]</li>
+                    <li>UI libraries [DaisyUI]</li>
+                </ul>
 
-          <h3 class="text-xl font-bold pt-2">Programming</h3>
-          <ul class="pt-1 font-medium text-xl lg:text-lg">
-            <li>:: JavaScript/TypeScript</li>
-            <li>:: C</li>
-            <li>:: C++</li>
-            <li>:: Rust</li>
-            <li>:: Go</li>
-            <li>:: Python</li>
-            <li>:: Java</li>
-          </ul>
+                <h4 class="text-xl font-bold pt-2">Programming</h4>
+                <ul class="pt-1 font-medium text-xl lg:text-lgi list-(--semi-colons)">
+                    <li>JavaScript/TypeScript</li>
+                    <li>C</li>
+                    <li>C++</li>
+                    <li>Rust</li>
+                    <li>Go</li>
+                    <li>Python</li>
+                    <li>Java</li>
+                </ul>
 
-          <h3 class="text-xl font-bold pt-2">Tools</h3>
-          <ul class="pt-1 font-medium text-xl lg:text-lg">
-            <li>:: RayLib</li>
-          </ul>
+                <h4 class="text-xl font-bold pt-2">Tools</h4>
+                <ul class="pt-1 font-medium text-xl lg:text-lg list-(--semi-colons)">
+                    <li>RayLib</li>
+                </ul>
+            </div>
         </div>
-      </div>
     </div>
 </Layout>
+
+<style>
+:root {
+    --semi-colons: ":: ";
+  }
+</style>

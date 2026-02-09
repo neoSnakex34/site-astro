@@ -5,36 +5,36 @@ import "src/styles/global.css";
 
 const siteurl = "https://francescojames.dev"
 
-const { 
+const {
 	justifyType, alignType, showFab = false, bgColor,
-	title = "Francesco James, Developer", 
+	title = "Francesco James, Developer",
 	description = "Programmatore e Tecnico a Latina, faccio al caso tuo",
-	
-	canonical, 
-	ogImage = `${siteurl}/io.png`, 
+
+	canonical,
+	ogImage = `${siteurl}/io.png`,
 	robots = "index, follow",
 	} = Astro.props;
 
 
 // import { SEO } from "astro-seo";
-// TODO remove astro seo 
+// TODO remove astro seo
 
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="it">
 	<head>
 
 	<script type="text/javascript" src="https://embeds.iubenda.com/widgets/b4d01a1b-7a9f-4fb5-a45a-79966a6834fd.js"></script>
 		<!-- <SEO
-			title="francesco james - developer" 
+			title="francesco james - developer"
 			description="Freelance developer a Latina e in Remote Working"
 			openGraph={{
         basic: {
 		  title: "francesco james - developer",
 		  type: "website",
 		  image: "https://avatars.githubusercontent.com/u/97003970?v=4"
-			
+
 		},
       }}
 	  twitter={{
@@ -75,7 +75,7 @@ const {
 		<!-- <title>neosnakex34</title> -->
 	</head>
 	<body>
-		
+
 		<Navbar />
 		<main
 			class=`min-h-[calc(100vh-56px)] flex flex-col w-full ${bgColor ? "bg-"+bgColor : 'bg-base-200'}  ${justifyType ? "justify-"+justifyType : 'justify-center'} ${alignType ? "items-"+alignType : 'items-center'}`
@@ -87,8 +87,8 @@ const {
 
 </main>
 		<!-- top fab -->
-		{ showFab && 
-		
+		{ showFab &&
+
 		<div class='mb-12 fab transition-opacity duration-200 opacity-0' id="fab-top-container">
 			<!-- a focusable div with tabindex is necessary to work on all browsers. role="button" is necessary for accessibility -->
 			<button
@@ -98,8 +98,8 @@ const {
 			>
 				^
 			</button>
-			
-			
+
+
 		</div>
 		}
 
@@ -117,9 +117,9 @@ const {
 </style>
 
 <script>
-	
 
-	
+
+
 	const debounce = <T extends unknown[]> (
 		callback: (...args: T) => void,
 		delay: number
@@ -134,14 +134,14 @@ const {
 				callback(...args);
 			}, delay);
 		};
-	}; 
-	
+	};
+
 
 	document.addEventListener('DOMContentLoaded', () => {
 
 
 	const fabTop: HTMLElement | null = document.getElementById('fab-top-container');
-	
+
 
 	fabTop?.addEventListener('click', () => {
 		window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -151,7 +151,7 @@ const {
 	console.log('fabTop:', fabTop);
 
 
-	
+
 	if (fabTop) {
 	window.addEventListener('scroll', debounce(() => {
 		console.log('called');
@@ -168,10 +168,10 @@ const {
 
 	};
 
-	
-	
+
+
 
 
 });
-	
+
 </script>

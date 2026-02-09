@@ -15,14 +15,15 @@ const navLinks: navLink[] = Object.keys(pages).map((p) => {
     .replace("index", "");
 
     console.log(name)
-    
+
   const route = name === "" ? "/" : `/${name}`;
 
   return { name: name || "Home", route };
-  
+
 });
 
 console.log(navLinks)
+
 const homeLink: navLink = navLinks.find((l) => l.route === "/") || {
   name: "Home",
   route: "/",
@@ -35,7 +36,7 @@ const blogLink: navLink = navLinks.find((l) => l.route === "/blog") || {
 };
 
 const otherLinks: navLink[] = navLinks.filter(
-  (l) => l.route != homeLink?.route && l.route != blogLink?.route,
+  (l) => l.name !== "404" && l.route !== homeLink?.route && l.route !== blogLink?.route,
 );
 
 const sortedLinks: navLink[] = [homeLink, ...otherLinks, blogLink];
@@ -57,9 +58,9 @@ const isLinkActive = (route: string): boolean => {
   aria-label="Main navigation bar"
   class="font-montserrat navbar bg-base-100 shadow-sm"
 >
-  
+
   <div class="navbar-start">
-    
+
     <div class="dropdown relative">
       <button
         id="menu-button"

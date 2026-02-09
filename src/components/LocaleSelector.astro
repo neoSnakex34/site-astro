@@ -5,7 +5,7 @@ const dropdownT = btnType === 'footer' ? "dropdown-bottom" : "dropdown-center"
 const { pathname } = Astro.url;
 const isItalian = pathname.startsWith("/it");
 
-// paths without it localization should be put here 
+// paths without it localization should be put here
 const untranslatedPaths = ["/blog", "/posts"];
 const disableItalian = untranslatedPaths.some((path) => pathname.includes(path));
 
@@ -13,18 +13,18 @@ const currentLang = isItalian ? "it" : "en";
 ---
 
 <div class=`dropdown ${dropdownT}`>
-  
+
   <div tabindex="0" role="button" class=`btn ${buttonT} btn-sm text-md`  aria-label="Language Selector">
     {isItalian ? "[it]" : "[en]"}
   </div>
 
   <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-    
+
     <li>
-      <button 
-        class="lang-btn flex justify-between" 
+      <button
+        class="lang-btn flex justify-between"
         data-lang="en"
-        disabled={!isItalian} 
+        disabled={!isItalian}
       >
         <span>🇬🇧 English</span>
         {!isItalian && <span class="text-xs font-bold">✓</span>}
@@ -32,14 +32,14 @@ const currentLang = isItalian ? "it" : "en";
     </li>
 
     <li>
-      <button 
-        class="lang-btn flex justify-between" 
-        data-lang="it" 
-        disabled={isItalian || disableItalian} 
+      <button
+        class="lang-btn flex justify-between"
+        data-lang="it"
+        disabled={isItalian || disableItalian}
         title={disableItalian ? "Translation not available" : ""}
       >
         <span class={disableItalian ? "opacity-50" : ""}>🇮🇹 Italiano</span>
-        
+
         {isItalian && <span class="text-xs font-bold">✓</span>}
         {disableItalian && <span class="badge badge-xs badge-ghost">N/A</span>}
       </button>
@@ -53,21 +53,24 @@ const currentLang = isItalian ? "it" : "en";
     const currentPath = window.location.pathname;
     const isItalianPath = currentPath.startsWith("/it");
 
-    const savedLang = localStorage.getItem("lang");
-    
+
     const itBtn = document.querySelector('button[data-lang="it"]') as HTMLButtonElement | null;
     const isItDisabled = itBtn?.disabled || false;
 
-    if (savedLang === "it" && !isItalianPath && !isItDisabled) {
-      window.location.replace("/it" + currentPath);
-    } 
+    const savedLang = localStorage.getItem("lang");
 
-    else if (savedLang === "en" && isItalianPath) {
-      window.location.replace(currentPath.replace(/^\/it/, "") || "/");
+    if (isItalianPath) {
+      if (savedLang !== "it") {
+        localStorage.setItem("lang", "it");
+      }
+    } else {
+      if (savedLang !== "en" && !isItDisabled) { // NOTE this is probably not needed since there is no reason for checking it is disabled
+        localStorage.setItem("lang", "en");
+      }
     }
 
     const buttons = document.querySelectorAll('.lang-btn');
-    
+
     buttons.forEach((btn) => {
       btn.addEventListener("click", (e) => {
 
@@ -79,7 +82,7 @@ const currentLang = isItalian ? "it" : "en";
         localStorage.setItem("lang", selectedLang);
 
         if (selectedLang === "it") {
-       
+
            window.location.assign("/it" + currentPath);
         } else {
            const newPath = currentPath.replace(/^\/it/, "") || "/";

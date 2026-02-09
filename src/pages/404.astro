@@ -1,80 +1,75 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import "../styles/global.css";
 
-// here locale will be trated in a special manner since 404 is handled by astro
 const translations = {
   en: {
-    headTitle: "404 - Page Not Found",
-    headDesc: "The page you are looking for does not exist.",
     title: "404",
     subtitle: "Page Not Found",
     text: "Sorry, this page does not exist.",
     btn: "Go back home",
-    homeLink: "/"
+    link: "/"
   },
   it: {
-    headTitle: "404 - Pagina Non Trovata",
-    headDesc: "La pagina che stai cercando non esiste.",
     title: "404",
     subtitle: "Pagina Non Trovata",
-    text: "Ci dispiace, questa pagina non esiste.",
+    text: "Mi dispiace, questa pagina non esiste.",
     btn: "Torna alla home",
-    homeLink: "/it"
+    link: "/it"
   }
 };
 
-const defaultLang = "en";
-const t = translations[defaultLang];
+const t = translations.en;
 ---
 
-<Layout
-  title={t.headTitle}
-  description={t.headDesc}
-  robots="noindex, follow"
-  lang={defaultLang}
->
+<!DOCTYPE html>
+<html lang="en" class="bg-base-100">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title id="doc-title">404 - Page Not Found</title>
+    <meta name="robots" content="noindex" />
+  </head>
 
-  <div class="hero min-h-[60vh] bg-base-200">
-    <div class="hero-content text-center">
-      <div class="max-w-md">
+  <body class="min-h-screen grid place-items-center p-4">
 
-        <h1 class="text-5xl font-bold" id="err-title">
-          {t.title}
-        </h1>
+    <div class="text-center max-w-md space-y-6">
 
-        <h2 class="py-4 text-3xl font-bold" id="err-subtitle">
-          {t.subtitle}
-        </h2>
+      <h1 id="err-title" class="text-6xl font-black">
+        {t.title}
+      </h1>
 
-        <p class="py-4 text-lg" id="err-text">
-          {t.text}
-        </p>
+      <h2 id="err-subtitle" class="text-3xl font-bold">
+        {t.subtitle}
+      </h2>
 
-        <a href={t.homeLink} class="btn btn-primary" id="err-btn">
+      <p id="err-text" class="text-lg opacity-80">
+        {t.text}
+      </p>
+
+      <div class="pt-4">
+        <a id="err-btn" href={t.link} class="btn btn-primary">
           {t.btn}
         </a>
-
       </div>
+
     </div>
-  </div>
 
-</Layout>
 
-<script define:vars={{ translations }}>
-  const pathname = window.location.pathname;
 
-  if (pathname.startsWith("/it")) {
-    const t = translations.it;
+  </body>
+</html>
+ <script define:vars={{ translations }}>
+      if (window.location.pathname.startsWith("/it")) {
+        const t = translations.it;
 
-    document.getElementById("err-title").innerText = t.title;
-    document.getElementById("err-subtitle").innerText = t.subtitle;
-    document.getElementById("err-text").innerText = t.text;
+        document.documentElement.lang = "it";
+        document.title = `${t.title} - ${t.subtitle}`;
 
-    const btn = document.getElementById("err-btn");
-    btn.innerText = t.btn;
-    btn.href = t.homeLink;
+        document.getElementById("err-subtitle").innerText = t.subtitle;
+        document.getElementById("err-text").innerText = t.text;
 
-    document.documentElement.setAttribute("lang", "it");
-    document.title = t.headTitle;
-  }
-</script>
+        const btn = document.getElementById("err-btn");
+        btn.innerText = t.btn;
+        btn.href = t.link;
+      }
+    </script>

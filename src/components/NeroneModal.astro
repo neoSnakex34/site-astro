@@ -1,20 +1,58 @@
 ---
 import { Image } from "astro:assets";
 import nerone from "src/assets/nerone.jpg";
+import nerone2 from "src/assets/nerone2.jpg";
 ---
+
 <dialog id="my_modal_1" class="modal">
-  <div class="modal-box">
-    <Image 
-      loading="eager"
-      src={nerone}
-      alt="nerone, one of the stray cats I look after"
-    />
-    <p class="pt-5 font-montserrat font-semibold">She/He is Nerone</p>
-    <div class="modal-action">
-      <form method="dialog">
-        <!-- if there is a button in form, it will close the modal -->
-        <button class="btn">Close</button>
-      </form>
+  <div class="modal-box w-11/12 max-w-2xl p-0 overflow-hidden">
+    <!-- Carousel container -->
+    <div class="carousel w-full relative">
+      <!-- Slide 1 -->
+      <div id="slide1" class="carousel-item w-full">
+        <div class="w-full relative">
+          <Image
+            src={nerone}
+            alt="nerone, one of the stray cats I look after"
+            class="w-full aspect-[804/714] object-cover"
+          />
+          <div class="absolute inset-0 flex items-center justify-between px-4 pointer-events-none">
+            <a href="#slide2" class="btn btn-circle btn-sm pointer-events-auto">❮</a>
+            <a href="#slide2" class="btn btn-circle btn-sm pointer-events-auto">❯</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div id="slide2" class="carousel-item w-full">
+        <div class="w-full relative">
+          <Image
+            src={nerone2}
+            alt="nerone, one of the stray cats I look after"
+            class="w-full aspect-[804/714] object-cover"
+          />
+          <div class="absolute inset-0 flex items-center justify-between px-4 pointer-events-none">
+            <a href="#slide1" class="btn btn-circle btn-sm pointer-events-auto">❮</a>
+            <a href="#slide1" class="btn btn-circle btn-sm pointer-events-auto">❯</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal content below carousel -->
+    <div class="p-6">
+      <p class="font-montserrat font-semibold mb-4">She is Mimì (but I call her Nerone)</p>
+      <div class="modal-action">
+        <form method="dialog">
+          <!-- if there is a button in form, it will close the modal -->
+          <button class="btn">Close</button>
+        </form>
+      </div>
     </div>
   </div>
+
+  <!-- Click outside to close -->
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
 </dialog>

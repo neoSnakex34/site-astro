@@ -9,70 +9,75 @@ const {
 	justifyType, alignType, showFab = false, bgColor,
 	title = "Francesco James, Developer",
 	description = "Programmatore e Tecnico a Latina, faccio al caso tuo",
-
 	canonical,
 	ogImage = `${siteurl}/io.png`,
 	robots = "index, follow",
+	ogType = "website",
+	pubDate,
+	articleAuthor,
 	} = Astro.props;
 
+const enCanonical = canonical ? canonical.replace("francescojames.dev/it", "francescojames.dev") : undefined;
 
-// import { SEO } from "astro-seo";
-// TODO remove astro seo
-
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "Person",
+			"name": "Francesco James Fanti",
+			"url": siteurl,
+			"sameAs": ["https://github.com/neosnakex34", "https://x.com/neosankex34"],
+			"jobTitle": "Sviluppatore Freelance",
+			"address": { "@type": "PostalAddress", "addressLocality": "Latina", "addressCountry": "IT" }
+		},
+		{ "@type": "WebSite", "name": "Francesco James Fanti", "url": siteurl, "inLanguage": "it" }
+	]
+};
 ---
 
 <!doctype html>
 <html lang="it">
 	<head>
-
-	<script type="text/javascript" src="https://embeds.iubenda.com/widgets/b4d01a1b-7a9f-4fb5-a45a-79966a6834fd.js"></script>
-		<!-- <SEO
-			title="francesco james - developer"
-			description="Freelance developer a Latina e in Remote Working"
-			openGraph={{
-        basic: {
-		  title: "francesco james - developer",
-		  type: "website",
-		  image: "https://avatars.githubusercontent.com/u/97003970?v=4"
-
-		},
-      }}
-	  twitter={{
-		creator: "@neosankex34"
-	  }}
-	extend={{
-		link: [{rel: "icon", href: "/favicon.ico"}],
-
-		meta: [
-			{name: "twitter:image", content: "https://avatars.githubusercontent.com/u/97003970?v=4"},
-			{name: "twitter:title", content: "francesco james - developer"},
-			{name: "twitter:description", content: "Freelance developer a Latina e in Remote Working"},
-		],
-	}}
-
-		/> -->
-
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+
+		<script type="text/javascript" src="https://embeds.iubenda.com/widgets/b4d01a1b-7a9f-4fb5-a45a-79966a6834fd.js"></script>
+
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
-		<meta name="generator" content={Astro.generator} />
+
 		<title>{title}</title>
 		<meta name="description" content={description} />
-		{canonical ? <link rel="canonical" href={canonical}/> : null }
-		<meta property="og:type" content="website" />
+		<meta name="author" content="Francesco James Fanti" />
+		<meta name="robots" content={robots} />
+		<meta name="theme-color" content="#1d1617" />
+		<meta name="generator" content={Astro.generator} />
+
+		{canonical && <link rel="canonical" href={canonical} />}
+		{enCanonical && <link rel="alternate" hreflang="en" href={enCanonical} />}
+		{canonical && <link rel="alternate" hreflang="it" href={canonical} />}
+		{enCanonical && <link rel="alternate" hreflang="x-default" href={enCanonical} />}
+
+		<meta property="og:type" content={ogType} />
+		<meta property="og:site_name" content="Francesco James Fanti" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		{ogImage ? <meta property="og:image" content={ogImage} /> : null }
-		<meta name="robots" content={robots}>
+		<meta property="og:locale" content="it_IT" />
+		{canonical && <meta property="og:url" content={canonical} />}
+		{ogImage && <meta property="og:image" content={ogImage} />}
+		{ogType === "article" && pubDate && <meta property="article:published_time" content={new Date(pubDate).toISOString()} />}
+		{ogType === "article" && articleAuthor && <meta property="article:author" content={articleAuthor} />}
 
 		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:site" content="@neosankex34" />
+		<meta name="twitter:creator" content="@neosankex34" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
-		{ ogImage && <meta name = "twitter:image" content="https://avatars.githubusercontent.com/u/97003970?v=4"/>}
-		<!-- TODO SITEMAP ? -->
+		{ogImage && <meta name="twitter:image" content={ogImage} />}
 
-		<!-- <title>neosnakex34</title> -->
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+		<slot name="head" />
 	</head>
 	<body>
 

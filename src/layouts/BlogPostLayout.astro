@@ -1,60 +1,89 @@
 ---
 import Layout from "src/layouts/Layout.astro";
-const { frontmatter } = Astro.props;
-
-
 import "src/styles/global.css";
 
+const { frontmatter } = Astro.props;
+
+const canonical = `https://francescojames.dev${Astro.url.pathname}`;
+const ogImage = frontmatter.image?.url
+  ? `https://francescojames.dev${frontmatter.image.url}`
+  : undefined;
+
+const blogPostingJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": frontmatter.title,
+  "description": frontmatter.description,
+  ...(ogImage ? { "image": ogImage } : {}),
+  "author": {
+    "@type": "Person",
+    "name": frontmatter.author,
+    "url": "https://francescojames.dev"
+  },
+  "datePublished": frontmatter.pubDate?.toString().slice(0, 10),
+  "url": canonical,
+  "publisher": {
+    "@type": "Person",
+    "name": "Francesco James Fanti",
+    "url": "https://francescojames.dev"
+  }
+};
 ---
 
-<Layout justifyType="start" alignType="center" bgColor="base-300" showFab={true}
-
-robots="noindex, follow"
+<Layout
+  justifyType="start"
+  alignType="center"
+  bgColor="base-300"
+  showFab={true}
+  title={frontmatter.title}
+  description={frontmatter.description}
+  ogImage={ogImage}
+  ogType="article"
+  pubDate={frontmatter.pubDate}
+  articleAuthor={frontmatter.author}
+  canonical={canonical}
+  robots="noindex, follow"
 >
-  
-<div class="container font-montserrat flex flex-col items-left gap-4">
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(blogPostingJsonLd)} />
+  </Fragment>
 
-<div class="gap-6 items-left">
+  <div class="container font-montserrat flex flex-col items-left gap-4">
 
-<div>
-  <h1 class="text-2xl font-bold">{frontmatter.title}</h1>
-  <p class="text-sm font-medium">{frontmatter.pubDate.toString().slice(0,10)}</p>
-  <p class="my-3 font-medium"><em>{frontmatter.description}</em></p>
-  <p class="text-xs font-medium mb-2">Written by: {frontmatter.author}</p>
+    <div class="gap-6 items-left">
+      <div>
+        <h1 class="text-2xl font-bold">{frontmatter.title}</h1>
+        <p class="text-sm font-medium">{frontmatter.pubDate.toString().slice(0,10)}</p>
+        <p class="my-3 font-medium"><em>{frontmatter.description}</em></p>
+        <p class="text-xs font-medium mb-2">Written by: {frontmatter.author}</p>
+      </div>
+      <div class="mt-6">
+        <img src={frontmatter.image.url} width="600" alt={frontmatter.image.alt} />
+        <div class="mt-4 flex flex-row justify-start gap-10">
+          <p class="text-xs font-medium mb-4 mt-2">Image credit: <a class="link link-info" target="_blank" rel="noopener noreferrer" href={frontmatter.image.creditUrl}>{frontmatter.image.credit}</a></p>
+          <button id="btn-fullscreen-img" class="btn btn-sm btn-ghost">open fullscreen image</button>
+        </div>
+      </div>
+    </div>
 
-</div>
-<div class="mt-6">
-  <img src={frontmatter.image.url} width="600" alt={frontmatter.image.alt} />
-  <div class="mt-4 flex flex-row justify-start gap-10">
-  <p class="text-xs font-medium mb-4 mt-2">Image credit: <a class="link link-info" target="_blank" rel="noopener noreferrer" href={frontmatter.image.creditUrl}>{frontmatter.image.credit}</a></p>
-  <button id="btn-fullscreen-img" class="btn btn-sm btn-ghost">open fullscreen image</button>
+    <div class="prose font-medium font-montserrat mx-auto">
+      <slot />
+    </div>
 
   </div>
-</div>
-</div>
-
-<div class="prose font-medium font-montserrat mx-auto">
-  <slot />
-</div>
-
-
-</div>
 </Layout>
 
 <script define:vars={{frontmatter}} is:inline>
-  
   const imgUrl = frontmatter.image.url || '';
 
   const handleImgClick = () => {
     if (!imgUrl) {
-    //  TODO gracefully handle error in ui instead of console
       console.error('Image URL is not available.');
       return;
     }
-
     window.open(imgUrl, '_blank');
   };
 
   const fullscrenBtn = document.getElementById('btn-fullscreen-img');
-  fullscrenBtn?.addEventListener('click', handleImgClick); 
+  fullscrenBtn?.addEventListener('click', handleImgClick);
 </script>

@@ -2,17 +2,26 @@
 import Layout from "src/layouts/Layout.astro";
 import { Image } from "astro:assets";
 import cat from "src/assets/giphy.gif";
+
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://francescojames.dev" },
+    { "@type": "ListItem", "position": 2, "name": "Skills", "item": "https://francescojames.dev/skills" }
+  ]
+};
 ---
 
 <Layout
-    title="Skills"
     justifyType="start"
-    title="My Skills - Francesco James Fanti"
-    ,
-    description="the toolchain I work with"
-    ,
+    title="Skills | Francesco James - Software Developer"
+    description="Discover the tech stack and skills of Francesco James Fanti: Node.js, React, Astro, Go, Python, cloud development and more. Freelance developer in Latina, Italy."
     canonical="https://francescojames.dev/skills"
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+  </Fragment>
     <div class="gif-container mb-10">
         <div style="width:100%;height:0;padding-bottom:77%;position:relative;">
             <Image

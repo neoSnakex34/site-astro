@@ -2,17 +2,26 @@
 import Layout from "src/layouts/it/Layout.astro";
 import { Image } from "astro:assets";
 import cat from "src/assets/giphy.gif";
+
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://francescojames.dev/it" },
+    { "@type": "ListItem", "position": 2, "name": "Skill", "item": "https://francescojames.dev/it/skills" }
+  ]
+};
 ---
 
 <Layout
-    title="Skills"
     justifyType="start"
-    title="Le mie Skill - Francesco James Fanti"
-    ,
-    description="gli strumenti con cui lavoro"
-    ,
+    title="Skill | Francesco James - Sviluppatore Software"
+    description="Scopri le competenze di Francesco James Fanti: Node.js, React, Astro, Go, Python, sviluppo cloud e molto altro. Sviluppatore freelance a Latina, disponibile a Roma."
     canonical="https://francescojames.dev/it/skills"
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+  </Fragment>
 
     <div class="gif-container mb-10">
         <div style="width:100%;height:0;padding-bottom:77%;position:relative;">

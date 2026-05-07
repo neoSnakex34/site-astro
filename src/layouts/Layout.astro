@@ -5,8 +5,8 @@ import "src/styles/global.css";
 const siteurl = "https://francescojames.dev";
 const { justifyType, alignType, showFab = false, bgColor,
 
-	title = "Francesco James, Developer",
-	description = "A skilled developer based in Italy, here for you",
+	title = "Francesco James - Software Developer",
+	description = "Freelance software developer based in Latina, Italy. Available for frontend, full-stack and cloud-native projects in Rome and across Italy.",
 	canonical,
 	ogImage = `${siteurl}/io.png`,
 	robots = "index, follow",
@@ -23,13 +23,42 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "Person",
+      "@id": `${siteurl}/#person`,
+      "name": "Francesco James Fanti",
+      "givenName": "Francesco",
+      "familyName": "Fanti",
+      "url": siteurl,
+      "image": `${siteurl}/io.png`,
+      "sameAs": ["https://github.com/neosnakex34"],
+      "jobTitle": "Freelance Software Developer",
+      "description": "Freelance software developer based in Latina, Italy. Specialised in frontend, full-stack and cloud-native solutions. Available for projects in Rome and across Italy.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Latina",
+        "addressRegion": "Lazio",
+        "addressCountry": "IT"
+      },
+      "areaServed": ["Latina", "Roma", "Italy"],
+      "knowsAbout": ["JavaScript", "TypeScript", "React", "Astro", "Node.js", "Go", "Python", "Cloud Computing", "Frontend Development", "Full-Stack Development"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteurl}/#website`,
       "name": "Francesco James Fanti",
       "url": siteurl,
-      "sameAs": ["https://github.com/neosnakex34" ],
-      "jobTitle": "Freelance Developer",
-      "address": { "@type": "PostalAddress", "addressLocality": "Latina", "addressCountry": "IT" }
+      "inLanguage": "en",
+      "author": { "@id": `${siteurl}/#person` }
     },
-    { "@type": "WebSite", "name": "Francesco James Fanti", "url": siteurl, "inLanguage": "en" }
+    {
+      "@type": "SiteNavigationElement",
+      "name": "About Me",
+      "url": `${siteurl}/about`
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "name": "Skills",
+      "url": `${siteurl}/skills`
+    }
   ]
 };
 ---
@@ -51,6 +80,10 @@ const jsonLd = {
 		<meta name="robots" content={robots} />
 		<meta name="theme-color" content="#1d1617" />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="geo.region" content="IT-LT" />
+		<meta name="geo.placename" content="Latina" />
+		<meta name="geo.position" content="41.4661;12.9038" />
+		<meta name="ICBM" content="41.4661, 12.9038" />
 
 		{canonical && <link rel="canonical" href={canonical} />}
 		{canonical && <link rel="alternate" hreflang="en" href={canonical} />}

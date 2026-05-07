@@ -285,6 +285,169 @@ sitemap({
 
 ---
 
+---
+
+# SEO Round 2 — Local SEO (Latina / Rome) + Sitelink Targeting
+
+**Date:** 2026  
+**Scope:** Both layouts, all 8 pages  
+**Goal:** Rank for "Francesco James - Sviluppatore Software" with "Chi Sono" / "Skill" sitelinks (IT) and the English equivalents; establish local authority for Latina, Rome and the Lazio region.
+
+---
+
+## 14. Default title brand identity
+
+**Both layouts — Priority: HIGH (SERP brand anchor)**
+
+The layout default titles now carry the brand identity used as the target SERP headline:
+
+```
+EN: "Francesco James - Software Developer"
+IT: "Francesco James - Sviluppatore Software"
+```
+
+All inner pages use the format `"<Section> | Francesco James - <Title>"` so Google's sitelinks generator can extract clean section labels.
+
+---
+
+## 15. Per-page titles and descriptions — SERP-ready
+
+**All 8 pages — Priority: HIGH**
+
+| Page | Title (IT) | Title (EN) |
+|---|---|---|
+| Homepage | `Francesco James - Sviluppatore Software \| Latina, Italia` | `Francesco James - Software Developer \| Latina, Italy` |
+| About | `Chi Sono \| Francesco James - Sviluppatore Software` | `About Me \| Francesco James - Software Developer` |
+| Skills | `Skill \| Francesco James - Sviluppatore Software` | `Skills \| Francesco James - Software Developer` |
+| Works | `Lavori \| Francesco James - Sviluppatore Software` | `Works \| Francesco James - Software Developer` |
+
+Descriptions are now geo-targeted (mention Latina, Roma, Italia / Italy) and keyword-rich.
+
+Bonus: the duplicate `title` prop bug on `skills.astro` and `it/skills.astro` (two `title=` attributes) was removed.
+
+---
+
+## 16. Enhanced Person JSON-LD schema
+
+**Both layouts — Priority: HIGH (entity disambiguation + local rich results)**
+
+The `Person` node in the `@graph` now includes:
+
+```json
+{
+  "@type": "Person",
+  "@id": "https://francescojames.dev/#person",
+  "givenName": "Francesco",
+  "familyName": "Fanti",
+  "image": "https://francescojames.dev/io.png",
+  "description": "Freelance software developer based in Latina ...",
+  "jobTitle": "Freelance Software Developer",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Latina",
+    "addressRegion": "Lazio",
+    "addressCountry": "IT"
+  },
+  "areaServed": ["Latina", "Roma", "Italy"],
+  "knowsAbout": ["JavaScript", "TypeScript", "React", "Astro", "Node.js", "Go", "Python", "Cloud Computing", ...]
+}
+```
+
+New fields vs. round 1:
+- `@id` — stable IRI so Google can link the Person across pages
+- `givenName` / `familyName` — helps entity disambiguation
+- `image` — links the headshot for Knowledge Panel eligibility
+- `description` — crawlable bio with local keywords
+- `addressRegion: "Lazio"` — region added (was only city before)
+- `areaServed` — signals Latina + Roma service area
+- `knowsAbout` — links the Person to skill topics
+
+The `WebSite` node gains `@id` + `author` back-reference:
+
+```json
+{
+  "@type": "WebSite",
+  "@id": "https://francescojames.dev/#website",
+  "author": { "@id": "https://francescojames.dev/#person" }
+}
+```
+
+---
+
+## 17. SiteNavigationElement — sitelink hints
+
+**Both layouts — Priority: HIGH (sitelink targeting)**
+
+Two `SiteNavigationElement` nodes are added to every page's `@graph`, explicitly naming the pages Google should surface as sitelinks:
+
+**IT layout:**
+```json
+{ "@type": "SiteNavigationElement", "name": "Chi Sono", "url": "https://francescojames.dev/it/about" },
+{ "@type": "SiteNavigationElement", "name": "Skill",    "url": "https://francescojames.dev/it/skills" }
+```
+
+**EN layout:**
+```json
+{ "@type": "SiteNavigationElement", "name": "About Me", "url": "https://francescojames.dev/about" },
+{ "@type": "SiteNavigationElement", "name": "Skills",   "url": "https://francescojames.dev/skills" }
+```
+
+---
+
+## 18. Geo meta tags — local SEO for Latina
+
+**Both layouts — Priority: medium (Bing + local crawlers)**
+
+Added to every page:
+
+```html
+<meta name="geo.region"    content="IT-LT" />
+<meta name="geo.placename" content="Latina" />
+<meta name="geo.position"  content="41.4661;12.9038" />
+<meta name="ICBM"          content="41.4661, 12.9038" />
+```
+
+`IT-LT` is the ISO 3166-2 code for the Province of Latina. Google doesn't officially consume these tags, but Bing, DuckDuckGo and many local-SEO auditing tools do.
+
+---
+
+## 19. BreadcrumbList JSON-LD on all inner pages
+
+**6 inner pages (about, skills, works × 2 locales) — Priority: HIGH (sitelink hierarchy)**
+
+Each non-home page now injects a `BreadcrumbList` via `<Fragment slot="head">` to reinforce its position in the site hierarchy and strengthen sitelink eligibility:
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://francescojames.dev/it" },
+    { "@type": "ListItem", "position": 2, "name": "Chi Sono", "item": "https://francescojames.dev/it/about" }
+  ]
+}
+```
+
+Sitelink labels (`name`) exactly match the page `<title>` prefix (`Chi Sono`, `Skill`, `About Me`, `Skills`, etc.) for maximum signal consistency.
+
+---
+
+## 20. Canonical bug fix — IT Works page
+
+**`it/works.astro` — Priority: correctness**
+
+The Italian Works page had `canonical="https://francescojames.dev/works"` (pointing at the EN URL). Fixed to:
+
+```html
+canonical="https://francescojames.dev/it/works"
+```
+
+---
+
+## Validation
+
+All 10 modified files pass `astro check` with **0 errors, 0 warnings**.
+
 ## Validation
 
 All four modified files pass Astro diagnostics with zero errors and zero warnings.

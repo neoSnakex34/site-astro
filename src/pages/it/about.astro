@@ -2,15 +2,29 @@
 import Layout from "src/layouts/it/Layout.astro";
 import Whoami from "src/components/Whoami.astro";
 import NeroneModal from "src/components/it/NeroneModal.astro";
+
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://francescojames.dev/it" },
+    { "@type": "ListItem", "position": 2, "name": "Chi Sono", "item": "https://francescojames.dev/it/about" }
+  ]
+};
 ---
 
-<Layout justifyType="start" showFab={true}
-title="Chi Sono  - Francesco James Fanti",
-  description="Sono un programmatore e tecnico, a Latina. Scopri di più",
+<Layout
+  justifyType="start"
+  showFab={true}
+  title="Chi Sono | Francesco James - Sviluppatore Software"
+  description="Scopri chi è Francesco James Fanti, sviluppatore software freelance a Latina, disponibile a Roma e in tutta Italia. Frontend, full-stack e cloud."
   canonical="https://francescojames.dev/it/about"
-  >
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+  </Fragment>
 
-  <Whoami />
+<Whoami />
   <div id="about-section" class="font-montserrat animate-about-fade-in">
 
   <h1 class="font-bold text-xl">Ecco alcune <span class="italic">informazioni su di me</span></h1>

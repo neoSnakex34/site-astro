@@ -3,6 +3,8 @@ import Layout from "src/layouts/it/Layout.astro";
 import { Image } from "astro:assets";
 import cat from "src/assets/giphy.gif";
 
+const metaKeywords = "programmatore latina, web developer a latina, creazione sito a latina, creazione app a latina, sviluppo web a latina, programmatore a latina";
+
 const breadcrumb = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -15,12 +17,13 @@ const breadcrumb = {
 
 <Layout
     justifyType="start"
-    title="Skill | Francesco James - Sviluppatore Software"
-    description="Scopri le competenze di Francesco James Fanti: Node.js, React, Astro, Go, Python, sviluppo cloud e molto altro. Sviluppatore freelance a Latina, disponibile a Roma."
+    title="Competenze | Programmatore e Web Developer a Latina - Francesco James"
+    description="Scopri le competenze di Francesco James Fanti, programmatore e sviluppatore software freelance a Latina. Specializzato in creazione siti web, app e soluzioni cloud-native. Disponibile per progetti a Roma e in tutta Italia."
     canonical="https://francescojames.dev/it/skills"
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+	<meta name="keywords" content={metaKeywords} />
   </Fragment>
 
     <div class="gif-container mb-10">
@@ -55,16 +58,17 @@ const breadcrumb = {
             </div>
             <h2 class="pt-10 text-3xl font-bold">Tecnologie</h2>
             <div>
-                <h3 class="text-xl font-semibold italic">
-                    che uso nei miei progetti:
-                </h3>
-                <h4 class="text-xl font-bold mt-8">Backend</h4>
-                <ul class="pt-1 font-medium text-xl lg:text-lg list-disc list-inside">
-                    <li>Node.js [express.js]</li>
-                    <li>Python [FastAPI]</li>
-                    <li>Go [Gin-gonic]</li>
-                    <li>Database [SQL; Redis]</li>
-                </ul>
+                        <h3 class="text-xl font-semibold italic">
+                            che uso nei miei progetti:
+                        </h3>
+                        <p>Come <span class="font-bold">programmatore a Latina</span>, offro servizi di <span class="font-bold">creazione app a Latina</span> e sviluppo di soluzioni cloud-native.</p>
+                        <h4 class="text-xl font-bold mt-8">Backend</h4>
+                        <ul class="pt-1 font-medium text-xl lg:text-lg list-disc list-inside">
+                            <li>Node.js [express.js]</li>
+                            <li>Python [FastAPI]</li>
+                            <li>Go [Gin-gonic]</li>
+                            <li>Database [SQL; Redis]</li>
+                        </ul>
 
                 <h4 class="text-xl font-bold pt-5">Frontend</h4>
                 <ul class="pt-1 font-medium text-xl lg:text-lg list-disc list-inside">

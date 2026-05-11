@@ -3,6 +3,8 @@ import Layout from "src/layouts/it/Layout.astro";
 import Whoami from "src/components/Whoami.astro";
 import NeroneModal from "src/components/it/NeroneModal.astro";
 
+const metaKeywords = "programmatore latina, web developer a latina, creazione sito a latina, creazione app a latina, sviluppo web a latina, programmatore a latina";
+
 const breadcrumb = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -16,12 +18,13 @@ const breadcrumb = {
 <Layout
   justifyType="start"
   showFab={true}
-  title="Chi Sono | Francesco James - Sviluppatore Software"
-  description="Scopri chi è Francesco James Fanti, sviluppatore software freelance a Latina, disponibile a Roma e in tutta Italia. Frontend, full-stack e cloud."
+  title="Chi Sono | Programmatore e Web Developer a Latina - Francesco James"
+  description="Scopri Francesco James Fanti, programmatore e sviluppatore software freelance a Latina. Specializzato in sviluppo web, frontend, full-stack e soluzioni cloud. Disponibile per progetti a Roma e in tutta Italia."
   canonical="https://francescojames.dev/it/about"
 >
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+	<meta name="keywords" content={metaKeywords} />
   </Fragment>
 
 <Whoami />
@@ -33,6 +36,7 @@ const breadcrumb = {
   <h4 class="font-medium text-md leading-relaxed pb-6">
     <p>Quando parliamo di <span class="font-bold">tecnologia</span> mi considero un <span class="italic font-bold">tuttofare.</span></p>
     <p>Sono uno <span class="italic font-bold">sviluppatore freelance</span> che si occupa di <span class="font-bold">soluzioni frontend o applicazioni full-stack native cloud</span></p>
+    <p>Offro servizi di <span class="font-bold">creazione siti web a Latina</span> e <span class="font-bold">sviluppo web a Latina</span>, con soluzioni moderne e personalizzate per le tue esigenze.</p>
     <p>Amo <span class="italic font-bold">riparare hardware</span>, assemblare PC e fare manutenzione.</p>
     <p class="pt-2">Puoi apprendere di più a riguardo nella mia: <a class="link link-accent font-bold" href="/it/skills">pagina delle competenze</a>;</p>
     <p>guardare i miei progetti su <a class="link link-info font-bold" href="https://github.com/neosnakex34" target="_blank" rel="noopener noreferrer">github</a>;</p>

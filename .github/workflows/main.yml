@@ -33,7 +33,7 @@ jobs:
           git checkout main 
           git pull 
           git merge --ff-only upstream 
-          git push origin main  
+          git push   
 
 
 

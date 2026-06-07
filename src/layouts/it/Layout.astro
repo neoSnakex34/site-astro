@@ -8,13 +8,13 @@ const siteurl = "https://francescojames.dev"
 const {
 	justifyType, alignType, showFab = false, bgColor,
 	title = "Francesco James - Sviluppatore Software",
-	description = "Sviluppatore software freelance a Latina, disponibile a Roma e in tutta Italia. Frontend, full-stack e soluzioni cloud-native.",
+	description = "Sviluppatore a Latina, disponibile a Roma e in tutta Italia. Frontend, full-stack e soluzioni cloud-native.",
 	canonical,
 	ogImage = `${siteurl}/io.png`,
 	robots = "index, follow",
 	ogType = "website",
 	pubDate,
-	articleAuthor,
+	articleAuthor
 	} = Astro.props;
 
 const enCanonical = canonical ? canonical.replace("francescojames.dev/it", "francescojames.dev") : undefined;
@@ -31,8 +31,8 @@ const jsonLd = {
 			"url": siteurl,
 			"image": `${siteurl}/io.png`,
 			"sameAs": ["https://github.com/neosnakex34"],
-			"jobTitle": "Sviluppatore Software Freelance",
-			"description": "Sviluppatore software freelance con sede a Latina, disponibile a Roma e in tutta Italia. Specializzato in frontend, full-stack e soluzioni cloud-native.",
+			    "jobTitle": "Sviluppatore Software",
+			    "description": "Sviluppatore con sede a Latina, disponibile a Roma e in tutta Italia. Specializzato in frontend, full-stack e soluzioni cloud-native.",
 			"address": {
 				"@type": "PostalAddress",
 				"addressLocality": "Latina",

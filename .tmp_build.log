@@ -1,0 +1,611 @@
+[2m15:20:18[22m [34m[content][39m Syncing content
+[2m15:20:18[22m [34m[content][39m Synced content
+[2m15:20:18[22m [34m[types][39m Generated [2m103ms[22m
+[2m15:20:18[22m [34m[build][39m output: [34m"static"[39m
+[2m15:20:18[22m [34m[build][39m mode: [34m"static"[39m
+[2m15:20:18[22m [34m[build][39m directory: [34m/tmp/workspace/neoSnakex34/site-astro/dist/[39m
+[2m15:20:18[22m [34m[build][39m Collecting build info...
+[2m15:20:18[22m [34m[build][39m [32m✓ Completed in 123ms.[39m
+[2m15:20:18[22m [34m[build][39m Building static entrypoints...
+/*! 🌼 daisyUI 5.5.5 */
+Found 1 warning while optimizing generated CSS:
+
+[2m│ }[22m
+[2m│ @layer base {[22m
+[2m│[22m   @property --radialprogress {
+[2m┆[22m            [33m[2m^--[22m Unknown at rule: @property[39m
+[2m┆[22m
+[2m│     syntax: "<percentage>";[22m
+[2m│     inherits: true;[22m
+
+[33m[1m15:20:20[22m [WARN] [vite][39m [33m"matchHostname", "matchPathname", "matchPort" and "matchProtocol" are imported from external module "@astrojs/internal-helpers/remote" but never used in "node_modules/astro/dist/assets/utils/remotePattern.js".[39m
+[2m15:20:20[22m [34m[vite][39m [32m✓ built in 1.68s[39m
+[2m15:20:20[22m [34m[build][39m [32m✓ Completed in 1.72s.[39m
+
+[42m[30m building client (vite) [39m[49m
+[2m15:20:20[22m [34m[vite][39m transforming...
+[2m15:20:20[22m [34m[vite][39m [32m✓[39m 7 modules transformed.
+[2m15:20:20[22m [34m[vite][39m rendering chunks...
+[2m15:20:20[22m [34m[vite][39m [32m✓ built in 27ms[39m
+
+[42m[30m generating static routes [39m[49m
+[2m15:20:20[22m [32m▶[39m src/pages/404.astro
+[2m15:20:20[22m   [34m└─[39m [2m/404.html[22m [2m(+6ms)[22m 
+[2m15:20:20[22m [32m▶[39m src/pages/about.astro
+[2m15:20:20[22m   [34m└─[39m [2m/about/index.html[22m{
+  '/src/pages/404.astro': [Object: null prototype] [Module] {
+    default: [Function: 404] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/404.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/404.astro',
+    url: '/404'
+  },
+  '/src/pages/about.astro': [Object: null prototype] [Module] {
+    default: [Getter],
+    file: [Getter],
+    url: [Getter]
+  },
+  '/src/pages/blog.astro': [Object: null prototype] [Module] {
+    default: [Function: blog] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/blog.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/blog.astro',
+    url: '/blog'
+  },
+  '/src/pages/index.astro': [Object: null prototype] [Module] {
+    default: [Function: index] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/index.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/index.astro',
+    url: ''
+  },
+  '/src/pages/skills.astro': [Object: null prototype] [Module] {
+    default: [Function: skills] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/skills.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/skills.astro',
+    url: '/skills'
+  },
+  '/src/pages/works.astro': [Object: null prototype] [Module] {
+    default: [Function: works] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/works.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/works.astro',
+    url: '/works'
+  }
+}
+404
+about
+blog
+
+skills
+works
+[
+  { name: '404', route: '/404' },
+  { name: 'about', route: '/about' },
+  { name: 'blog', route: '/blog' },
+  { name: 'Home', route: '/' },
+  { name: 'skills', route: '/skills' },
+  { name: 'works', route: '/works' }
+]
+{ name: 'Home', route: '/' }
+ [2m(+8ms)[22m 
+[2m15:20:20[22m [32m▶[39m src/pages/blog.astro
+[2m15:20:20[22m   [34m└─[39m [2m/blog/index.html[22m{
+  '/src/pages/404.astro': [Object: null prototype] [Module] {
+    default: [Function: 404] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/404.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/404.astro',
+    url: '/404'
+  },
+  '/src/pages/about.astro': [Object: null prototype] [Module] {
+    default: [Getter],
+    file: [Getter],
+    url: [Getter]
+  },
+  '/src/pages/blog.astro': [Object: null prototype] [Module] {
+    default: [Function: blog] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/blog.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/blog.astro',
+    url: '/blog'
+  },
+  '/src/pages/index.astro': [Object: null prototype] [Module] {
+    default: [Function: index] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/index.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/index.astro',
+    url: ''
+  },
+  '/src/pages/skills.astro': [Object: null prototype] [Module] {
+    default: [Function: skills] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/skills.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/skills.astro',
+    url: '/skills'
+  },
+  '/src/pages/works.astro': [Object: null prototype] [Module] {
+    default: [Function: works] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/works.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/works.astro',
+    url: '/works'
+  }
+}
+404
+about
+blog
+
+skills
+works
+[
+  { name: '404', route: '/404' },
+  { name: 'about', route: '/about' },
+  { name: 'blog', route: '/blog' },
+  { name: 'Home', route: '/' },
+  { name: 'skills', route: '/skills' },
+  { name: 'works', route: '/works' }
+]
+{ name: 'Home', route: '/' }
+ [2m(+2ms)[22m 
+[2m15:20:20[22m [32m▶[39m src/pages/it/about.astro
+[2m15:20:20[22m   [34m└─[39m [2m/it/about/index.html[22m [2m(+3ms)[22m 
+[2m15:20:20[22m [32m▶[39m src/pages/it/skills.astro
+[2m15:20:20[22m   [34m└─[39m [2m/it/skills/index.html[22m [2m(+2ms)[22m 
+[2m15:20:20[22m [32m▶[39m src/pages/it/works.astro
+[2m15:20:20[22m   [34m└─[39m [2m/it/works/index.html[22m [2m(+3ms)[22m 
+[2m15:20:20[22m [32m▶[39m src/pages/it/index.astro
+[2m15:20:20[22m   [34m└─[39m [2m/it/index.html[22m [2m(+2ms)[22m 
+[2m15:20:20[22m [32m▶[39m src/pages/posts/post-1.md
+[2m15:20:20[22m   [34m└─[39m [2m/posts/post-1/index.html[22m{
+  '/src/pages/404.astro': [Object: null prototype] [Module] {
+    default: [Function: 404] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/404.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/404.astro',
+    url: '/404'
+  },
+  '/src/pages/about.astro': [Object: null prototype] [Module] {
+    default: [Getter],
+    file: [Getter],
+    url: [Getter]
+  },
+  '/src/pages/blog.astro': [Object: null prototype] [Module] {
+    default: [Function: blog] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/blog.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/blog.astro',
+    url: '/blog'
+  },
+  '/src/pages/index.astro': [Object: null prototype] [Module] {
+    default: [Function: index] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/index.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/index.astro',
+    url: ''
+  },
+  '/src/pages/skills.astro': [Object: null prototype] [Module] {
+    default: [Function: skills] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/skills.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/skills.astro',
+    url: '/skills'
+  },
+  '/src/pages/works.astro': [Object: null prototype] [Module] {
+    default: [Function: works] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/works.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/works.astro',
+    url: '/works'
+  }
+}
+404
+about
+blog
+
+skills
+works
+[
+  { name: '404', route: '/404' },
+  { name: 'about', route: '/about' },
+  { name: 'blog', route: '/blog' },
+  { name: 'Home', route: '/' },
+  { name: 'skills', route: '/skills' },
+  { name: 'works', route: '/works' }
+]
+{ name: 'Home', route: '/' }
+ [2m(+2ms)[22m 
+[2m15:20:20[22m [32m▶[39m src/pages/posts/post-2.md
+[2m15:20:20[22m   [34m└─[39m [2m/posts/post-2/index.html[22m{
+  '/src/pages/404.astro': [Object: null prototype] [Module] {
+    default: [Function: 404] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/404.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/404.astro',
+    url: '/404'
+  },
+  '/src/pages/about.astro': [Object: null prototype] [Module] {
+    default: [Getter],
+    file: [Getter],
+    url: [Getter]
+  },
+  '/src/pages/blog.astro': [Object: null prototype] [Module] {
+    default: [Function: blog] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/blog.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/blog.astro',
+    url: '/blog'
+  },
+  '/src/pages/index.astro': [Object: null prototype] [Module] {
+    default: [Function: index] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/index.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/index.astro',
+    url: ''
+  },
+  '/src/pages/skills.astro': [Object: null prototype] [Module] {
+    default: [Function: skills] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/skills.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/skills.astro',
+    url: '/skills'
+  },
+  '/src/pages/works.astro': [Object: null prototype] [Module] {
+    default: [Function: works] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/works.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/works.astro',
+    url: '/works'
+  }
+}
+404
+about
+blog
+
+skills
+works
+[
+  { name: '404', route: '/404' },
+  { name: 'about', route: '/about' },
+  { name: 'blog', route: '/blog' },
+  { name: 'Home', route: '/' },
+  { name: 'skills', route: '/skills' },
+  { name: 'works', route: '/works' }
+]
+{ name: 'Home', route: '/' }
+ [2m(+2ms)[22m 
+[2m15:20:20[22m [32m▶[39m src/pages/posts/post-3.md
+[2m15:20:20[22m   [34m└─[39m [2m/posts/post-3/index.html[22m{
+  '/src/pages/404.astro': [Object: null prototype] [Module] {
+    default: [Function: 404] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/404.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/404.astro',
+    url: '/404'
+  },
+  '/src/pages/about.astro': [Object: null prototype] [Module] {
+    default: [Getter],
+    file: [Getter],
+    url: [Getter]
+  },
+  '/src/pages/blog.astro': [Object: null prototype] [Module] {
+    default: [Function: blog] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/blog.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/blog.astro',
+    url: '/blog'
+  },
+  '/src/pages/index.astro': [Object: null prototype] [Module] {
+    default: [Function: index] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/index.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/index.astro',
+    url: ''
+  },
+  '/src/pages/skills.astro': [Object: null prototype] [Module] {
+    default: [Function: skills] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/skills.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/skills.astro',
+    url: '/skills'
+  },
+  '/src/pages/works.astro': [Object: null prototype] [Module] {
+    default: [Function: works] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/works.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/works.astro',
+    url: '/works'
+  }
+}
+404
+about
+blog
+
+skills
+works
+[
+  { name: '404', route: '/404' },
+  { name: 'about', route: '/about' },
+  { name: 'blog', route: '/blog' },
+  { name: 'Home', route: '/' },
+  { name: 'skills', route: '/skills' },
+  { name: 'works', route: '/works' }
+]
+{ name: 'Home', route: '/' }
+ [2m(+2ms)[22m 
+[2m15:20:20[22m [32m▶[39m src/pages/skills.astro
+[2m15:20:20[22m   [34m└─[39m [2m/skills/index.html[22m{
+  '/src/pages/404.astro': [Object: null prototype] [Module] {
+    default: [Function: 404] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/404.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/404.astro',
+    url: '/404'
+  },
+  '/src/pages/about.astro': [Object: null prototype] [Module] {
+    default: [Getter],
+    file: [Getter],
+    url: [Getter]
+  },
+  '/src/pages/blog.astro': [Object: null prototype] [Module] {
+    default: [Function: blog] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/blog.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/blog.astro',
+    url: '/blog'
+  },
+  '/src/pages/index.astro': [Object: null prototype] [Module] {
+    default: [Function: index] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/index.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/index.astro',
+    url: ''
+  },
+  '/src/pages/skills.astro': [Object: null prototype] [Module] {
+    default: [Function: skills] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/skills.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/skills.astro',
+    url: '/skills'
+  },
+  '/src/pages/works.astro': [Object: null prototype] [Module] {
+    default: [Function: works] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/works.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/works.astro',
+    url: '/works'
+  }
+}
+404
+about
+blog
+
+skills
+works
+[
+  { name: '404', route: '/404' },
+  { name: 'about', route: '/about' },
+  { name: 'blog', route: '/blog' },
+  { name: 'Home', route: '/' },
+  { name: 'skills', route: '/skills' },
+  { name: 'works', route: '/works' }
+]
+{ name: 'Home', route: '/' }
+ [2m(+2ms)[22m 
+[2m15:20:20[22m [32m▶[39m src/pages/works.astro
+[2m15:20:20[22m   [34m└─[39m [2m/works/index.html[22m{
+  '/src/pages/404.astro': [Object: null prototype] [Module] {
+    default: [Function: 404] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/404.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/404.astro',
+    url: '/404'
+  },
+  '/src/pages/about.astro': [Object: null prototype] [Module] {
+    default: [Getter],
+    file: [Getter],
+    url: [Getter]
+  },
+  '/src/pages/blog.astro': [Object: null prototype] [Module] {
+    default: [Function: blog] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/blog.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/blog.astro',
+    url: '/blog'
+  },
+  '/src/pages/index.astro': [Object: null prototype] [Module] {
+    default: [Function: index] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/index.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/index.astro',
+    url: ''
+  },
+  '/src/pages/skills.astro': [Object: null prototype] [Module] {
+    default: [Function: skills] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/skills.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/skills.astro',
+    url: '/skills'
+  },
+  '/src/pages/works.astro': [Object: null prototype] [Module] {
+    default: [Function: works] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/works.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/works.astro',
+    url: '/works'
+  }
+}
+404
+about
+blog
+
+skills
+works
+[
+  { name: '404', route: '/404' },
+  { name: 'about', route: '/about' },
+  { name: 'blog', route: '/blog' },
+  { name: 'Home', route: '/' },
+  { name: 'skills', route: '/skills' },
+  { name: 'works', route: '/works' }
+]
+{ name: 'Home', route: '/' }
+ [2m(+2ms)[22m 
+[2m15:20:20[22m [32m▶[39m src/pages/index.astro
+[2m15:20:20[22m   [34m└─[39m [2m/index.html[22m{
+  '/src/pages/404.astro': [Object: null prototype] [Module] {
+    default: [Function: 404] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/404.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/404.astro',
+    url: '/404'
+  },
+  '/src/pages/about.astro': [Object: null prototype] [Module] {
+    default: [Getter],
+    file: [Getter],
+    url: [Getter]
+  },
+  '/src/pages/blog.astro': [Object: null prototype] [Module] {
+    default: [Function: blog] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/blog.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/blog.astro',
+    url: '/blog'
+  },
+  '/src/pages/index.astro': [Object: null prototype] [Module] {
+    default: [Function: index] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/index.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/index.astro',
+    url: ''
+  },
+  '/src/pages/skills.astro': [Object: null prototype] [Module] {
+    default: [Function: skills] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/skills.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/skills.astro',
+    url: '/skills'
+  },
+  '/src/pages/works.astro': [Object: null prototype] [Module] {
+    default: [Function: works] {
+      isAstroComponentFactory: true,
+      moduleId: '/tmp/workspace/neoSnakex34/site-astro/src/pages/works.astro',
+      propagation: undefined
+    },
+    file: '/tmp/workspace/neoSnakex34/site-astro/src/pages/works.astro',
+    url: '/works'
+  }
+}
+404
+about
+blog
+
+skills
+works
+[
+  { name: '404', route: '/404' },
+  { name: 'about', route: '/about' },
+  { name: 'blog', route: '/blog' },
+  { name: 'Home', route: '/' },
+  { name: 'skills', route: '/skills' },
+  { name: 'works', route: '/works' }
+]
+{ name: 'Home', route: '/' }
+ [2m(+2ms)[22m 
+[2m15:20:20[22m [32m✓ Completed in 66ms.
+[39m
+[42m[30m generating optimized images [39m[49m
+[2m15:20:20[22m   [32m▶[39m /_astro/giphy.JJtQZlOc_Z2dMLOc.webp [2m(before: 115kB, after: 58kB)[22m [2m(+134ms)[22m [2m(1/10)[22m
+[2m15:20:20[22m   [32m▶[39m /_astro/nerone.sofDyoMQ_1xhQH3.webp [2m(before: 251kB, after: 178kB)[22m [2m(+174ms)[22m [2m(2/10)[22m
+[2m15:20:20[22m   [32m▶[39m /_astro/sessionbee.BO0FGYKN_1dA2xF.webp [2m(before: 100kB, after: 65kB)[22m [2m(+80ms)[22m [2m(3/10)[22m
+[2m15:20:20[22m   [32m▶[39m /_astro/studio.CGIJmo6K_Z1MQskx.webp [2m(before: 1941kB, after: 68kB)[22m [2m(+359ms)[22m [2m(4/10)[22m
+[2m15:20:20[22m   [32m▶[39m /_astro/rcipsum1.DmsB-R4L_Z1iiQxF.webp [2m(before: 244kB, after: 30kB)[22m [2m(+150ms)[22m [2m(5/10)[22m
+[2m15:20:20[22m   [32m▶[39m /_astro/tossdice2.DdA1La4a_ZCBm1i.webp [2m(before: 88kB, after: 20kB)[22m [2m(+258ms)[22m [2m(6/10)[22m
+[2m15:20:20[22m   [32m▶[39m /_astro/wasa.CALVIA87_Z3dvCa.webp [2m(before: 737kB, after: 77kB)[22m [2m(+122ms)[22m [2m(7/10)[22m
+[2m15:20:20[22m   [32m▶[39m /_astro/nerone2.CoOVSVw8_Z2dI94G.webp [2m(before: 560kB, after: 515kB)[22m [2m(+491ms)[22m [2m(8/10)[22m
+[2m15:20:21[22m   [32m▶[39m /_astro/io.DQi2KQka_Z27OCWJ.webp [2m(before: 6913kB, after: 0kB)[22m [2m(+298ms)[22m [2m(9/10)[22m
+[2m15:20:21[22m   [32m▶[39m /_astro/io.DQi2KQka_2rKjVd.webp [2m(before: 6913kB, after: 1kB)[22m [2m(+273ms)[22m [2m(10/10)[22m
+[2m15:20:21[22m [32m✓ Completed in 937ms.
+[39m
+[2m15:20:21[22m [34m[@astrojs/sitemap][39m `sitemap-index.xml` created at `dist`
+[2m15:20:21[22m [34m[build][39m 13 page(s) built in [1m2.90s[22m
+[2m15:20:21[22m [34m[build][39m [1mComplete![22m

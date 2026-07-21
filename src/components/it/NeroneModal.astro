@@ -2,6 +2,12 @@
 import { Image } from "astro:assets";
 import nerone from "src/assets/nerone.jpg";
 import nerone2 from "src/assets/nerone2.jpg";
+
+const slideTexts = {
+  slide1: "Lei è Mimì (ma la chiamo Nerone)",
+  slide2: "Lui è Felix (o Tempesta, ma lo chiamo Milo), il nuovo arrivato nella comunità dei gatti randagi",
+  slide3: "Lei è Cherie, una miciona affetuosa"
+};
 ---
 
 <dialog id="my_modal_1" class="modal">
@@ -41,7 +47,7 @@ import nerone2 from "src/assets/nerone2.jpg";
 
     <!-- Modal content -->
     <div class="p-6">
-      <p class="font-montserrat font-semibold mb-4">Lei è Mimì (ma la chiamo Nerone)</p>
+      <p id="modal-text" class="font-montserrat font-semibold mb-4"></p>
       <div class="modal-action">
         <form method="dialog">
           <!-- if there is a button in form, it will close the modal -->
@@ -56,3 +62,34 @@ import nerone2 from "src/assets/nerone2.jpg";
     <button>close</button>
   </form>
 </dialog>
+
+<script>
+  const modalText = document.getElementById('modal-text');
+  const modal = document.getElementById('my_modal_1');
+
+  function updateText() {
+    const hash = window.location.hash.substring(1);
+    modalText.textContent = slideTexts[hash] || slideTexts.slide1;
+  }
+
+  window.addEventListener('hashchange', updateText);
+
+  // Reset to default when modal opens or closes (with debounce)
+  let openTimeout, closeTimeout;
+
+  modal.addEventListener('open', () => {
+    clearTimeout(openTimeout);
+    openTimeout = setTimeout(() => {
+      modalText.textContent = slideTexts.slide1;
+    }, 50);
+  });
+
+  modal.addEventListener('close', () => {
+    clearTimeout(closeTimeout);
+    closeTimeout = setTimeout(() => {
+      modalText.textContent = slideTexts.slide1;
+    }, 200);
+  });
+
+  updateText();
+</script>

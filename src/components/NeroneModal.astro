@@ -89,32 +89,52 @@ const slideTexts = {
 
   const modalText = document.getElementById('modal-text');
   const modal = document.getElementById('my_modal_1');
-  const carousel = document.querySelector('.carousel');
+  const carousel = modal.querySelector('.carousel');
+
+  let currentSlide = 'slide1';
 
   function updateText() {
-    const hash = window.location.hash.substring(1);
-    modalText.textContent = slideTexts[hash] || slideTexts.slide1;
+    modalText.textContent = slideTexts[currentSlide] || slideTexts.slide1;
   }
 
-  function resetToFirstSlide() {
-    window.location.hash = '#slide1';
+  function setSlide(slideId) {
+    currentSlide = slideId;
+    carousel.querySelectorAll('.carousel-item').forEach((item, index) => {
+      item.classList.toggle('w-full', item.id === slideId);
+    });
     updateText();
   }
 
-  // Handle hash changes (button navigation)
-  window.addEventListener('hashchange', updateText);
+  function resetToFirstSlide() {
+    currentSlide = 'slide1';
+    setSlide('slide1');
+  }
 
-  // Handle touch swipe events
-  carousel.addEventListener('scroll', () => {
-    const activeSlide = carousel.querySelector('.carousel-item.w-full');
-    if (activeSlide && activeSlide.id) {
-      modalText.textContent = slideTexts[activeSlide.id] || slideTexts.slide1;
-    }
-  }, { passive: true });
+  // Intercept carousel navigation links
+  modal.querySelectorAll('.carousel a[href^="#slide"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetSlide = link.getAttribute('href').substring(1);
+      setSlide(targetSlide);
+    });
+  });
 
-  // Reset to first slide when modal opens or closes (with debounce)
-  let openTimeout, closeTimeout;
+  // Handle touch swipe - use IntersectionObserver for active slide detection
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        currentSlide = entry.target.id;
+        updateText();
+      }
+    });
+  }, { threshold: 0.5 });
 
+  carousel.querySelectorAll('.carousel-item').forEach(item => {
+    observer.observe(item);
+  });
+
+  // Reset to first slide when modal opens (with debounce)
+  let openTimeout;
   modal.addEventListener('open', () => {
     clearTimeout(openTimeout);
     openTimeout = setTimeout(() => {
@@ -123,10 +143,7 @@ const slideTexts = {
   });
 
   modal.addEventListener('close', () => {
-    clearTimeout(closeTimeout);
-    closeTimeout = setTimeout(() => {
-      modalText.textContent = slideTexts.slide1;
-    }, 200);
+    modalText.textContent = slideTexts.slide1;
   });
 
   updateText();

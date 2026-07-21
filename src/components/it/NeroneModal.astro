@@ -66,21 +66,36 @@ const slideTexts = {
 <script>
   const modalText = document.getElementById('modal-text');
   const modal = document.getElementById('my_modal_1');
+  const carousel = document.querySelector('.carousel');
 
   function updateText() {
     const hash = window.location.hash.substring(1);
     modalText.textContent = slideTexts[hash] || slideTexts.slide1;
   }
 
+  function resetToFirstSlide() {
+    window.location.hash = '#slide1';
+    updateText();
+  }
+
+  // Handle hash changes (button navigation)
   window.addEventListener('hashchange', updateText);
 
-  // Reset to default when modal opens or closes (with debounce)
+  // Handle touch swipe events
+  carousel.addEventListener('scroll', () => {
+    const activeSlide = carousel.querySelector('.carousel-item.w-full');
+    if (activeSlide && activeSlide.id) {
+      modalText.textContent = slideTexts[activeSlide.id] || slideTexts.slide1;
+    }
+  }, { passive: true });
+
+  // Reset to first slide when modal opens or closes (with debounce)
   let openTimeout, closeTimeout;
 
   modal.addEventListener('open', () => {
     clearTimeout(openTimeout);
     openTimeout = setTimeout(() => {
-      modalText.textContent = slideTexts.slide1;
+      resetToFirstSlide();
     }, 50);
   });
 

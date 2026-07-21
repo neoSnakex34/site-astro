@@ -1,13 +1,14 @@
 ---
 import { Image } from "astro:assets";
-import nerone from "src/assets/nerone.jpg";
-import nerone2 from "src/assets/nerone2.jpg";
+import nerone from "src/assets/nerone2.jpg";
+import milo from "src/assets/milo.jpg";
+import cherie from "src/assets/cherie.jpg";
 
-const slideTexts = {
-  slide1: "Lei è Mimì (ma la chiamo Nerone)",
-  slide2: "Lui è Felix (o Tempesta, ma lo chiamo Milo), il nuovo arrivato nella comunità dei gatti randagi",
-  slide3: "Lei è Cherie, una miciona affetuosa"
-};
+// const slideTexts = {
+//   slide1: "Lei è Mimì (ma la chiamo Nerone)",
+//   slide2: "Lui è Felix (o Tempesta, ma lo chiamo Milo), il nuovo arrivato nella comunità dei gatti randagi",
+//   slide3: "Lei è Cherie, una miciona affetuosa"
+// };
 ---
 
 <dialog id="my_modal_1" class="modal">
@@ -15,7 +16,7 @@ const slideTexts = {
     <!-- Carousel container -->
     <div class="carousel w-full relative">
       <!-- Slide 1 -->
-      <div id="slide1" class="carousel-item w-full">
+      <div id="slide1" class="carousel-item w-full" data-text="Lei è Mimì (ma la chiamo Nerone)">
         <div class="w-full relative">
           <Image
             src={nerone}
@@ -23,31 +24,45 @@ const slideTexts = {
             class="w-full aspect-[804/714] object-cover"
           />
           <div class="absolute inset-0 flex items-center justify-between px-4 pointer-events-none">
-            <a href="#slide2" class="btn btn-circle btn-sm pointer-events-auto">❮</a>
+            <a href="#slide3" class="btn btn-circle btn-sm pointer-events-auto">❮</a>
             <a href="#slide2" class="btn btn-circle btn-sm pointer-events-auto">❯</a>
           </div>
         </div>
       </div>
 
       <!-- Slide 2 -->
-      <div id="slide2" class="carousel-item w-full">
+      <div id="slide2" class="carousel-item w-full" data-text="Lui è Felix (o Tempesta, ma lo chiamo Milo), il nuovo arrivato nella comunità dei gatti randagi">
         <div class="w-full relative">
           <Image
-            src={nerone2}
-            alt="Nerone, uno dei gatti randagi di cui mi occupo"
+            src={milo}
+            alt="Milo, il nuovo arrivato nella comunità dei gatti randagi"
             class="w-full aspect-[804/714] object-cover"
           />
           <div class="absolute inset-0 flex items-center justify-between px-4 pointer-events-none">
             <a href="#slide1" class="btn btn-circle btn-sm pointer-events-auto">❮</a>
+            <a href="#slide3" class="btn btn-circle btn-sm pointer-events-auto">❯</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="slide3" class="carousel-item w-full" data-text="Lei è Cherie, una miciona affetuosa">
+        <div class="w-full relative">
+          <Image
+            src={cherie}
+            alt="Cherie, uno dei gatti randagi di cui mi occupo"
+            class="w-full aspect-[804/714] object-cover"
+          />
+          <div class="absolute inset-0 flex items-center justify-between px-4 pointer-events-none">
+            <a href="#slide2" class="btn btn-circle btn-sm pointer-events-auto">❮</a>
             <a href="#slide1" class="btn btn-circle btn-sm pointer-events-auto">❯</a>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Modal content -->
+    <!-- Modal content below carousel -->
     <div class="p-6">
-      <p id="modal-text" class="font-montserrat font-semibold mb-4"></p>
+        <p id="modal-text" class="font-montserrat font-semibold mb-4"></p>
       <div class="modal-action">
         <form method="dialog">
           <!-- if there is a button in form, it will close the modal -->
@@ -66,61 +81,43 @@ const slideTexts = {
 <script>
   const modalText = document.getElementById('modal-text');
   const modal = document.getElementById('my_modal_1');
-  const carousel = modal.querySelector('.carousel');
-
-  let currentSlide = 'slide1';
+  const carousel = modal?.querySelector('.carousel');
+  const slides = carousel?.querySelectorAll('.carousel-item');
 
   function updateText() {
-    modalText.textContent = slideTexts[currentSlide] || slideTexts.slide1;
+    if (!carousel || !slides?.length || !modalText) return;
+
+    const slideIndex = Math.round(carousel.scrollLeft / carousel.clientWidth);
+    const activeSlide = slides[Math.min(slideIndex, slides.length - 1)];
+    modalText.textContent = activeSlide?.getAttribute('data-text') || '';
   }
 
-  function setSlide(slideId) {
-    currentSlide = slideId;
-    carousel.querySelectorAll('.carousel-item').forEach((item, index) => {
-      item.classList.toggle('w-full', item.id === slideId);
-    });
-    updateText();
-  }
+  carousel?.addEventListener('scroll', updateText, { passive: true });
 
-  function resetToFirstSlide() {
-    currentSlide = 'slide1';
-    setSlide('slide1');
-  }
-
-  // Intercept carousel navigation links
-  modal.querySelectorAll('.carousel a[href^="#slide"]').forEach(link => {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const targetSlide = link.getAttribute('href').substring(1);
-      setSlide(targetSlide);
+  modal?.querySelectorAll('.carousel a[href^="#slide"]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      const target = carousel?.querySelector(link.getAttribute('href'));
+      target?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
     });
   });
 
-  // Handle touch swipe - use IntersectionObserver for active slide detection
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        currentSlide = entry.target.id;
-        updateText();
-      }
-    });
-  }, { threshold: 0.5 });
-
-  carousel.querySelectorAll('.carousel-item').forEach(item => {
-    observer.observe(item);
+  const modalObserver = new MutationObserver(() => {
+    if (modal?.hasAttribute('open')) {
+      carousel?.scrollTo({ left: 0, behavior: 'instant' });
+      updateText();
+    }
   });
 
-  // Reset to first slide when modal opens (with debounce)
-  let openTimeout;
-  modal.addEventListener('open', () => {
-    clearTimeout(openTimeout);
-    openTimeout = setTimeout(() => {
-      resetToFirstSlide();
-    }, 50);
-  });
+  if (modal) {
+    modalObserver.observe(modal, { attributes: true, attributeFilter: ['open'] });
+  }
 
-  modal.addEventListener('close', () => {
-    modalText.textContent = slideTexts.slide1;
+  modal?.addEventListener('close', () => {
+    setTimeout(() => {
+      carousel?.scrollTo({ left: 0, behavior: 'instant' });
+      updateText();
+    }, 200);
   });
 
   updateText();

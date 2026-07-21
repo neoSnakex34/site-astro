@@ -1,7 +1,16 @@
 ---
 import { Image } from "astro:assets";
-import nerone from "src/assets/nerone.jpg";
-import nerone2 from "src/assets/nerone2.jpg";
+import nerone from "src/assets/nerone2.jpg";
+// import nerone2 from "src/assets/nerone2.jpg";
+import milo from "src/assets/milo.jpg";
+import cherie from "src/assets/cherie.jpg";
+
+const slideTexts = {
+  slide1: "She is Mimì (but I call her Nerone)",
+  slide2: "He is Felix (or Tempesta, but I call him Milo), the new arrival to the stray cat community",
+  slide3: "She is Cherie, a cute affectionate cat"
+};
+
 ---
 
 <dialog id="my_modal_1" class="modal">
@@ -17,7 +26,7 @@ import nerone2 from "src/assets/nerone2.jpg";
             class="w-full aspect-[804/714] object-cover"
           />
           <div class="absolute inset-0 flex items-center justify-between px-4 pointer-events-none">
-            <a href="#slide2" class="btn btn-circle btn-sm pointer-events-auto">❮</a>
+            <a href="#slide3" class="btn btn-circle btn-sm pointer-events-auto">❮</a>
             <a href="#slide2" class="btn btn-circle btn-sm pointer-events-auto">❯</a>
           </div>
         </div>
@@ -27,12 +36,26 @@ import nerone2 from "src/assets/nerone2.jpg";
       <div id="slide2" class="carousel-item w-full">
         <div class="w-full relative">
           <Image
-            src={nerone2}
-            alt="nerone, one of the stray cats I look after"
+            src={milo}
+            alt="milo, the new arrived on the stray cats community"
             class="w-full aspect-[804/714] object-cover"
           />
           <div class="absolute inset-0 flex items-center justify-between px-4 pointer-events-none">
             <a href="#slide1" class="btn btn-circle btn-sm pointer-events-auto">❮</a>
+            <a href="#slide3" class="btn btn-circle btn-sm pointer-events-auto">❯</a>
+          </div>
+        </div>
+      </div>
+
+      <div id="slide3" class="carousel-item w-full">
+        <div class="w-full relative">
+          <Image
+            src={cherie}
+            alt="cherie, one of the stray cats I look after"
+            class="w-full aspect-[804/714] object-cover"
+          />
+          <div class="absolute inset-0 flex items-center justify-between px-4 pointer-events-none">
+            <a href="#slide2" class="btn btn-circle btn-sm pointer-events-auto">❮</a>
             <a href="#slide1" class="btn btn-circle btn-sm pointer-events-auto">❯</a>
           </div>
         </div>
@@ -41,7 +64,7 @@ import nerone2 from "src/assets/nerone2.jpg";
 
     <!-- Modal content below carousel -->
     <div class="p-6">
-      <p class="font-montserrat font-semibold mb-4">She is Mimì (but I call her Nerone)</p>
+        <p id="modal-text" class="font-montserrat font-semibold mb-4"></p>
       <div class="modal-action">
         <form method="dialog">
           <!-- if there is a button in form, it will close the modal -->
@@ -56,3 +79,40 @@ import nerone2 from "src/assets/nerone2.jpg";
     <button>close</button>
   </form>
 </dialog>
+
+<script>
+  const slideTexts = {
+    slide1: "She is Mimì (but I call her Nerone)",
+    slide2: "This is Milo, the newest addition to the stray cat community",
+    slide3: "This is Cherie, another stray cat I look after"
+  };
+
+  const modalText = document.getElementById('modal-text');
+  const modal = document.getElementById('my_modal_1');
+
+  function updateText() {
+    const hash = window.location.hash.substring(1);
+    modalText.textContent = slideTexts[hash] || slideTexts.slide1;
+  }
+
+  window.addEventListener('hashchange', updateText);
+
+  // Reset to default when modal opens or closes (with debounce)
+  let openTimeout, closeTimeout;
+
+  modal.addEventListener('open', () => {
+    clearTimeout(openTimeout);
+    openTimeout = setTimeout(() => {
+      modalText.textContent = slideTexts.slide1;
+    }, 50);
+  });
+
+  modal.addEventListener('close', () => {
+    clearTimeout(closeTimeout);
+    closeTimeout = setTimeout(() => {
+      modalText.textContent = slideTexts.slide1;
+    }, 200);
+  });
+
+  updateText();
+</script>

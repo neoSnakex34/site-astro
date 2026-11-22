@@ -3,7 +3,7 @@ import Navbar from "src/components/Navbar.astro";
 import Footer from "src/components/Footer.astro";
 import "src/styles/global.css";
 const siteurl = "https://francescojames.dev";
-const { justifyType, alignType, showFab = false, bgColor,
+const { justifyType, alignType, showFab = false, bgColor, fullBleed = false,
 
 	title = "Francesco James - Software Developer",
 	description = "Freelance software developer based in Latina, Italy. Available for frontend, full-stack and cloud-native projects in Rome and across Italy.",
@@ -117,12 +117,11 @@ const jsonLd = {
 		<main
 			class=`min-h-[calc(100vh-56px)] flex flex-col w-full ${bgColor ? "bg-"+bgColor : 'bg-base-200'}  ${justifyType ? "justify-"+justifyType : 'justify-center'} ${alignType ? "items-"+alignType : 'items-center'}`
 		>
-			<div class=`lg:p-20 md:p-8 p-6 bg-inherit`>
+			<div class={fullBleed ? "bg-inherit w-full" : "lg:p-20 md:p-8 p-6 bg-inherit"}>
 				<slot class="bg-inherit"/>
 			</div>
 		</main>
 
-</main>
 		<!-- top fab -->
 		{ showFab &&
 

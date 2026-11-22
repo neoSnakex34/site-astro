@@ -12,6 +12,14 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+    ssr: {
+      noExternal: ["@tsparticles/astro"],
+    },
+    server: {
+      watch: {
+        usePolling: true,
+      },
+    },
   },
   site: "https://francescojames.dev",
   integrations: [
@@ -24,5 +32,9 @@ export default defineConfig({
         },
       },
     }),
-  ],
+    ],
+    server: {
+        host: true,
+        port: 4321
+    }
 });

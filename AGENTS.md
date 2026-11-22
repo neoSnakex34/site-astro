@@ -7,6 +7,15 @@
 
 ---
 
+## Commit Style
+
+Use **Conventional Commits** for every commit:
+`<type>[optional scope]: <description>` (for example,
+`fix(particles): enable responsive options`). Use an appropriate type such as
+`feat`, `fix`, `docs`, `refactor`, `test`, or `chore`. Keep the description
+imperative and the subject concise, without a final period. Add a body only
+when it provides useful context beyond the subject.
+
 ## Core Principles
 
 ### 1. No external SEO libraries

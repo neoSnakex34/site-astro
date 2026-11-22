@@ -1,21 +1,23 @@
 ---
 import "../styles/global.css";
 
+// English-only site: the /it locale was retired (see old_locale_deprecated/).
+// The Italian copy is preserved here, commented out, for a future review.
 const translations = {
   en: {
     title: "404",
     subtitle: "Page Not Found",
-    text: "Sorry, this page does not exist.",
-    btn: "Go back home",
+    text: "I'm sorry pal, you're page is in another castle.",
+    btn: "go back home",
     link: "/"
   },
-  it: {
-    title: "404",
-    subtitle: "Pagina Non Trovata",
-    text: "Mi dispiace, questa pagina non esiste.",
-    btn: "Torna alla home",
-    link: "/it"
-  }
+  // it: {
+  //   title: "404",
+  //   subtitle: "Pagina Non Trovata",
+  //   text: "Mi dispiace, questa pagina non esiste.",
+  //   btn: "Torna alla home",
+  //   link: "/it"
+  // }
 };
 
 const t = translations.en;
@@ -47,7 +49,7 @@ const t = translations.en;
       </p>
 
       <div class="pt-4">
-        <a id="err-btn" href={t.link} class="btn btn-primary">
+        <a id="err-btn " href={t.link} class="btn btn-error primary btn-lg font-bold">
           {t.btn}
         </a>
       </div>
@@ -58,18 +60,25 @@ const t = translations.en;
 
   </body>
 </html>
- <script define:vars={{ translations }}>
-      if (window.location.pathname.startsWith("/it")) {
-        const t = translations.it;
 
-        document.documentElement.lang = "it";
-        document.title = `${t.title} - ${t.subtitle}`;
+<!--
+  Preserved for a future review: the old client-side Italian swap for /it URLs.
+  Legacy /it/* URLs now redirect to their English counterpart (astro.config.mjs),
+  so this branch is dead code.
 
-        document.getElementById("err-subtitle").innerText = t.subtitle;
-        document.getElementById("err-text").innerText = t.text;
+  <script define:vars={{ translations }}>
+    if (window.location.pathname.startsWith("/it")) {
+      const t = translations.it;
 
-        const btn = document.getElementById("err-btn");
-        btn.innerText = t.btn;
-        btn.href = t.link;
-      }
-    </script>
+      document.documentElement.lang = "it";
+      document.title = `${t.title} - ${t.subtitle}`;
+
+      document.getElementById("err-subtitle").innerText = t.subtitle;
+      document.getElementById("err-text").innerText = t.text;
+
+      const btn = document.getElementById("err-btn");
+      btn.innerText = t.btn;
+      btn.href = t.link;
+    }
+  </script>
+-->

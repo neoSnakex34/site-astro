@@ -1,10 +1,14 @@
 ---
-const { pathname } = Astro.url;
-const isItalian = pathname.startsWith("/it");
+// English-only site: the /it locale was retired (see old_locale_deprecated/).
+// Italian branch kept for a future review, hence the comment block.
+// const { pathname } = Astro.url;
+// const isItalian = pathname.startsWith("/it");
+//
+// const ariaLabel = isItalian
+//   ? "Terminale: esecuzione del comando whoami che mostra il mio nome"
+//   : "Terminal: running whoami command displaying my name";
 
-const ariaLabel = isItalian 
-  ? "Terminale: esecuzione del comando whoami che mostra il mio nome" 
-  : "Terminal: running whoami command displaying my name";
+const ariaLabel = "Terminal: running whoami command displaying my name";
 ---
 
 <div

@@ -1,10 +1,9 @@
 ---
-import LocaleSelector from "src/components/LocaleSelector.astro"
 ---
 
 <!-- TODO add credits to font and other resources -->
 <footer
-  class="footer sm:footer-horizontal font-montserrat bg-base-300 text-base-content p-10 pb-10"
+  class="footer sm:footer-horizontal font-montserrat bg-base-300 text-base-content p-10 pb-10 pr-6 sm:pr-12 pl-12 sm:pl-24 lg:pl-32"
 >
   <nav>
     <h6 class="footer-title">Credits</h6>
@@ -62,18 +61,10 @@ import LocaleSelector from "src/components/LocaleSelector.astro"
   </nav>
   <nav>
     <h6 class="footer-title">Legal</h6>
-      <a
-      class="link link-hover"
-      href="/policy-site.docx"
-
-      >Privacy Policy</a>
-      <a
-          class="link link-hover"
-      href="/cookie-policy.docx"
-      target="_blank"
-      rel="noopener noreferrer">
-
-      Cookie Policy</a>
+      <a href="https://www.iubenda.com/privacy-policy/49626183" class="iubenda-black iubenda-noiframe iubenda-embed link link-hover" title="Privacy Policy">Privacy Policy</a>
+      <script is:inline type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+      <a href="https://www.iubenda.com/privacy-policy/49626183/cookie-policy" class="iubenda-black iubenda-noiframe iubenda-embed link link-hover" title="Cookie Policy">Cookie Policy</a>
+      <script is:inline type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src="https://cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
       <a
       class="link link-hover"
       href="https://github.com/neosnakex34/site-astro"
@@ -83,12 +74,13 @@ import LocaleSelector from "src/components/LocaleSelector.astro"
 
   </nav>
   <nav>
-    <h6 class="footer-title">Language</h6>
-
-
-      <LocaleSelector btnType="footer"></LocaleSelector>
-
-
+    <h6 class="footer-title">Accessibility</h6>
+    <button
+      id="particles-toggle"
+      type="button"
+      class="link link-hover w-fit"
+      aria-pressed="true"
+    >Disable particles</button>
   </nav>
 </footer>
 <footer
@@ -96,13 +88,11 @@ import LocaleSelector from "src/components/LocaleSelector.astro"
 >
   <div>
     <div class="text-xs leading-relaxed font-medium">
-      <p>Every trademark or logo not explicitly mentioned is property of its respective owner.</p>
+      <p>Every trademark or logo not explicitly claimed by me is property of its respective owner</p>
       <p>Balatro is a game by LocalThunk</p>
 
     </div>
     <p class="font-medium">the owner of this site supports Free and Open Source Software</p>
-    <p class="pt-2 font-small">according to Italian Law there is no VAT number reported since I operate as Occasional Work</p>
-    <p class="font-small">I hereby commit myself in quickly updating this page if I am ever to register as a VAT freelance</p>
     <p class="font-bold">Copyright © {new Date().getFullYear()} - Francesco James Fanti</p>
   </div>
 </footer>

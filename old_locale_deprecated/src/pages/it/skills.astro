@@ -1,0 +1,99 @@
+---
+import Layout from "src/layouts/it/Layout.astro";
+import { Image } from "astro:assets";
+import cat from "src/assets/giphy.gif";
+
+const metaKeywords = "programmatore, web developer, creazione sito, creazione app, sviluppo web, programmatore";
+
+const breadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://francescojames.dev/it" },
+    { "@type": "ListItem", "position": 2, "name": "Skill", "item": "https://francescojames.dev/it/skills" }
+  ]
+};
+---
+
+<Layout
+    justifyType="start"
+    title="Francesco James - Competenze"
+    description="Scopri le competenze di Francesco James Fanti, programmatore e sviluppatore software freelance. Specializzato in creazione siti web, app e soluzioni cloud-native."
+    canonical="https://francescojames.dev/it/skills"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumb)} />
+	<meta name="keywords" content={metaKeywords} />
+  </Fragment>
+
+    <div class="gif-container mb-10">
+        <div style="width:100%;height:0;padding-bottom:77%;position:relative;">
+            <Image
+                loading="eager"
+                src={cat}
+                alt="gatto che digita su un laptop"
+                style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;"
+            />
+        </div><p>
+            <a
+                class="text-xs link link-base"
+                href="https://giphy.com/gifs/VIU0t3EaFcpPPjPV5N"
+                target="_blank"
+                rel="noopener noreferrer">via GIPHY</a
+            >
+        </p>
+    </div>
+
+    <div class="flex-col lg:flex-row-reverse mx-6">
+        <div class="font-montserrat">
+            <h1 class="text-3xl font-bold pt-10">Tecnologie</h1>
+            <div>
+                        <h3 class="text-xl font-semibold italic">
+                            che uso nei miei progetti:
+                        </h3>
+                        <h4 class="text-xl font-bold mt-8">Backend</h4>
+                        <ul class="pt-1 font-medium text-xl lg:text-lg list-disc list-inside">
+                            <li>Node.js [express.js]</li>
+                            <li>Spring Boot</li>
+                            <li>Python [FastAPI]</li>
+                            <li>Go [Gin-gonic]</li>
+                            <li>Database [SQL; Redis]</li>
+                        </ul>
+
+                <h4 class="text-xl font-bold pt-5">Frontend</h4>
+                <ul class="pt-1 font-medium text-xl lg:text-lg list-disc list-inside">
+                    <li>Astro</li>
+                    <li>React</li>
+                    <li>Vue.js [Nuxt.js]</li>
+                    <li>Librerie CSS [Tailwind; Bootstrap]</li>
+                    <li>Librerie UI [DaisyUI]</li>
+                </ul>
+
+                <h4 class="text-xl font-bold pt-5">Programmazione</h4>
+                <ul class="pt-1 font-medium text-xl lg:text-lg list-disc list-inside">
+                    <li>JavaScript/TypeScript</li>
+                    <li>C</li>
+                    <li>C++</li>
+                    <li>Rust</li>
+                    <li>Go</li>
+                    <li>Python</li>
+                    <li>Java</li>
+                </ul>
+
+                <h4 class="text-xl font-bold pt-5">Strumenti</h4>
+                <ul class="pt-1 font-medium text-xl lg:text-lg list-disc list-inside">
+                    <li>RayLib</li>
+                    <li>Pandas</li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</Layout>
+
+<style>
+:root {
+    --semi-colons: ":: ";
+  }
+</style>

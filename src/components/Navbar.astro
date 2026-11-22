@@ -1,5 +1,4 @@
 ---
-import LocaleSelector from "./LocaleSelector.astro";
 const pages = import.meta.glob("src/pages/*.astro", { eager: true });
 
 interface navLink {
@@ -112,7 +111,6 @@ const isLinkActive = (route: string): boolean => {
       class="btn btn-ghost text-xl mx-3"
       href="/">neoSnakex34</a
     >
-    <LocaleSelector/>
   </div>
 
   <div class="navbar-center hidden lg:flex">

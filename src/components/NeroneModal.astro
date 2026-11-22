@@ -99,7 +99,8 @@ const slideTexts = {
   modal?.querySelectorAll('.carousel a[href^="#slide"]').forEach((link) => {
     link.addEventListener('click', (event) => {
       event.preventDefault();
-      const target = carousel?.querySelector(link.getAttribute('href'));
+      const href = link.getAttribute('href');
+      const target = href ? carousel?.querySelector(href) : null;
       target?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
     });
   });

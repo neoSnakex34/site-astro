@@ -1,0 +1,215 @@
+---
+import Navbar from "src/components/it/Navbar.astro";
+import Footer from "src/components/it/Footer.astro";
+import "src/styles/global.css";
+
+const siteurl = "https://francescojames.dev"
+
+const {
+	justifyType, alignType, showFab = false, bgColor,
+	title = "Francesco James - Sviluppatore Software",
+	description = "Sviluppatore a Latina, disponibile a Roma e in tutta Italia. Frontend, full-stack e soluzioni cloud-native.",
+	canonical,
+	ogImage = `${siteurl}/io.png`,
+	robots = "index, follow",
+	ogType = "website",
+	pubDate,
+	articleAuthor
+	} = Astro.props;
+
+const enCanonical = canonical ? canonical.replace("francescojames.dev/it", "francescojames.dev") : undefined;
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "Person",
+			"@id": `${siteurl}/#person`,
+			"name": "Francesco James Fanti",
+			"givenName": "Francesco",
+			"familyName": "Fanti",
+			"url": siteurl,
+			"image": `${siteurl}/io.png`,
+			"sameAs": ["https://github.com/neosnakex34"],
+			    "jobTitle": "Sviluppatore Software",
+			    "description": "Sviluppatore con sede a Latina, disponibile a Roma e in tutta Italia. Specializzato in frontend, full-stack e soluzioni cloud-native.",
+			"address": {
+				"@type": "PostalAddress",
+				"addressLocality": "Latina",
+				"addressRegion": "Lazio",
+				"addressCountry": "IT"
+			},
+			"areaServed": ["Latina", "Roma", "Italia"],
+			      "knowsAbout": ["JavaScript", "TypeScript", "React", "Astro", "Node.js", "Go", "Python", "Cloud Computing", "Sviluppo Frontend", "Sviluppo Full-Stack", "Programmatore a Latina", "Web Developer a Latina", "Creazione sito a Latina", "Creazione app a Latina", "Sviluppo web a Latina", "Programmatore Latina"]
+		},
+		{
+			"@type": "WebSite",
+			"@id": `${siteurl}/#website`,
+			"name": "Francesco James Fanti",
+			"url": siteurl,
+			"inLanguage": "it",
+			"author": { "@id": `${siteurl}/#person` }
+		},
+		{
+			"@type": "SiteNavigationElement",
+			"name": "Chi Sono",
+			"url": `${siteurl}/it/about`
+		},
+		{
+			"@type": "SiteNavigationElement",
+			"name": "Skill",
+			"url": `${siteurl}/it/skills`
+		}
+	]
+};
+---
+
+<!doctype html>
+<html lang="it">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+
+		<script type="text/javascript" src="https://embeds.iubenda.com/widgets/b4d01a1b-7a9f-4fb5-a45a-79966a6834fd.js"></script>
+
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link rel="sitemap" href="/sitemap-index.xml" />
+
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="author" content="Francesco James Fanti" />
+		<meta name="robots" content={robots} />
+		<meta name="theme-color" content="#1d1617" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="geo.region" content="IT-LT" />
+		<meta name="geo.placename" content="Latina" />
+		<meta name="geo.position" content="41.4661;12.9038" />
+		<meta name="ICBM" content="41.4661, 12.9038" />
+
+		{canonical && <link rel="canonical" href={canonical} />}
+		{enCanonical && <link rel="alternate" hreflang="en" href={enCanonical} />}
+		{canonical && <link rel="alternate" hreflang="it" href={canonical} />}
+		{enCanonical && <link rel="alternate" hreflang="x-default" href={enCanonical} />}
+
+		<meta property="og:type" content={ogType} />
+		<meta property="og:site_name" content="Francesco James Fanti" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:locale" content="it_IT" />
+		{canonical && <meta property="og:url" content={canonical} />}
+		{ogImage && <meta property="og:image" content={ogImage} />}
+		{ogType === "article" && pubDate && <meta property="article:published_time" content={new Date(pubDate).toISOString()} />}
+		{ogType === "article" && articleAuthor && <meta property="article:author" content={articleAuthor} />}
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:site" content="@neosankex34" />
+		<meta name="twitter:creator" content="@neosankex34" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		{ogImage && <meta name="twitter:image" content={ogImage} />}
+
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+		<slot name="head" />
+	</head>
+	<body>
+
+		<Navbar />
+		<main
+			class=`min-h-[calc(100vh-56px)] flex flex-col w-full ${bgColor ? "bg-"+bgColor : 'bg-base-200'}  ${justifyType ? "justify-"+justifyType : 'justify-center'} ${alignType ? "items-"+alignType : 'items-center'}`
+		>
+			<div class=`lg:p-20 md:p-8 p-6 bg-inherit`>
+				<slot class="bg-inherit"/>
+			</div>
+		</main>
+
+</main>
+		<!-- top fab -->
+		{ showFab &&
+
+		<div class='mb-12 fab transition-opacity duration-200 opacity-0' id="fab-top-container">
+			<!-- a focusable div with tabindex is necessary to work on all browsers. role="button" is necessary for accessibility -->
+			<button
+				role="button"
+				class="z-0 btn btn-lg btn-circle btn-accent"
+				aria-label="scroll on top"
+			>
+				^
+			</button>
+
+
+		</div>
+		}
+
+<Footer />
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+<script>
+
+
+
+	const debounce = <T extends unknown[]> (
+		callback: (...args: T) => void,
+		delay: number
+	) => {
+
+		let timeoutTimer: ReturnType<typeof setTimeout>;
+
+		return (...args: T) => {
+			clearTimeout(timeoutTimer);
+
+			timeoutTimer = setTimeout(() => {
+				callback(...args);
+			}, delay);
+		};
+	};
+
+
+	document.addEventListener('DOMContentLoaded', () => {
+
+
+	const fabTop: HTMLElement | null = document.getElementById('fab-top-container');
+
+
+	fabTop?.addEventListener('click', () => {
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+		fabTop.classList.remove('opacity-100');
+		fabTop.classList.add('opacity-0');
+	});
+	console.log('fabTop:', fabTop);
+
+
+
+	if (fabTop) {
+	window.addEventListener('scroll', debounce(() => {
+		console.log('called');
+		if (fabTop) {
+			if (window.scrollY > 300) {
+				fabTop.classList.remove('opacity-0');
+				fabTop.classList.add('opacity-100');
+			} else {
+				fabTop.classList.remove('opacity-100');
+				fabTop.classList.add('opacity-0');
+			}
+		}
+	}, 380));
+
+	};
+
+
+
+
+
+});
+
+</script>

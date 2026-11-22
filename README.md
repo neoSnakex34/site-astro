@@ -46,23 +46,23 @@ output, but refuses to rewrite the lockfile. Do not run `yarn set version` or
    type-checks, and builds the merged result with Node 26.
 4. Pushes to `master` only if every preceding step succeeds.
 
-There is no separate one-time migration job: merge this work into `upstream`
-and the first push event performs the initial promotion. Later updates use
-exactly the same path. The workflow can also be dispatched manually against
+There is no separate one-time migration job. First merge the workflow changes
+into `master` manually (the automatic token cannot push workflow-file changes).
+Then updates to `upstream` automatically promote application changes to `master`. The workflow can also be dispatched manually against
 `upstream` once GitHub exposes it in the Actions UI (manual dispatch requires
 the workflow to exist on the default branch).
 
 Repository configuration required:
 
-- Keep the `Actions` environment available to the `upstream` branch. Any required
-  environment approvals must be granted before the job can run.
-- Set its existing `TOKEN` secret to a PAT with repository **Contents: read and
-  write** and **Workflows: read and write** (or `repo` + `workflow` scopes for a
-  classic PAT). Workflow permission is needed when the merge changes files in
-  `.github/workflows`. A PAT also lets pushes to `master` trigger downstream
-  workflows, unlike pushes made with the default `GITHUB_TOKEN`.
-- Branch rules on `master` must allow that PAT's owner to push these merges;
+
+- No custom token or secret is required: checkout and push use GitHub's automatic,
+  short-lived `GITHUB_TOKEN` with `contents: write`.
+- Branch rules on `master` must allow GitHub Actions to push these merges;
   workflow YAML cannot bypass repository protection rules by itself.
+- `GITHUB_TOKEN` cannot push changes to `.github/workflows`. Merge workflow changes
+  into `master` manually first, including this initial setup.
+- Pushes to `master` made with `GITHUB_TOKEN` do not trigger downstream push
+  workflows. Deployment must run in this workflow if it depends on promotion.
 - Merge conflicts fail the job without pushing. Resolve them on `upstream` and
   push again. If another writer updates `master` during validation, the normal
   push safely fails rather than force-pushing; rerun the job to test a new merge.

@@ -19,7 +19,7 @@ jobs:
     if: github.ref == 'refs/heads/upstream'
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    environment: Actions
+
 
     env:
       COREPACK_ENABLE_AUTO_PIN: '0'
@@ -30,13 +30,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          # A PAT also allows the master push to trigger deployment workflows.
-          # SECURITY: Store TOKEN only as an Actions environment secret; never
-          # commit or print it. Use an expiring, repository-scoped PAT with only
-          # Contents and Workflows write access; rotate it before expiry or on exposure.
-          # Checkout persists credentials for the push, so dependency/build scripts
-          # can access them: protect upstream and run only trusted code here.
-          token: ${{ secrets.TOKEN }}
+          # Uses GitHub's automatic, short-lived GITHUB_TOKEN; no PAT required.
 
       - name: Prepare the merge into master
         run: |

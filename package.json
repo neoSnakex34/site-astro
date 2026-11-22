@@ -23,6 +23,7 @@
     "tailwindcss": "^4.1.17"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.9",
     "@types/node": "^24.10.1",
     "typescript": "^5.9.3",
     "vite": "^7.2.6"

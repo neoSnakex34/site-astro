@@ -1,40 +1,76 @@
-name: basic CI/CD  
+name: CI/CD — build, check, merge upstream → master
 
-on: 
+on:
   push:
     branches:
-      - upstream  
+      - upstream
+  workflow_dispatch:
+
+# Never cancel a run while it may be pushing master.
+concurrency:
+  group: upstream-to-master
+  cancel-in-progress: false
+
+permissions:
+  contents: write
 
 jobs:
-  build-check-and-merge: 
+  build-check-merge:
+    if: github.ref == 'refs/heads/upstream'
     runs-on: ubuntu-latest
-    environment: Actions  
+    timeout-minutes: 20
+    environment: Actions
+
+    env:
+      COREPACK_ENABLE_AUTO_PIN: '0'
+      COREPACK_ENABLE_DOWNLOAD_PROMPT: '0'
 
     steps:
-      - name: Checkout repo 
-        uses: actions/checkout@v2 
+      - name: Checkout the triggering upstream revision
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0 
+          fetch-depth: 0
+          # A PAT also allows the master push to trigger deployment workflows.
+          # SECURITY: Store TOKEN only as an Actions environment secret; never
+          # commit or print it. Use an expiring, repository-scoped PAT with only
+          # Contents and Workflows write access; rotate it before expiry or on exposure.
+          # Checkout persists credentials for the push, so dependency/build scripts
+          # can access them: protect upstream and run only trusted code here.
+          token: ${{ secrets.TOKEN }}
 
-      - name: Set up env
-        uses: actions/setup-node@v2 
-        with: 
-          node-version: '22' 
+      - name: Prepare the merge into master
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin master
+          git switch --create master --track origin/master
+          GIT_EDITOR=true git merge --no-edit "${{ github.sha }}"
 
-      - name: install dependencies 
-        run: yarn install
+      - name: Set up Node.js LTS
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: .nvmrc
+          # Do not invoke Yarn for caching before Corepack is installed.
+          package-manager-cache: false
 
-      - name: build project 
-        run: yarn build 
+      - name: Install Corepack and activate the pinned Yarn Berry
+        run: |
+          npm install --global corepack@0.36.0
+          corepack enable
+          corepack install
+          node --version
+          yarn --version
+          node --input-type=module -e "import { execFileSync } from 'node:child_process'; import { readFileSync } from 'node:fs'; const expected = JSON.parse(readFileSync('package.json', 'utf8')).packageManager.split('@')[1]; const actual = execFileSync('yarn', ['--version'], { encoding: 'utf8' }).trim(); if (actual !== expected) throw new Error('Expected Yarn ' + expected + ', got ' + actual);"
 
-      - name: merge upstream in main 
-        if: success() 
-        env:
-          TOKEN: ${{ secrets.TOKEN }}   
-        run: | 
-          git config --global user.name "Github Actions" 
-          git config --global user.email 'actions@github.com'
-          git checkout master 
-          git pull 
-          git merge --ff-only upstream 
-          git push https://x-access-token:${TOKEN}@github.com/neoSnakex34/site-astro.git master 
+      - name: Install dependencies without changing the lockfile
+        run: yarn install --immutable
+
+      - name: Type check
+        run: yarn astro check
+
+      - name: Build
+        run: yarn build
+
+      - name: Push the validated merge to master
+        # A normal push refuses to overwrite any concurrent changes to master.
+        run: git push origin HEAD:refs/heads/master

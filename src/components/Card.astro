@@ -1,9 +1,10 @@
 ---
 import { Image } from 'astro:assets';
 
-const { title, description, path, redirect1 = undefined, redirect2 = undefined, lazyLoading = true } = Astro.props;
+const { title, description, path, redirect1 = undefined, redirect2 = undefined, redirect3 = undefined, lazyLoading = true } = Astro.props;
 const hasRedirect1 = redirect1 !== undefined;
 const hasRedirect2 = redirect2 !== undefined;
+const hasRedirect3 = redirect3 !== undefined;
 const loadingType = lazyLoading ? "lazy" : "eager";
 ---
 
@@ -12,7 +13,7 @@ const loadingType = lazyLoading ? "lazy" : "eager";
     <Image
       loading={loadingType}
       src={path}
-      alt={title} 
+      alt={title}
       inferSize = {true}
     />
   </figure>
@@ -21,7 +22,9 @@ const loadingType = lazyLoading ? "lazy" : "eager";
     <h2 class="card-title text-xl font-bold">{title}</h2>
     <p class="text-lg font-medium">{description}</p>
     <div class="card-actions justify-end p-3">
-    <a role="button" href={redirect1} class=`mr-3 btn btn-lg btn-success ${hasRedirect1 ? '' : 'hidden'}` target={hasRedirect1 ? "_blank" : ""} rel={hasRedirect1 ? "noopener noreferrer" : ""}>Site</a>
-    <a role="button" href={redirect2} class=`btn btn-lg btn-accent ${hasRedirect2 ? '' : 'hidden'}` target={hasRedirect2 ? "_blank" : ""} rel={hasRedirect2 ? "noopener noreferrer" : ""}>Code</a>
+    <a role="button" href={redirect1} class={`mr-3 btn btn-lg btn-success ${hasRedirect1 ? '' : 'hidden'}`} target={hasRedirect1 ? "_blank" : ""} rel={hasRedirect1 ? "noopener noreferrer" : ""}>Site</a>
+    <a role="button" href={redirect2} class={`btn btn-lg btn-accent ${hasRedirect2 ? '' : 'hidden'}`} target={hasRedirect2 ? "_blank" : ""} rel={hasRedirect2 ? "noopener noreferrer" : ""}>Code</a>
+    <a role="button" href={redirect3} class={`btn btn-lg  btn-disabled ${hasRedirect3 ? '' : 'hidden'}`}>Closed Source</a>
+    </div>
 </div>
 </div>

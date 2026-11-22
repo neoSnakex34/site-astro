@@ -1,7 +1,9 @@
 # Agent Guidelines for SEO & Content Maintenance
 
-**Last Updated:** 2026  
+**Last Updated:** November 2026
 **Scope:** Maintaining and evolving the native Astro SEO implementation on `francescojames.dev`
+**Locale:** English only (`en`). The Italian locale has been retired — see *Legacy `/it` URLs* below.
+**Also read:** the `@agents/` folder (`agents/README.md` is the index; `agents/seo-improvements.md` is the implementation log with the reasoning behind each SEO decision). This file is the operational source of truth; `agents/` holds the history.
 
 ---
 
@@ -11,20 +13,37 @@
 This site uses **native Astro** for all SEO signals. Do **not** introduce `astro-seo`, `@astrojs/seo`, or similar packages.
 
 All SEO lives in:
-- `src/layouts/Layout.astro` (EN)
-- `src/layouts/it/Layout.astro` (IT)
+- `src/layouts/Layout.astro` (the single layout)
 - Page-level props & `<Fragment slot="head">` injections
 
-### 2. Bilingual consistency
-Every SEO signal must exist in **both** EN and IT layouts, with appropriate locale translations:
-- `og:locale`: `"en_GB"` vs. `"it_IT"`
-- `inLanguage`: `"en"` vs. `"it"`
-- `hreflang`: `rel="alternate" hreflang="en"` and `rel="alternate" hreflang="it"`
+### 2. Single locale: English only
+The site is served from one unprefixed URL space (`/`, `/about`, `/skills`, `/works`, ...). There is no `/it` route space anymore.
 
-### 3. Brand identity is non-negotiable
-The site brand appears in:
-- Layout default title: `"Francesco James - Software Developer"` (EN) / `"Francesco James - Sviluppatore Software"` (IT)
-- All page titles follow: `"<Section> | Francesco James - <Brand>"`
+- `astro.config.mjs` declares `i18n.locales: ["en"]` with `defaultLocale: "en"`.
+- `og:locale` is `"en_GB"`, Layout `inLanguage` is `"en"`, `<html lang="en">`.
+- `hreflang`: the layout emits exactly two alternates per page — `en` and `x-default` — both pointing at the page's canonical URL. Never emit an `it` alternate again unless the Italian locale is deliberately reintroduced.
+- **Do not create `src/pages/it/...` pages.** They will not be built into `/it` routes and the redirect map will shadow them.
+
+### 3. Legacy `/it` URLs
+Every URL the old Italian site published still needs to resolve. Handled as static redirects in `astro.config.mjs`:
+
+```js
+redirects: {
+  "/it": "/",
+  "/it/about": "/about",
+  "/it/skills": "/skills",
+  "/it/works": "/works",
+}
+```
+
+Rules:
+- Never remove an entry from this map — those URLs are indexed and linked from outside the site.
+- If you ever restore the Italian site, start from `old_locale_deprecated/README.md` (components, layout and pages are preserved there, and it lists exactly what was unhooked).
+
+### 4. Brand identity is non-negotiable
+The brand is **`Francesco James - Cloud Engineer`**. It appears in:
+- Layout default title: `"Francesco James - Cloud Engineer"`
+- All page titles follow: `"<Section> | Francesco James - Cloud Engineer"`
 - Person schema `name` field
 - OG `og:site_name`
 
@@ -33,14 +52,14 @@ This consistency is critical for:
 - Sitelink extraction (Google parses the `|` separator to extract clean labels)
 - Knowledge Panel eligibility
 
-### 4. Local SEO is foundational
+### 5. Local SEO is foundational
 Every page signals:
 - **City:** Latina (`addressLocality: "Latina"`, `geo.placename: "Latina"`)
 - **Region:** Lazio (`addressRegion: "Lazio"`, `geo.region: "IT-LT"`)
 - **Service area:** Latina, Roma, Italy (`areaServed: [...]`)
 - **Coordinates:** `41.4661, 12.9038` (Latina city center) in `geo.position` and `ICBM`
 
-This enables ranking for geo-local queries like "developer in Latina" and discovery from local crawlers (Bing, DuckDuckGo).
+This enables ranking for geo-local queries like "cloud engineer in Latina" and discovery from local crawlers (Bing, DuckDuckGo).
 
 ---
 
@@ -48,14 +67,14 @@ This enables ranking for geo-local queries like "developer in Latina" and discov
 
 ### Step 1: Create the page file
 ```
-src/pages/my-feature.astro  (EN)
-src/pages/it/my-feature.astro  (IT)
+src/pages/my-feature.astro
 ```
+(No `/it` counterpart. See *Legacy `/it` URLs*.)
 
 ### Step 2: Set page props (frontmatter or layout props)
 ```astro
 <Layout
-  title="My Feature | Francesco James - Software Developer"
+  title="My Feature | Francesco James - Cloud Engineer"
   description="Keyword-rich description. Mention Latina/Roma/Italy if relevant. 155–160 chars."
   canonical="https://francescojames.dev/my-feature"
   justifyType="start"
@@ -65,7 +84,7 @@ src/pages/it/my-feature.astro  (IT)
 
 **Title rules:**
 - Format: `"<Section Name> | Francesco James - <Brand>"`
-- Must include locale-specific keywords (Latina, Rome, Italy / Italia, Roma, Latina for IT)
+- Must include locale-relevant keywords (Latina, Rome, Italy)
 - Keep under 60 chars if possible; Google typically truncates at ~60 in SERPs
 
 **Description rules:**
@@ -95,16 +114,11 @@ Inject it:
 
 **Why:** Reinforces page hierarchy for sitelink eligibility and breadcrumb SERP features.
 
-### Step 4: Create the IT translation
-- Translate title, description, and page content
-- Set `title` with Italian keywords
-- Set `canonical` to the `/it/` path variant
-- Update breadcrumb `name` to Italian
+### Step 4: Verify hreflang is auto-generated
+The layout automatically emits `<link rel="alternate" hreflang="en">` and
+`hreflang="x-default"` from the `canonical` prop. No manual action needed **unless you're doing something unconventional**.
 
-### Step 5: Verify hreflang is auto-generated
-The layout automatically emits `<link rel="alternate" hreflang="...">` based on the canonical URL. No manual action needed **unless you're doing something unconventional**.
-
-### Step 6: Test
+### Step 5: Test
 ```bash
 yarn astro check  # Verify no TypeScript errors
 yarn astro build  # Verify build passes
@@ -117,35 +131,28 @@ yarn astro build  # Verify build passes
 ### Title updates
 - Keep the format: `"<Section> | Francesco James - <Brand>"`
 - If changing the section name, update the breadcrumb `name` to match
-- Always update both EN and IT pages
 
 ### Description updates
-- Audit for keyword decay (do we still target "Latina developer"? Or should we add "Rome"?)
+- Audit for keyword decay (do we still target "cloud engineer in Latina"? Or should we add "Rome"?)
 - Keep it under 155–160 chars
 - Check that geo keywords are still contextually relevant
 
 ### Major content rewrites
-- If the page focus changes (e.g., "Services" → "Case Studies"), update `title`, `description`, and breadcrumb in **both locales**
+- If the page focus changes (e.g., "Services" → "Case Studies"), update `title`, `description`, and breadcrumb together
 - Consider if this should get its own `SiteNavigationElement` entry in the layout's `@graph` (see below)
 
 ### Canonical URL changes
 - **Never** move a page without a 301 redirect
 - Update `canonical` prop in the Layout call
-- Verify hreflang links automatically update (they should, since they derive from canonical)
+- Verify hreflang links automatically update (they do, since they derive from canonical)
+- If the old URL was an `/it/...` path, add it to the `redirects` map in `astro.config.mjs`
 
 ---
 
 ## Checklist: Adding a SiteNavigationElement (Sitelink hint)
 
-`SiteNavigationElement` nodes tell Google which pages are "important enough" to show as sitelinks beneath your brand name. Currently, only two are configured:
+`SiteNavigationElement` nodes tell Google which pages are "important enough" to show as sitelinks beneath your brand name. Currently, two are configured:
 
-**IT:**
-```json
-{ "@type": "SiteNavigationElement", "name": "Chi Sono", "url": "https://francescojames.dev/it/about" },
-{ "@type": "SiteNavigationElement", "name": "Skill", "url": "https://francescojames.dev/it/skills" }
-```
-
-**EN:**
 ```json
 { "@type": "SiteNavigationElement", "name": "About Me", "url": "https://francescojames.dev/about" },
 { "@type": "SiteNavigationElement", "name": "Skills", "url": "https://francescojames.dev/skills" }
@@ -157,7 +164,7 @@ yarn astro build  # Verify build passes
 - **Keep it sparse:** more isn't better
 
 ### How to add
-1. Edit `src/layouts/Layout.astro` (EN) and `src/layouts/it/Layout.astro` (IT)
+1. Edit `src/layouts/Layout.astro`
 2. Add a new object to the `@graph` array:
    ```json
    {
@@ -173,18 +180,18 @@ yarn astro build  # Verify build passes
 
 ## Layout Props Reference
 
-### Common props (both EN and IT layouts)
 ```astro
 <Layout
   title="string"              // Required; full <title> value
   description="string"        // Required; full meta description
   canonical="string"          // Required; absolute URL with https://
-  
+
   justifyType="string"        // Optional; Tailwind justify-* class (default: "center")
   alignType="string"          // Optional; Tailwind items-* class (default: "center")
   bgColor="string"            // Optional; Tailwind bg-* class (default: "base-200")
   showFab={boolean}           // Optional; show scroll-to-top button (default: false)
-  
+  fullBleed={boolean}         // Optional; drop the padded content wrapper (default: false)
+
   ogImage="string"            // Optional; absolute URL to social image (default: "/io.png")
   robots="string"             // Optional; robots meta value (default: "index, follow")
   ogType="string"             // Optional; OG type, e.g. "article" (default: "website")
@@ -204,10 +211,10 @@ yarn astro build  # Verify build passes
 ## JSON-LD Schema Strategy
 
 ### Person schema (every page)
-Emitted by both layouts. Key fields:
+Emitted by the layout. Key fields:
 - `@id`: stable IRI anchor (`https://francescojames.dev/#person`)
 - `name`, `givenName`, `familyName`
-- `jobTitle`: locale-specific (EN: "Freelance Software Developer", IT: "Sviluppatore Software Freelance")
+- `jobTitle`: `"Cloud Engineer"`
 - `address` + `areaServed`: local SEO signals
 - `knowsAbout`: array of skill/topic strings (used by Google for relevance)
 - `image`: headshot URL
@@ -220,7 +227,7 @@ Emitted by both layouts. Key fields:
   "@id": "https://francescojames.dev/#website",
   "name": "Francesco James Fanti",
   "url": "https://francescojames.dev",
-  "inLanguage": "en" or "it",
+  "inLanguage": "en",
   "author": { "@id": "https://francescojames.dev/#person" }
 }
 ```
@@ -257,15 +264,15 @@ Injected via `<Fragment slot="head">` in `BlogPostLayout.astro`. See existing la
 ```
 
 ### ❌ Mismatched hreflang links
-The layouts auto-derive alternate hreflang URLs from `canonical`. If you manually set `canonical` incorrectly, hreflang will be broken.
+The layout auto-derives alternate hreflang URLs from `canonical`. If you manually set `canonical` incorrectly, hreflang will be broken.
 
-Example: if EN page has `canonical="https://francescojames.dev/about"`, the layout will emit:
+A correct page emits only:
 ```html
 <link rel="alternate" hreflang="en" href="https://francescojames.dev/about" />
-<link rel="alternate" hreflang="it" href="https://francescojames.dev/it/about" />
+<link rel="alternate" hreflang="x-default" href="https://francescojames.dev/about" />
 ```
 
-This is automatic. Don't override it.
+This is automatic. Don't override it — and don't hand-add an `it` alternate.
 
 ### ❌ Forgotten `canonical` on new pages
 Every page **must** have an absolute canonical URL. Without it:
@@ -280,11 +287,11 @@ Only use `robots="noindex, follow"` for:
 
 **Never** use it on core pages (About, Skills, Homepage, Works).
 
-### ❌ Skipping Italian translations
-Every page needs an EN and IT version. Bilingual consistency is non-negotiable for:
-- hreflang correctness
-- User experience
-- SEO fairness (you don't want Google to suppress either language version as duplicate)
+### ❌ Reintroducing `/it` by half
+Do not add `src/pages/it/*` pages, an `it` locale in `astro.config.mjs`, or an `it` hreflang alternate on their own. Restoring Italian is a coordinated change (pages + components + layout + config + redirects) and starts from `old_locale_deprecated/README.md`.
+
+### ❌ Dead locale plumbing left behind
+Anything locale-shaped in a single-language site is a bug: no `localStorage`/cookie language preference, no `pathname.startsWith("/it")` branches, no `/it` links in content. The retired pieces are preserved as comments only for review — see `src/components/Whoami.astro` and `src/pages/404.astro`.
 
 ### ❌ Hardcoding sitelink names
 `SiteNavigationElement` names must **exactly match** the page title prefix. If you change a page title from "About Me" to "Who I Am", you must also update the schema.
@@ -299,36 +306,48 @@ yarn astro check        # TypeScript + Astro type checking
 yarn astro build        # Full build; detects missing props, broken hreflang, etc.
 ```
 
+Note: `old_locale_deprecated/` is excluded from `tsconfig.json`, so it is never type-checked or built.
+
 ### Before deploying
 1. Run `astro check` and fix all errors
 2. Run `astro build` and verify `dist/sitemap-index.xml` contains all pages
-3. Verify `dist/` has both EN and IT variants of each page (e.g., `about/index.html` and `it/about/index.html`)
+3. Verify `dist/` contains only English pages plus the legacy redirect stubs (`dist/it/index.html`, `dist/it/about/index.html`, `dist/it/skills/index.html`, `dist/it/works/index.html`) that point at their English counterpart
+4. Spot-check a built page's `<head>`: exactly one `hreflang="en"` and one `hreflang="x-default"`, no `hreflang="it"`
 
 ### Post-deployment validation
 - [Google Rich Results Test](https://search.google.com/test/rich-results) — check Person + WebSite + BreadcrumbList schemas
 - [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) — verify OG tags
-- [hreflang Tester](https://www.aleydasolis.com/english/international-seo-tools/hreflang-tags-generator/) — verify bilingual links
 - [Google Search Console](https://search.google.com/search-console/) — monitor indexation and sitelink appearance
+- Fetch an old `/it/...` URL and confirm it lands on the English page
 
 ---
 
 ## Keywords & Positioning
 
-### Primary keywords (Freelance / General)
-- **EN:** "software developer", "freelance developer", "full-stack developer"
-- **IT:** "sviluppatore software", "sviluppatore freelance", "sviluppatore full-stack"
+### Positioning
+Francesco is a **cloud engineer**: currently a **backup specialist** in an **Accenture internship**, inside a team working on **infrastructure and cloud transformation**. That is the primary identity for titles, descriptions and schema — not "software developer" and not "freelance". Frontend / full-stack work is presented as the background he brings to cloud work.
+
+The visible page copy is the author's own; this document only governs SEO strings (`title`, `description`, canonical, schema). Do not rewrite page body content to match the keywords below.
+
+### Primary keywords
+- "cloud engineer", "cloud engineer Italy", "cloud transformation", "infrastructure engineer"
+
+### Backup & recovery keywords (the current specialisation)
+- "backup specialist", "backup and recovery", "disaster recovery", "data backup", "backup strategy"
 
 ### Local keywords (Latina / Rome / Lazio)
-- **EN:** "developer in Latina", "developer in Rome", "developer Italy", "Latina software developer"
-- **IT:** "sviluppatore a Latina", "sviluppatore a Roma", "sviluppatore Italia", "sviluppatore freelance Latina"
+- "cloud engineer in Latina", "cloud engineer in Rome", "cloud engineer Italy", "Latina cloud engineer"
 
 ### Skill-based keywords
-- React, Astro, Node.js, Go, Python, TypeScript, Cloud Computing, etc.
+- Azure, AWS, Cloud Computing, Linux, Infrastructure, Networking, CI/CD, Terraform, Go, Python, TypeScript, React, Astro, Node.js
 
 These should appear naturally in:
 - Page descriptions
 - `knowsAbout` array in Person schema
 - Page body content
+
+### Retired Italian keywords (only when Italian returns)
+Kept for reference: "sviluppatore software", "sviluppatore freelance", "sviluppatore full-stack", "sviluppatore a Latina", "sviluppatore a Roma", "sviluppatore Italia". Do not target these from English pages.
 
 ---
 
@@ -338,6 +357,7 @@ These should appear naturally in:
 - Audit SERP appearance in Google Search Console (are we getting impressions? Clicks?)
 - Check if sitelinks are appearing below brand SERP result
 - Verify no new crawl errors
+- Check Search Console "Pages" for 404s under `/it/` (a 404 there means a redirect entry is missing)
 
 ### Quarterly
 - Run [Google Rich Results Test](https://search.google.com/test/rich-results) on homepage
@@ -349,15 +369,16 @@ These should appear naturally in:
 - Evaluate if new `SiteNavigationElement` entries should be added (new structural pillars?)
 - Update the `knowsAbout` array if skill set has changed
 - Refresh location coordinates if you move (Latina coordinates: `41.4661, 12.9038`)
+- Re-read `old_locale_deprecated/README.md` and decide whether the Italian site should come back
 
 ---
 
 ## Contact & Escalation
 
 If you encounter an SEO issue not covered in this guide:
-1. Check `seo-improvements.md` for the reasoning behind current implementations
+1. Check `agents/seo-improvements.md` for the reasoning behind current implementations
 2. Run `astro check` and `astro build` to isolate technical errors
 3. Use Google Search Console to identify crawl/indexing issues
 4. Consult schema.org documentation if adding new schema types
 
-Keep both documents in sync during maintenance.
+Keep this document and `agents/seo-improvements.md` in sync during maintenance.

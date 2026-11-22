@@ -168,7 +168,7 @@ A `<script type="application/ld+json">` block is injected in every page via `set
 }
 ```
 
-The IT layout uses `"inLanguage": "it"` and `"jobTitle": "Sviluppatore Freelance"`.
+The IT layout uses `"inLanguage": "it"` and `"jobTitle": "Sviluppatore Freelance"`. *(The IT locale has since been retired — see `old_locale_deprecated/README.md`.)*
 
 ---
 
@@ -302,11 +302,14 @@ sitemap({
 The layout default titles now carry the brand identity used as the target SERP headline:
 
 ```
-EN: "Francesco James - Software Developer"
+EN: "Francesco James - Software Developer"   *(superseded in Round 3 → "Francesco James - Cloud Engineer")*
 IT: "Francesco James - Sviluppatore Software"
 ```
 
 All inner pages use the format `"<Section> | Francesco James - <Title>"` so Google's sitelinks generator can extract clean section labels.
+
+> Round 3 note: the live brand is now `Francesco James - Cloud Engineer`; the table below is kept as the historical record of the bilingual era.
+
 
 ---
 
@@ -457,3 +460,57 @@ To verify structured data and OG tags after deploying, use:
 - [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
 - [Twitter Card Validator](https://cards-dev.twitter.com/validator)
 - [hreflang Tags Testing Tool](https://www.aleydasolis.com/english/international-seo-tools/hreflang-tags-generator/)
+
+---
+
+# SEO Round 3 — Brand repositioning to "Cloud Engineer" (single locale)
+
+**Date:** November 2026
+**Scope:** `src/layouts/Layout.astro`, `src/pages/*.astro`
+
+**Goal:** Retire the "software developer" identity in every SEO string and position
+Francesco as a **cloud engineer** — currently a **backup specialist** on an
+**Accenture internship** in a team working on **infrastructure and cloud
+transformation**. Page body copy was deliberately left untouched; only metadata
+and structured data changed.
+
+## 17. Brand string
+
+| Surface | Before | After |
+|---|---|---|
+| Layout default `<title>` | `Francesco James - Software Developer` | `Francesco James - Cloud Engineer` |
+| Homepage `<title>` | `Francesco James - Web and Cloud Developer` | `Francesco James - Cloud Engineer` |
+| Person `jobTitle` | `Freelance Software Developer` | `Cloud Engineer` |
+
+No "freelance" wording remains in any SEO string: `areaServed` / local signals
+stay, but availability claims ("available for projects in Rome") were dropped
+because they no longer describe the current role.
+
+## 18. Person schema `description` + `knowsAbout`
+
+`description` now reads as cloud engineering with a backup/recovery focus and a
+frontend/full-stack background.
+
+`knowsAbout` dropped the *role* keywords (`Software Developer Latina`,
+`Freelance Developer Rome`) and gained domain topics:
+`Cloud Engineer Latina`, `Cloud Transformation Italy`, `Infrastructure`,
+`Backup and Recovery`, `Disaster Recovery`, `Cloud Migration`, `Linux`.
+Technical topics (JS/TS/React/Astro/Node/Go/Python/Cloud Computing) were kept —
+they are the background, not the identity.
+
+## 19. Page-level metadata
+
+| Page | Change |
+|---|---|
+| `index.astro` | title → Cloud Engineer; description rewritten around infrastructure/cloud transformation + backup and recovery |
+| `about.astro` | description: "developer bridging web technologies..." → cloud engineer, infrastructure/cloud transformation, backup and recovery |
+| `skills.astro` | description leads with cloud infrastructure and backup/recovery before the stack list |
+| `works.astro`, `blog.astro` | unchanged (portfolio/blog, no role claim) |
+
+## 20. Locale note
+
+These edits land on the **English-only** site: the `it` locale was retired, its
+files live in `old_locale_deprecated/`, and every legacy `/it/*` URL redirects to
+its English counterpart. `hreflang` is `en` + `x-default` only. Any Italian copy
+of this repositioning (e.g. "Cloud Engineer", "specialista backup") belongs to a
+future resurrection of the locale, not to this round.

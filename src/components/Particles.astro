@@ -1,5 +1,4 @@
 ---
-import Particles from "@tsparticles/astro";
 import type { ISourceOptions } from "@tsparticles/engine";
 
 interface Props {
@@ -15,7 +14,7 @@ const options: ISourceOptions = {
   background: { color: "transparent" },
 
   particles: {
-    number: { value: 130, density: { enable: true, width: 900, height: 900 } },
+    number: { value: 50, density: { enable: false } },
     color: { value: ["#a5d8ff", "#99f6e4"] },
     opacity: { value: opacity },
     size: { value: { min: 1, max: 3 } },
@@ -32,8 +31,19 @@ const options: ISourceOptions = {
 
   interactivity: {
     detectsOn: "window",
-    events: { onHover: { enable: true, mode: "grab" } },
-    modes: { grab: { distance: 200, links: { opacity: 0.1 } } },
+    events: {
+      onHover: { enable: true, mode: "grab" },
+      onDiv: {
+        enable: true,
+        selectors: ".hero-particle-exclusion",
+        mode: "repulse",
+        type: "circle",
+      },
+    },
+    modes: {
+      grab: { distance: 200, links: { opacity: 0.1 } },
+      repulse: { speed: 0.2, factor: 10, maxSpeed: 2 },
+    },
   },
 
   responsive: [
@@ -41,26 +51,29 @@ const options: ISourceOptions = {
       maxWidth: 768,
       options: {
         particles: {
-          number: { value: 40 },
+          number: { value: 20 },
           links: { distance: 120 },
           move: { speed: 0.2 },
         },
-        interactivity: { events: { onHover: { enable: false } } },
       },
     },
   ],
 };
+
+// Serialized once on the server; the client script below reads it back.
+const serializedOptions = JSON.stringify(options);
 ---
 
-<!-- The engine looks up this ID; without it, it appends a canvas to body. -->
+<!--
+  The engine looks up this ID on the client and paints into it. The canvas is
+  created by tsParticles itself, so this element must stay empty.
+-->
 <div
   id={id}
   class={`particles-background ${className}`}
-
+  data-particles-options={serializedOptions}
   aria-hidden="true"
->
-  <Particles id={id} options={options} />
-</div>
+></div>
 
 <style is:global>
   .particles-background {
@@ -70,7 +83,6 @@ const options: ISourceOptions = {
     pointer-events: none;
   }
 
-  .particles-background astro-particles,
   .particles-background canvas {
     position: absolute;
     inset: 0;
@@ -78,13 +90,128 @@ const options: ISourceOptions = {
     width: 100%;
     height: 100%;
   }
+
+  /* Belt and braces: never show the canvas when the OS asks for reduced motion. */
+  @media (prefers-reduced-motion: reduce) {
+    .particles-background {
+      display: none;
+    }
+  }
 </style>
 
 <script>
-  import { initParticlesEngine } from "@tsparticles/astro";
+  import { tsParticles } from "@tsparticles/engine";
   import { loadSlim } from "@tsparticles/slim";
+  import type { Container } from "@tsparticles/engine";
 
-  await initParticlesEngine(async (engine) => {
-    await loadSlim(engine);
+  const STORAGE_KEY = "particles-enabled";
+
+  // Loaded once per page: register the slim bundle, then initialise the engine.
+  // Everything stays in this one module, so there is no init/upgrade race.
+  const engineReady = (async () => {
+    await loadSlim(tsParticles);
+
+    if (typeof tsParticles.init === "function") {
+      await tsParticles.init();
+    }
+  })();
+
+  const containers = (): HTMLElement[] =>
+    Array.from(document.querySelectorAll<HTMLElement>("[data-particles-options]"));
+
+  const mount = async (element: HTMLElement) => {
+    const serialized = element.dataset.particlesOptions;
+    const id = element.id;
+
+    if (!serialized || !id || element.dataset.mounted === "1") return;
+
+    element.dataset.mounted = "1";
+
+    await engineReady;
+
+    // Wait for layout so the canvas gets the real hero size, not 0x0.
+    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+
+    try {
+      await tsParticles.load({ id, options: JSON.parse(serialized) });
+    } catch (error) {
+      console.error("[particles] failed to mount", error);
+    }
+  };
+
+  const syncToggleButton = (enabled: boolean) => {
+    const button = document.getElementById("particles-toggle");
+
+    if (!button) return;
+
+    button.setAttribute("aria-pressed", String(enabled));
+    button.textContent = enabled ? "Disable particles" : "Enable particles";
+  };
+
+  const setEnabled = async (next: boolean) => {
+    enabled = next;
+
+    try {
+      localStorage.setItem(STORAGE_KEY, next ? "on" : "off");
+    } catch {
+      // storage unavailable (private mode) — session-only toggle
+    }
+
+    for (const element of containers()) {
+      if (next) {
+        element.style.display = "";
+        element.dataset.mounted = "";
+        await mount(element);
+      } else {
+        element.style.display = "none";
+      }
+    }
+
+    if (!next) {
+      tsParticles.items.forEach((container: Container) => container.destroy());
+    }
+
+    syncToggleButton(next);
+  };
+
+  // Accessibility: honour the OS-level reduced-motion preference unless the
+  // visitor made an explicit choice with the footer toggle.
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  let stored: string | null = null;
+
+  try {
+    stored = localStorage.getItem(STORAGE_KEY);
+  } catch {
+    stored = null;
+  }
+
+  let enabled = stored === "on" || (stored === null && !reducedMotion.matches);
+
+  const boot = () => void setEnabled(enabled);
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot, { once: true });
+  } else {
+    boot();
+  }
+
+  // Live-follow the OS preference when no explicit choice was stored.
+  reducedMotion.addEventListener("change", (event) => {
+    let current: string | null = null;
+
+    try {
+      current = localStorage.getItem(STORAGE_KEY);
+    } catch {
+      current = null;
+    }
+
+    if (current === null) {
+      void setEnabled(!event.matches);
+    }
   });
+
+  document
+    .getElementById("particles-toggle")
+    ?.addEventListener("click", () => void setEnabled(!enabled));
 </script>

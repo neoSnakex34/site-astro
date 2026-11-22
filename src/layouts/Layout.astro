@@ -5,8 +5,8 @@ import "src/styles/global.css";
 const siteurl = "https://francescojames.dev";
 const { justifyType, alignType, showFab = false, bgColor, fullBleed = false,
 
-	title = "Francesco James - Software Developer",
-	description = "Freelance software developer based in Latina, Italy. Available for frontend, full-stack and cloud-native projects in Rome and across Italy.",
+	title = "Francesco James - Cloud Engineer",
+	description = "Cloud engineer based in Latina, Italy, working in infrastructure and cloud transformation with a focus on backup and recovery, on top of a frontend and full-stack background.",
 	canonical,
 	ogImage = `${siteurl}/io.png`,
 	robots = "index, follow",
@@ -16,7 +16,9 @@ const { justifyType, alignType, showFab = false, bgColor, fullBleed = false,
 
 } = Astro.props;
 
-const itCanonical = canonical ? canonical.replace("francescojames.dev", "francescojames.dev/it") : undefined;
+// English-only: hreflang is emitted for `en` plus `x-default`, both pointing at
+// the canonical URL. The old `itCanonical` alternate was retired with the
+// Italian locale (legacy /it/* URLs redirect, see astro.config.mjs).
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -30,8 +32,8 @@ const jsonLd = {
       "url": siteurl,
       "image": `${siteurl}/io.png`,
       "sameAs": ["https://github.com/neosnakex34"],
-      "jobTitle": "Freelance Software Developer",
-      "description": "Freelance software developer based in Latina, Italy. Specialised in frontend, full-stack and cloud-native solutions. Available for projects in Rome and across Italy.",
+      "jobTitle": "Cloud Engineer",
+      "description": "Cloud engineer based in Latina, Italy. Works in infrastructure and cloud transformation with a focus on backup and recovery, backed by a frontend, full-stack and cloud-native development background.",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Latina",
@@ -39,7 +41,7 @@ const jsonLd = {
         "addressCountry": "IT"
       },
       "areaServed": ["Latina", "Roma", "Italy"],
-      "knowsAbout": ["JavaScript", "TypeScript", "React", "Astro", "Node.js", "Go", "Python", "Cloud Computing", "Frontend Development", "Full-Stack Development", "Software Developer Latina", "Freelance Developer Rome", "Web Development Italy"]
+      "knowsAbout": ["JavaScript", "TypeScript", "React", "Astro", "Node.js", "Go", "Python", "Cloud Computing", "Cloud Engineer Latina", "Cloud Transformation Italy", "Infrastructure", "Backup and Recovery", "Disaster Recovery", "Cloud Migration", "Linux", "Frontend Development", "Full-Stack Development", "Web Development Italy"]
     },
     {
       "@type": "WebSite",
@@ -69,7 +71,7 @@ const jsonLd = {
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 
-		<script type="text/javascript" src="https://embeds.iubenda.com/widgets/b4d01a1b-7a9f-4fb5-a45a-79966a6834fd.js"></script>
+		<script type="text/javascript" src="https://embeds.iubenda.com/widgets/91906842-4017-4ca7-a1cd-d412489ea384.js"></script>
 
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
@@ -87,7 +89,6 @@ const jsonLd = {
 
 		{canonical && <link rel="canonical" href={canonical} />}
 		{canonical && <link rel="alternate" hreflang="en" href={canonical} />}
-		{itCanonical && <link rel="alternate" hreflang="it" href={itCanonical} />}
 		{canonical && <link rel="alternate" hreflang="x-default" href={canonical} />}
 
 		<meta property="og:type" content={ogType} />
@@ -174,6 +175,14 @@ const jsonLd = {
 
 
 	document.addEventListener('DOMContentLoaded', () => {
+
+	// The site is English-only. Purge the legacy locale preference that the
+	// retired LocaleSelector used to write (see old_locale_deprecated/).
+	try {
+		localStorage.removeItem('lang');
+	} catch {
+		// localStorage can be unavailable (private mode / blocked storage)
+	}
 
 
 	const fabTop: HTMLElement | null = document.getElementById('fab-top-container');

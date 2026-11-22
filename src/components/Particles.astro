@@ -49,9 +49,10 @@ const options: ISourceOptions = {
   responsive: [
     {
       maxWidth: 768,
+      mode: "canvas",
       options: {
         particles: {
-          number: { value: 20 },
+          number: { value: 60 },
           links: { distance: 120 },
           move: { speed: 0.2 },
         },
@@ -89,6 +90,16 @@ const serializedOptions = JSON.stringify(options);
     display: block;
     width: 100%;
     height: 100%;
+    animation: particles-fade-in 800ms ease-out both;
+  }
+
+  @keyframes particles-fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   /* Belt and braces: never show the canvas when the OS asks for reduced motion. */
@@ -102,6 +113,7 @@ const serializedOptions = JSON.stringify(options);
 <script>
   import { tsParticles } from "@tsparticles/engine";
   import { loadSlim } from "@tsparticles/slim";
+  import { loadResponsivePlugin } from "@tsparticles/plugin-responsive";
   import type { Container } from "@tsparticles/engine";
 
   const STORAGE_KEY = "particles-enabled";
@@ -110,6 +122,7 @@ const serializedOptions = JSON.stringify(options);
   // Everything stays in this one module, so there is no init/upgrade race.
   const engineReady = (async () => {
     await loadSlim(tsParticles);
+    await loadResponsivePlugin(tsParticles);
 
     if (typeof tsParticles.init === "function") {
       await tsParticles.init();

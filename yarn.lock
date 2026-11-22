@@ -1633,6 +1633,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tsparticles/plugin-responsive@npm:4.6.0":
+  version: 4.6.0
+  resolution: "@tsparticles/plugin-responsive@npm:4.6.0"
+  peerDependencies:
+    "@tsparticles/engine": 4.6.0
+  checksum: 10c0/3b38e1e5c9d9e1e4e109a2ce3f98fb6582ff24ca2e87b972cfbe21a7384568bdbb57486dc827bc8fd55bafc407841aedd4fdd289a058834a93537eb22e34d194
+  languageName: node
+  linkType: hard
+
 "@tsparticles/plugin-rgb-color@npm:4.6.0":
   version: 4.6.0
   resolution: "@tsparticles/plugin-rgb-color@npm:4.6.0"
@@ -5246,6 +5255,7 @@ __metadata:
     "@tailwindcss/vite": "npm:^4.1.17"
     "@tsparticles/astro": "npm:^4.6.0"
     "@tsparticles/engine": "npm:^4.6.0"
+    "@tsparticles/plugin-responsive": "npm:4.6.0"
     "@tsparticles/slim": "npm:^4.6.0"
     "@types/node": "npm:^24.10.1"
     astro: "npm:^5.16.2"

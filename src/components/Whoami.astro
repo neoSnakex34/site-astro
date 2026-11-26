@@ -29,8 +29,8 @@ const ariaLabel = "Terminal: running whoami command displaying my name";
   /* Pure CSS sequence, no JS. Font is monospace so 6ch = "whoami".
      Timeline:
        0.2s  typing starts (0.4s)
-       0.6s  command-line cursor appears, blinks 2x (on+off) at 2s rate
-       4.4s  during the 2nd off, just before it ends = "enter pressed":
+       0.6s  command-line cursor appears, blinks 1x (on+off) at 2s rate
+       2.4s  during the off phase, just before it ends = "enter pressed":
              name appears instantly, command cursor is gone,
              fresh prompt line appears */
   .typewriter {
@@ -46,33 +46,31 @@ const ariaLabel = "Terminal: running whoami command displaying my name";
     to { width: 6ch; }
   }
 
-  /* 2 complete blinks (on+off each), 1s on / 1s off to match the prompt
+  /* 1 complete blink (on+off), 1s on / 1s off to match the prompt
      cursor rate. step-end holds each keyframe until the next, so:
-     on 0.6-1.6s, off 1.6-2.6s, on 2.6-3.6s, off 3.6-4.6s.
-     At 4.6s the 2nd blink ends = "enter pressed". */
+     on 0.6-1.6s, off 1.6-2.6s.
+     At 2.6s the blink ends = "enter pressed". */
   .cmd-cursor {
     opacity: 0;
-    animation: cmd-cursor-life 4s step-end 0.6s 1 forwards;
+    animation: cmd-cursor-life 2s step-end 0.6s 1 forwards;
   }
 
   @keyframes cmd-cursor-life {
     0%   { opacity: 1; }
-    25%  { opacity: 0; }
-    50%  { opacity: 1; }
-    75%  { opacity: 0; }
+    50%  { opacity: 0; }
     100% { opacity: 0; }
   }
 
-  /* 0s duration = appears instantly, 200ms before the 2nd blink's off
+  /* 0s duration = appears instantly, 200ms before the blink's off
      phase ends, so the name shows while the cursor is already off. */
   .output-line {
     opacity: 0;
-    animation: output-in 0s linear 4.4s forwards;
+    animation: output-in 0s linear 2.4s forwards;
   }
 
   .prompt-line {
     opacity: 0;
-    animation: output-in 0s linear 4.4s forwards;
+    animation: output-in 0s linear 2.4s forwards;
   }
 
   @keyframes output-in {

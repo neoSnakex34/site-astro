@@ -5,7 +5,7 @@ source code for francescojames.dev — my portfolio and blog
 ## what's in here
 
 my personal website. i'm francesco, a cloud engineer and developer from
-latina, italy. the about page has the longer story and my cv, plus there
+italy. the about page has the longer story and my cv, plus there
 are works, skills and a few blog posts.
 
 ## tech stack

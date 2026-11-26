@@ -20,11 +20,13 @@ export default defineConfig({
     "/it/about": "/about",
     "/it/skills": "/skills",
     "/it/works": "/works",
-    // CVs live on the Scaleway bucket (public-read under cv/*, served
-    // inline). Cloudflare redirects were removed; these stubs keep the
-    // short URLs working.
-    "/cv": "https://site-astro-cv.s3.fr-par.scw.cloud/cv/cv.pdf",
-    "/cv-ita": "https://site-astro-cv.s3.fr-par.scw.cloud/cv/cv-ita.pdf",
+    // CVs live in the private Scaleway bucket (CI uploads) and are
+    // served by the francescojames-cv Cloudflare Pages project at
+    // cv.francescojames.dev, so Cloudflare's edge absorbs link
+    // hammering and the bucket is never publicly readable. PDFs are
+    // served inline. These stubs keep the short URLs working.
+    "/cv": "https://cv.francescojames.dev/cv/cv.pdf",
+    "/cv-ita": "https://cv.francescojames.dev/cv/cv-ita.pdf",
   },
   vite: {
     plugins: [tailwindcss()],

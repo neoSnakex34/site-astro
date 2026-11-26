@@ -20,6 +20,11 @@ export default defineConfig({
     "/it/about": "/about",
     "/it/skills": "/skills",
     "/it/works": "/works",
+    // CVs live on the Scaleway bucket (public-read under cv/*, served
+    // inline). Cloudflare redirects were removed; these stubs keep the
+    // short URLs working.
+    "/cv": "https://site-astro-cv.s3.fr-par.scw.cloud/cv/cv.pdf",
+    "/cv-ita": "https://site-astro-cv.s3.fr-par.scw.cloud/cv/cv-ita.pdf",
   },
   vite: {
     plugins: [tailwindcss()],

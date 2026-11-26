@@ -4,9 +4,9 @@ source code for francescojames.dev — my portfolio and blog
 
 ## what's in here
 
-the landing page does this little customer-developer chat bit, supposed to be a funny way to show what i do. there's also an about section where i talk about myself as a jack of all trades: frontend work, full-stack stuff, cloud things. and hardware. i like fixing hardware.
-
-the blog is there too if you're into that.
+my personal website. i'm francesco, a cloud engineer and developer from
+latina, italy. the about page has the longer story and my cv, plus there
+are works, skills and a few blog posts.
 
 ## tech stack
 

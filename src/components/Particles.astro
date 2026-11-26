@@ -90,7 +90,7 @@ const serializedOptions = JSON.stringify(options);
     display: block;
     width: 100%;
     height: 100%;
-    animation: particles-fade-in 800ms ease-out both;
+    animation: particles-fade-in 200ms ease-out both;
   }
 
   @keyframes particles-fade-in {
@@ -118,11 +118,14 @@ const serializedOptions = JSON.stringify(options);
 
   const STORAGE_KEY = "particles-enabled";
 
-  // Loaded once per page: register the slim bundle, then initialise the engine.
-  // Everything stays in this one module, so there is no init/upgrade race.
+  // Loaded once per page: register the slim bundle and the responsive plugin
+  // in parallel, then initialise the engine. Everything stays in this one
+  // module, so there is no init/upgrade race.
   const engineReady = (async () => {
-    await loadSlim(tsParticles);
-    await loadResponsivePlugin(tsParticles);
+    await Promise.all([
+      loadSlim(tsParticles),
+      loadResponsivePlugin(tsParticles),
+    ]);
 
     if (typeof tsParticles.init === "function") {
       await tsParticles.init();
@@ -141,9 +144,6 @@ const serializedOptions = JSON.stringify(options);
     element.dataset.mounted = "1";
 
     await engineReady;
-
-    // Wait for layout so the canvas gets the real hero size, not 0x0.
-    await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
 
     try {
       await tsParticles.load({ id, options: JSON.parse(serialized) });

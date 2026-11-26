@@ -26,6 +26,20 @@ export default defineConfig({
     ssr: {
       noExternal: ["@tsparticles/astro"],
     },
+    build: {
+      rollupOptions: {
+        output: {
+          // Give the Particles component script a stable, hash-free filename
+          // so Layout.astro can <link rel="modulepreload"> it. The browser
+          // then starts downloading the tsparticles chunks during <head>
+          // parsing instead of waiting until the <script> tag in <body>.
+          entryFileNames: (chunkInfo) =>
+            chunkInfo.name.includes("Particles")
+              ? "_astro/particles.js"
+              : "_astro/[name].[hash].js",
+        },
+      },
+    },
     server: {
       watch: {
         usePolling: true,

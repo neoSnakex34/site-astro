@@ -75,6 +75,12 @@ const jsonLd = {
 
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<link rel="sitemap" href="/sitemap-index.xml" />
+		<!-- Preload the particles script (stable name set in astro.config.mjs) so the
+		     browser starts fetching it and its tsparticles dependencies during head
+		     parsing, not when the module <script> tag is reached in the body.
+		     Production only: in dev mode Vite serves the script at a different URL,
+		     so this path would 404. -->
+		{import.meta.env.PROD && <link rel="modulepreload" href="/_astro/particles.js" />}
 
 		<title>{title}</title>
 		<meta name="description" content={description} />

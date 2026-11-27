@@ -247,7 +247,7 @@ A `BlogPosting` JSON-LD schema is also injected via the new `head` slot:
   "image": "...",
   "author": { "@type": "Person", "name": "...", "url": "https://francescojames.dev" },
   "datePublished": "YYYY-MM-DD",
-  "url": "https://francescojames.dev/posts/...",
+  "url": "https://francescojames.dev/blog/...",
   "publisher": { "@type": "Person", "name": "Francesco James Fanti", "url": "https://francescojames.dev" }
 }
 ```
@@ -514,3 +514,17 @@ files live in `old_locale_deprecated/`, and every legacy `/it/*` URL redirects t
 its English counterpart. `hreflang` is `en` + `x-default` only. Any Italian copy
 of this repositioning (e.g. "Cloud Engineer", "specialista backup") belongs to a
 future resurrection of the locale, not to this round.
+
+## 21. Post URLs moved from `/posts/` to `/blog/`
+
+Posts now live under `src/pages/blog/` so a post resolves at
+`/blog/<slug>` instead of `/posts/<slug>`, keeping the blog index (`/blog`)
+and its posts under one URL prefix. `blog.astro` globs `src/pages/blog/*.md`,
+and `BlogPostLayout.astro` derives `canonical` from `Astro.url.pathname`, so
+canonicals, hreflang and the sitemap followed the move with no extra edits.
+
+The legacy URLs stay alive: the `redirects` map in `astro.config.mjs` was
+converted from object syntax to array syntax (required for the dynamic
+`{ from: "/posts/:post", to: "/blog/:post" }` rule; the two syntaxes cannot be
+mixed) and every existing entry was preserved verbatim. Static build still
+emits meta-refresh stubs for the old paths.

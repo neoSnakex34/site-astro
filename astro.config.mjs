@@ -15,19 +15,24 @@ export default defineConfig({
   },
   // Static build: Astro emits a small HTML page per entry with a <meta refresh>
   // and a <link rel="canonical"> so crawlers follow the hop.
-  redirects: {
-    "/it": "/",
-    "/it/about": "/about",
-    "/it/skills": "/skills",
-    "/it/works": "/works",
+  // Array syntax (not the object map) because the /posts/:post rule needs a
+  // dynamic param, and the two syntaxes cannot be mixed.
+  redirects: [
+    { from: "/it", to: "/" },
+    { from: "/it/about", to: "/about" },
+    { from: "/it/skills", to: "/skills" },
+    { from: "/it/works", to: "/works" },
+    // Posts used to live under /posts/<slug>; they now live under
+    // /blog/<slug>. Keep the old URLs resolving (they are indexed/linked).
+    { from: "/posts/:post", to: "/blog/:post" },
     // CVs live in the private Scaleway bucket (CI uploads) and are
     // served by the francescojames-cv Cloudflare Pages project at
     // cv.francescojames.dev, so Cloudflare's edge absorbs link
     // hammering and the bucket is never publicly readable. PDFs are
     // served inline. These stubs keep the short URLs working.
-    "/cv": "https://cv.francescojames.dev/cv/cv.pdf",
-    "/cv-ita": "https://cv.francescojames.dev/cv/cv-ita.pdf",
-  },
+    { from: "/cv", to: "https://cv.francescojames.dev/cv/cv.pdf" },
+    { from: "/cv-ita", to: "https://cv.francescojames.dev/cv/cv-ita.pdf" },
+  ],
   vite: {
     plugins: [tailwindcss()],
     ssr: {

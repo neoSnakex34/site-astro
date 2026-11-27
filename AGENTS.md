@@ -16,6 +16,13 @@ Use **Conventional Commits** for every commit:
 imperative and the subject concise, without a final period. Add a body only
 when it provides useful context beyond the subject.
 
+Every commit is co-authored by the site owner, in addition to any agent
+attribution:
+
+```
+Co-Authored-By: devsnakex34 <fantifrancescojames@gmail.com>
+```
+
 ## Core Principles
 
 ### 1. No external SEO libraries

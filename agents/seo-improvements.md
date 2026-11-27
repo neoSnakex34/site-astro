@@ -523,8 +523,11 @@ and its posts under one URL prefix. `blog.astro` globs `src/pages/blog/*.md`,
 and `BlogPostLayout.astro` derives `canonical` from `Astro.url.pathname`, so
 canonicals, hreflang and the sitemap followed the move with no extra edits.
 
-The legacy URLs stay alive: the `redirects` map in `astro.config.mjs` was
-converted from object syntax to array syntax (required for the dynamic
-`{ from: "/posts/:post", to: "/blog/:post" }` rule; the two syntaxes cannot be
-mixed) and every existing entry was preserved verbatim. Static build still
-emits meta-refresh stubs for the old paths.
+The legacy URLs stay alive: the `redirects` map in `astro.config.mjs` gained
+explicit entries (`"/posts/post-1": "/blog/post-1"`, etc.). Astro only accepts
+an object map for `redirects` (the array `from`/`to` syntax is not supported —
+it fails `astro check` with `Expected type "object", received "array"`), so
+there is no dynamic `/posts/:post` rule; only posts that were actually
+published under `/posts/` get an entry, and new posts go straight to
+`/blog/<slug>` without needing one. Static build still emits meta-refresh
+stubs for the old paths.

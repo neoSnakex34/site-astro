@@ -29,8 +29,9 @@ const ariaLabel = "Terminal: running whoami command displaying my name";
   /* Pure CSS sequence, no JS. Font is monospace so 6ch = "whoami".
      Timeline:
        0.2s  typing starts (0.4s)
-       0.6s  command-line cursor appears, blinks 1x (on+off) at 2s rate
-       2.4s  during the off phase, just before it ends = "enter pressed":
+       0.6s  typing done: command cursor appears solid (a real cmd
+             cursor does not blink while you type)
+       1.2s  "enter pressed", about 0.6s after the last keystroke:
              name appears instantly, command cursor is gone,
              fresh prompt line appears */
   .typewriter {
@@ -46,31 +47,34 @@ const ariaLabel = "Terminal: running whoami command displaying my name";
     to { width: 6ch; }
   }
 
-  /* 1 complete blink (on+off), 1s on / 1s off to match the prompt
-     cursor rate. step-end holds each keyframe until the next, so:
-     on 0.6-1.6s, off 1.6-2.6s.
-     At 2.6s the blink ends = "enter pressed". */
+  /* Solid (no blink) for its whole short life: visible from the end
+     of typing until enter is pressed 0.6s later. Each 0s animation
+     just flips opacity once at its delay, so the cursor pops in at
+     0.6s and pops out at 1.2s. */
   .cmd-cursor {
     opacity: 0;
-    animation: cmd-cursor-life 2s step-end 0.6s 1 forwards;
+    animation:
+      cmd-cursor-in 0s linear 0.6s forwards,
+      cmd-cursor-out 0s linear 1.2s forwards;
   }
 
-  @keyframes cmd-cursor-life {
-    0%   { opacity: 1; }
-    50%  { opacity: 0; }
-    100% { opacity: 0; }
+  @keyframes cmd-cursor-in {
+    to { opacity: 1; }
   }
 
-  /* 0s duration = appears instantly, 200ms before the blink's off
-     phase ends, so the name shows while the cursor is already off. */
+  @keyframes cmd-cursor-out {
+    to { opacity: 0; }
+  }
+
+  /* 0s duration = appears instantly the moment enter is "pressed". */
   .output-line {
     opacity: 0;
-    animation: output-in 0s linear 2.4s forwards;
+    animation: output-in 0s linear 1.2s forwards;
   }
 
   .prompt-line {
     opacity: 0;
-    animation: output-in 0s linear 2.4s forwards;
+    animation: output-in 0s linear 1.2s forwards;
   }
 
   @keyframes output-in {

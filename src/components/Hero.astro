@@ -23,8 +23,9 @@ const {
 } = Astro.props;
 
 ---
-<div class="hero relative isolate overflow-hidden w-full bg-base-200 min-h-[calc(100svh-4rem)] lg:min-h-[calc(100dvh-5.5rem)]">
+<div class="hero relative isolate overflow-hidden w-full bg-base-200 min-h-[calc(100svh-4rem)]">
   <Particles opacity={particleOpacity} />
+  <div class="hero-flare" aria-hidden="true"></div>
 
   <div class="hero-content hero-particle-exclusion relative z-10 text-center">
     <div class="max-w-md">
@@ -42,6 +43,26 @@ const {
     </div>
   </div>
 </div>
+
+<style>
+  /* Soft flare anchored to the bottom-right corner of the hero: a radial
+     glow slightly brighter than the particle blue (#a5d8ff), fading to
+     transparent well before mid-screen. Painted above the particle canvas
+     and below the hero content (z-10), pointer-transparent, static (present
+     at first paint, no animation). */
+  .hero-flare {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      circle 60vmax at 100% 100%,
+      rgba(201, 231, 255, 0.20),
+      rgba(165, 216, 255, 0.10) 40%,
+      transparent 70%
+    );
+  }
+</style>
 
 
 <script>

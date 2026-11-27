@@ -29,7 +29,7 @@ Here is one of my favourites!
 
 ---
 
-![an illustration made by Smony](/blog/inPostPic/smony-porcodiaz.jpg)
+![an illustration made by Smony](/blog/inPostPic/smony_draw.jpg)
 
 ---
 

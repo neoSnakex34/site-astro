@@ -73,8 +73,7 @@ container.
 ---
 Then, all of a sudden I couldn't get enough of that incredible world. I started
 segmenting my network into different VLANs, I delved into firewall rules and experimenting with mesh VPN
-technologies and so on and so on, until I finally created a secondary - offsite
-- node for the lab.
+technologies and so on and so on, until I finally created a secondary - offsite - node for the lab.
 
 ---
 Introducing respighi: 

@@ -73,6 +73,7 @@ const serializedOptions = JSON.stringify(options);
   id={id}
   class={`particles-background ${className}`}
   data-particles-options={serializedOptions}
+  style={`--particles-placeholder-opacity: ${opacity}`}
   aria-hidden="true"
 ></div>
 
@@ -82,6 +83,33 @@ const serializedOptions = JSON.stringify(options);
     inset: 0;
     z-index: 0;
     pointer-events: none;
+  }
+
+  /* Static stand-in for the particle field, painted at first render so the
+     hero looks complete before the canvas finishes booting. The live canvas
+     is a child element and paints on top, so its 200ms fade-in becomes a
+     seamless takeover instead of a pop-in. Pseudo-element (not a child), so
+     the container stays empty for tsParticles' canvas. Sits inside the same
+     stacking context, so the toggle (display: none) and the reduced-motion
+     rule below hide it together with the canvas.
+     The mask carves a soft elliptical hole around the hero text, the same
+     zone the live particles are repulsed from, so the dots look emitted
+     out of the text rather than sprayed over it. */
+  .particles-background::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle, rgba(165, 216, 255, 0.5) 1px, transparent 1.5px),
+      radial-gradient(circle, rgba(153, 246, 228, 0.35) 1.5px, transparent 2px);
+    background-size: 90px 90px, 140px 140px;
+    background-position: 0 0, 50px 70px;
+    mask-image: radial-gradient(
+      ellipse 300px 230px at 50% 50%,
+      transparent 55%,
+      black 90%
+    );
+    opacity: var(--particles-placeholder-opacity, 0.5);
   }
 
   .particles-background canvas {
@@ -102,7 +130,8 @@ const serializedOptions = JSON.stringify(options);
     }
   }
 
-  /* Belt and braces: never show the canvas when the OS asks for reduced motion. */
+  /* Belt and braces: never show the particle layer (canvas or placeholder)
+     when the OS asks for reduced motion. */
   @media (prefers-reduced-motion: reduce) {
     .particles-background {
       display: none;
@@ -201,13 +230,10 @@ const serializedOptions = JSON.stringify(options);
 
   let enabled = stored === "on" || (stored === null && !reducedMotion.matches);
 
-  const boot = () => void setEnabled(enabled);
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", boot, { once: true });
-  } else {
-    boot();
-  }
+  // Boot immediately: this module is type=module, so it runs after the DOM
+  // is parsed — the elements it queries already exist and waiting for
+  // DOMContentLoaded would only delay the canvas by another tick.
+  void setEnabled(enabled);
 
   // Live-follow the OS preference when no explicit choice was stored.
   reducedMotion.addEventListener("change", (event) => {

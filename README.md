@@ -35,40 +35,6 @@ CI keeps `--immutable` enabled: it permits creating `node_modules` and build
 output, but refuses to rewrite the lockfile. Do not run `yarn set version` or
 `corepack use` in CI; the Yarn version is already committed.
 
-### upstream → master
-
-`.github/workflows/main.yml` runs whenever a push or PR merge updates the
-`upstream` branch, including the first merge of this configuration. It:
-
-1. Checks out the exact triggering commit and fetches `master`.
-2. Merges that commit into a local `master`, preserving both branches' history.
-3. Installs the pinned Yarn through Corepack, installs dependencies immutably,
-   type-checks, and builds the merged result with Node 26.
-4. Pushes to `master` only if every preceding step succeeds.
-
-There is no separate one-time migration job. First merge the workflow changes
-into `master` manually (the automatic token cannot push workflow-file changes).
-Then updates to `upstream` automatically promote application changes to `master`. The workflow can also be dispatched manually against
-`upstream` once GitHub exposes it in the Actions UI (manual dispatch requires
-the workflow to exist on the default branch).
-
-Repository configuration required:
-
-
-- No custom token or secret is required: checkout and push use GitHub's automatic,
-  short-lived `GITHUB_TOKEN` with `contents: write`.
-- Branch rules on `master` must allow GitHub Actions to push these merges;
-  workflow YAML cannot bypass repository protection rules by itself.
-- `GITHUB_TOKEN` cannot push changes to `.github/workflows`. Merge workflow changes
-  into `master` manually first, including this initial setup.
-- Pushes to `master` made with `GITHUB_TOKEN` do not trigger downstream push
-  workflows. Deployment must run in this workflow if it depends on promotion.
-- Merge conflicts fail the job without pushing. Resolve them on `upstream` and
-  push again. If another writer updates `master` during validation, the normal
-  push safely fails rather than force-pushing; rerun the job to test a new merge.
-- Pushes to `upstream` made by another workflow using `GITHUB_TOKEN` do not
-  trigger this workflow. Use a PAT / GitHub App token for automated source pushes.
-
 ## TODO
 
 - [x] add first blog post
